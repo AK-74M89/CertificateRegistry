@@ -26,8 +26,7 @@ namespace SertificateRegistry2.PresentationLayer
                 }
                 else
                 {
-                    Organization NewOrganization = new Organization();
-                    NewOrganization.AddOrganization(NameTextBox.Text);
+                    new Organization().AddOrganization(NameTextBox.Text);
                     Close();
                 }
             }
