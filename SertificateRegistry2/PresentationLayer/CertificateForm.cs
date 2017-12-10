@@ -1,5 +1,6 @@
 ﻿using SertificateRegistry2.DomainLayer;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SertificateRegistry2.PresentationLayer
@@ -13,7 +14,7 @@ namespace SertificateRegistry2.PresentationLayer
 
         private OrganizationListItem CurrentOrganization
         {
-            get { return (OrganizationListItem)OrganizationComboBox.SelectedItem; }
+            get { return (OrganizationListItem)OrganizationComboBox.SelectedValue; }
         }
 
         /// <summary>
@@ -46,11 +47,12 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void FillOrganizationComboBox()
         {           
-            OrganizationComboBox.DataSource = new Organization().GetOrganizationList();
+            OrganizationComboBox.DataSource = OrganizationHandler.GetOrganizationList();
 
+            OrganizationComboBox.SelectedIndex = -1;
             if (isEdit)
             {
-                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf(CurrentOrganizationName);
+                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<OrganizationListItem>).Find(o => o.Name == CurrentOrganizationName));
             }
         }
 

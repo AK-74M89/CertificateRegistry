@@ -53,7 +53,7 @@ namespace SertificateRegistry2
         }
     }
 
-    public struct OrganizationListItem
+    public class OrganizationListItem
     {
         private int id_organization;
         private string name;

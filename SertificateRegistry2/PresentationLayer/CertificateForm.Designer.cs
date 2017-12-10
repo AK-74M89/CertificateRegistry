@@ -58,26 +58,29 @@
             this.panel1.Controls.Add(this.CertificateNameLbl);
             this.panel1.Controls.Add(this.BeginDatePicker);
             this.panel1.Controls.Add(this.CertificateNameTextBox);
-            this.panel1.Location = new System.Drawing.Point(5, 5);
+            this.panel1.Location = new System.Drawing.Point(7, 6);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(435, 145);
+            this.panel1.Size = new System.Drawing.Size(580, 178);
             this.panel1.TabIndex = 0;
             // 
             // OrganizationLbl
             // 
             this.OrganizationLbl.AutoSize = true;
-            this.OrganizationLbl.Location = new System.Drawing.Point(5, 110);
+            this.OrganizationLbl.Location = new System.Drawing.Point(7, 135);
+            this.OrganizationLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.OrganizationLbl.Name = "OrganizationLbl";
-            this.OrganizationLbl.Size = new System.Drawing.Size(159, 13);
+            this.OrganizationLbl.Size = new System.Drawing.Size(206, 17);
             this.OrganizationLbl.TabIndex = 9;
             this.OrganizationLbl.Text = "Огран, выдавший сертификат";
             // 
             // AddOrganizationBtn
             // 
             this.AddOrganizationBtn.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddOrganizationBtn.Location = new System.Drawing.Point(405, 100);
+            this.AddOrganizationBtn.Location = new System.Drawing.Point(540, 123);
+            this.AddOrganizationBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AddOrganizationBtn.Name = "AddOrganizationBtn";
-            this.AddOrganizationBtn.Size = new System.Drawing.Size(25, 30);
+            this.AddOrganizationBtn.Size = new System.Drawing.Size(33, 37);
             this.AddOrganizationBtn.TabIndex = 5;
             this.AddOrganizationBtn.Text = "+";
             this.AddOrganizationBtn.UseVisualStyleBackColor = true;
@@ -85,85 +88,96 @@
             // 
             // OrganizationComboBox
             // 
+            this.OrganizationComboBox.DisplayMember = "Name";
             this.OrganizationComboBox.FormattingEnabled = true;
-            this.OrganizationComboBox.Location = new System.Drawing.Point(165, 105);
+            this.OrganizationComboBox.Location = new System.Drawing.Point(220, 129);
+            this.OrganizationComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.OrganizationComboBox.Name = "OrganizationComboBox";
-            this.OrganizationComboBox.Size = new System.Drawing.Size(235, 21);
+            this.OrganizationComboBox.Size = new System.Drawing.Size(312, 24);
             this.OrganizationComboBox.TabIndex = 4;
             this.OrganizationComboBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OrganizationComboBox_KeyUp);
             // 
             // EndDateLbl
             // 
             this.EndDateLbl.AutoSize = true;
-            this.EndDateLbl.Location = new System.Drawing.Point(5, 85);
+            this.EndDateLbl.Location = new System.Drawing.Point(7, 105);
+            this.EndDateLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.EndDateLbl.Name = "EndDateLbl";
-            this.EndDateLbl.Size = new System.Drawing.Size(76, 13);
+            this.EndDateLbl.Size = new System.Drawing.Size(98, 17);
             this.EndDateLbl.TabIndex = 7;
             this.EndDateLbl.Text = "Действует до";
             // 
             // EndDatePicker
             // 
-            this.EndDatePicker.Location = new System.Drawing.Point(165, 80);
+            this.EndDatePicker.Location = new System.Drawing.Point(220, 98);
+            this.EndDatePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.EndDatePicker.Name = "EndDatePicker";
-            this.EndDatePicker.Size = new System.Drawing.Size(235, 20);
+            this.EndDatePicker.Size = new System.Drawing.Size(312, 22);
             this.EndDatePicker.TabIndex = 3;
             this.EndDatePicker.ValueChanged += new System.EventHandler(this.EndDatePicker_ValueChanged);
             // 
             // BeginDateLbl
             // 
             this.BeginDateLbl.AutoSize = true;
-            this.BeginDateLbl.Location = new System.Drawing.Point(5, 60);
+            this.BeginDateLbl.Location = new System.Drawing.Point(7, 74);
+            this.BeginDateLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.BeginDateLbl.Name = "BeginDateLbl";
-            this.BeginDateLbl.Size = new System.Drawing.Size(73, 13);
+            this.BeginDateLbl.Size = new System.Drawing.Size(95, 17);
             this.BeginDateLbl.TabIndex = 5;
             this.BeginDateLbl.Text = "Дата выдачи";
             // 
             // CertificateNumberTextBox
             // 
-            this.CertificateNumberTextBox.Location = new System.Drawing.Point(165, 30);
+            this.CertificateNumberTextBox.Location = new System.Drawing.Point(220, 37);
+            this.CertificateNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CertificateNumberTextBox.Name = "CertificateNumberTextBox";
-            this.CertificateNumberTextBox.Size = new System.Drawing.Size(265, 20);
+            this.CertificateNumberTextBox.Size = new System.Drawing.Size(352, 22);
             this.CertificateNumberTextBox.TabIndex = 1;
             // 
             // CertificateNumberLbl
             // 
             this.CertificateNumberLbl.AutoSize = true;
-            this.CertificateNumberLbl.Location = new System.Drawing.Point(5, 35);
+            this.CertificateNumberLbl.Location = new System.Drawing.Point(7, 43);
+            this.CertificateNumberLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CertificateNumberLbl.Name = "CertificateNumberLbl";
-            this.CertificateNumberLbl.Size = new System.Drawing.Size(41, 13);
+            this.CertificateNumberLbl.Size = new System.Drawing.Size(51, 17);
             this.CertificateNumberLbl.TabIndex = 3;
             this.CertificateNumberLbl.Text = "Номер";
             // 
             // CertificateNameLbl
             // 
             this.CertificateNameLbl.AutoSize = true;
-            this.CertificateNameLbl.Location = new System.Drawing.Point(5, 10);
+            this.CertificateNameLbl.Location = new System.Drawing.Point(7, 12);
+            this.CertificateNameLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CertificateNameLbl.Name = "CertificateNameLbl";
-            this.CertificateNameLbl.Size = new System.Drawing.Size(57, 13);
+            this.CertificateNameLbl.Size = new System.Drawing.Size(72, 17);
             this.CertificateNameLbl.TabIndex = 2;
             this.CertificateNameLbl.Text = "Название";
             // 
             // BeginDatePicker
             // 
-            this.BeginDatePicker.Location = new System.Drawing.Point(165, 55);
+            this.BeginDatePicker.Location = new System.Drawing.Point(220, 68);
+            this.BeginDatePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BeginDatePicker.Name = "BeginDatePicker";
-            this.BeginDatePicker.Size = new System.Drawing.Size(235, 20);
+            this.BeginDatePicker.Size = new System.Drawing.Size(312, 22);
             this.BeginDatePicker.TabIndex = 2;
             this.BeginDatePicker.ValueChanged += new System.EventHandler(this.BeginDatePicker_ValueChanged);
             // 
             // CertificateNameTextBox
             // 
-            this.CertificateNameTextBox.Location = new System.Drawing.Point(165, 5);
+            this.CertificateNameTextBox.Location = new System.Drawing.Point(220, 6);
+            this.CertificateNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CertificateNameTextBox.Name = "CertificateNameTextBox";
-            this.CertificateNameTextBox.Size = new System.Drawing.Size(265, 20);
+            this.CertificateNameTextBox.Size = new System.Drawing.Size(352, 22);
             this.CertificateNameTextBox.TabIndex = 0;
             // 
             // CancelBtn
             // 
             this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelBtn.Location = new System.Drawing.Point(310, 160);
+            this.CancelBtn.Location = new System.Drawing.Point(413, 197);
+            this.CancelBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(100, 35);
+            this.CancelBtn.Size = new System.Drawing.Size(133, 43);
             this.CancelBtn.TabIndex = 8;
             this.CancelBtn.Text = "Отменить";
             this.CancelBtn.UseVisualStyleBackColor = true;
@@ -171,9 +185,10 @@
             // 
             // SaveBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(30, 160);
+            this.SaveBtn.Location = new System.Drawing.Point(40, 197);
+            this.SaveBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(105, 35);
+            this.SaveBtn.Size = new System.Drawing.Size(140, 43);
             this.SaveBtn.TabIndex = 7;
             this.SaveBtn.Text = "Сохранить";
             this.SaveBtn.UseVisualStyleBackColor = true;
@@ -181,14 +196,15 @@
             // 
             // CertificateForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(446, 203);
+            this.ClientSize = new System.Drawing.Size(595, 250);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CertificateForm";
