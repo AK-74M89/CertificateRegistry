@@ -1,22 +1,27 @@
 ﻿using SertificateRegistry2.DomainLayer;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SertificateRegistry2.PresentationLayer
 {
     public partial class CertificateForm:Form
     {
-        private IList<OrganizationListItem> OrganizationList;
         private bool isEdit;
-        private string CurrentOrganization;
         private int ID_Certificate;
+        private string CurrentOrganizationName;
+        private Organization OrganizationHandler;
+
+        private OrganizationListItem CurrentOrganization
+        {
+            get { return (OrganizationListItem)OrganizationComboBox.SelectedItem; }
+        }
 
         /// <summary>
         /// Конструктор формы по умолчанию (для добавления сертификата)
         /// </summary>
         public CertificateForm()
         {
+            OrganizationHandler = new Organization();
             InitializeComponent();
             isEdit = false;
         }
@@ -27,6 +32,7 @@ namespace SertificateRegistry2.PresentationLayer
         /// <param name="CertificateToEdit"></param>
         public CertificateForm(CertificatesListItem CertificateToEdit)
         {
+            OrganizationHandler = new Organization();
             InitializeComponent();
 
             isEdit = true;
@@ -34,24 +40,17 @@ namespace SertificateRegistry2.PresentationLayer
             CertificateNumberTextBox.Text = CertificateToEdit.Number;
             BeginDatePicker.Value = CertificateToEdit.Begin;
             EndDatePicker.Value = CertificateToEdit.End;
-            CurrentOrganization = CertificateToEdit.Organization;
+            CurrentOrganizationName = CertificateToEdit.Organization;
             ID_Certificate = CertificateToEdit.ID_Certificate;
         }
 
         private void FillOrganizationComboBox()
-        {
-            Organization OrganizationListSource = new Organization();
-            OrganizationList = OrganizationListSource.GetOrganizationList();
-
-            OrganizationComboBox.Items.Clear();
-            for (int i = 0; i < OrganizationList.Count; i++)
-            {
-                OrganizationComboBox.Items.Add(OrganizationList[i].Name);
-            }
+        {           
+            OrganizationComboBox.DataSource = new Organization().GetOrganizationList();
 
             if (isEdit)
             {
-                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf(CurrentOrganization);
+                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf(CurrentOrganizationName);
             }
         }
 
@@ -82,34 +81,28 @@ namespace SertificateRegistry2.PresentationLayer
                     MessageBox.Show("Нужно выбрать организацию", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                {
+                {                    
+                    Certificate CertificatesHandler = new Certificate();
                     if (isEdit)
                     {
-                        int ID_CurrentOrganization = OrganizationList[OrganizationComboBox.SelectedIndex].ID_Organization;
-
-                        Certificate NewCertificate = new Certificate();
-                        NewCertificate.EditCertificate(ID_Certificate,
-                                                       CertificateNameTextBox.Text,
-                                                       CertificateNumberTextBox.Text,
-                                                       BeginDatePicker.Value,
-                                                       EndDatePicker.Value,
-                                                       ID_CurrentOrganization);
-                        DialogResult = DialogResult.OK;
-                        Close();
+                                                
+                        CertificatesHandler.EditCertificate(ID_Certificate,
+                                                            CertificateNameTextBox.Text,
+                                                            CertificateNumberTextBox.Text,
+                                                            BeginDatePicker.Value,
+                                                            EndDatePicker.Value,
+                                                            CurrentOrganization.ID_Organization);
                     }
                     else
                     {
-                        int ID_CurrentOrganization = OrganizationList[OrganizationComboBox.SelectedIndex].ID_Organization;
-
-                        Certificate NewCertificate = new Certificate();
-                        NewCertificate.AddCertificate(CertificateNameTextBox.Text,
-                                                      CertificateNumberTextBox.Text,
-                                                      BeginDatePicker.Value,
-                                                      EndDatePicker.Value,
-                                                      ID_CurrentOrganization);
-                        DialogResult = DialogResult.OK;
-                        Close();
+                        CertificatesHandler.AddCertificate(CertificateNameTextBox.Text,
+                                                          CertificateNumberTextBox.Text,
+                                                          BeginDatePicker.Value,
+                                                          EndDatePicker.Value,
+                                                          CurrentOrganization.ID_Organization);
                     }
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
             }
             catch (DomainException CheckError)
@@ -128,14 +121,12 @@ namespace SertificateRegistry2.PresentationLayer
             }
         }
 
+        // переделать
         private void DeleteOrganizationBtn_Click(object sender, EventArgs e)
         {
-            string OrganizationName = OrganizationList[OrganizationComboBox.SelectedIndex].Name;
-            if (MessageBox.Show("Вы хотите удалить организацию" + OrganizationName + "?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Organization OrganizationKiller = new Organization();
-                int ID_OrganizationToDelete = OrganizationList[OrganizationComboBox.SelectedIndex].ID_Organization;
-                OrganizationKiller.DeleteOrganization(ID_OrganizationToDelete);
+            if (MessageBox.Show($"Вы хотите удалить организацию{CurrentOrganization.Name}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {                
+                OrganizationHandler.DeleteOrganization(CurrentOrganization.ID_Organization);
             }
         }
 
