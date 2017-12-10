@@ -16,7 +16,7 @@ namespace SertificateRegistry2.DataSourceLayer
         {
             if (!File.Exists(template_path))
             {
-                throw (new FileNotFoundException("Файл шаблона \"" + template_path + "\" не найден"));
+                throw (new FileNotFoundException($"Файл шаблона \"{template_path}\" не найден"));
             }
             return File.ReadAllText(template_path, Encoding.UTF8);
         }
