@@ -55,7 +55,7 @@
             this.SelectBtn = new System.Windows.Forms.Button();
             this.PrintSelectedBtn = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Название = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CertName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,7 +74,7 @@
             this.CertificatesTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CertificatesTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
-            this.Название,
+            this.CertName,
             this.Number,
             this.BeginDate,
             this.EndDate,
@@ -309,10 +309,10 @@
             // 
             // Название
             // 
-            this.Название.DataPropertyName = "Name";
-            this.Название.HeaderText = "Название";
-            this.Название.Name = "Название";
-            this.Название.ReadOnly = true;
+            this.CertName.DataPropertyName = "Name";
+            this.CertName.HeaderText = "Название";
+            this.CertName.Name = "Название";
+            this.CertName.ReadOnly = true;
             // 
             // Number
             // 
@@ -407,9 +407,8 @@
         private System.Windows.Forms.ToolStripMenuItem напечататьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem очиститьСписокToolStripMenuItem;
         private System.Windows.Forms.BindingSource bsCertificates;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CertificateName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Название;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CertName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn BeginDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
