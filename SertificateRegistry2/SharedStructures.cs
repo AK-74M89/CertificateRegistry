@@ -2,23 +2,54 @@
 
 namespace SertificateRegistry2
 {
-    public struct CertificatesListItem
+    public class CertificatesListItem
     {
-        public int ID_Certificate;
-        public string Name;
-        public string Number;
-        public DateTime Begin;
-        public DateTime End;
-        public string Organization;
+        private int id_certificate;
+        private string name;
+        private string number;
+        private DateTime begin;
+        private DateTime end;
+        private string organization;
 
         public CertificatesListItem(int ID_Certificate, string Name, string Number, DateTime Begin, DateTime End, string Organization)
         {
-            this.ID_Certificate = ID_Certificate;
-            this.Name = Name;
-            this.Number = Number;
-            this.Begin = Begin;
-            this.End = End;
-            this.Organization = Organization;
+            id_certificate = ID_Certificate;
+            name = Name;
+            number = Number;
+            begin = Begin;
+            end = End;
+            organization = Organization;
+        }
+
+        public int ID_Certificate
+        {
+            get { return id_certificate; }
+            set { id_certificate = value; }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+        public string Number
+        {
+            get { return number; }
+            set { number = value; }
+        }
+        public DateTime Begin
+        {
+            get { return begin; }
+            set { begin = value; }
+        }
+        public DateTime End
+        {
+            get { return end; }
+            set { end = value; }
+        }
+        public string Organization
+        {
+            get { return organization; }
+            set { organization = value; }
         }
     }
 

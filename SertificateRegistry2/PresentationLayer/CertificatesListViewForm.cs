@@ -1,21 +1,25 @@
-﻿using System;
+﻿using SertificateRegistry2.DomainLayer;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using SertificateRegistry2.DomainLayer;
-using System.ComponentModel;
-using System.Globalization;
-using System.Reflection;
 
 namespace SertificateRegistry2.PresentationLayer
 {
-    public partial class CertificatesListViewForm:Form
+    public partial class CertificatesListViewForm : Form
     {
         #region Поля
         private Certificate CertificateRegistryHandler;
-        private IList<CertificatesListItem> CertificatesList;
+        
         private IList<CertificatesListItem> SelectedCertificatesList;
         private bool isFirstSelection = true;
         #endregion Поля
+
+        #region Свойства
+        private CertificatesListItem CurrentCertificate
+        {
+            get { return CertificatesTable.CurrentRow.DataBoundItem as CertificatesListItem; }
+        }
+        #endregion Свойства
 
         #region Вспомогательные методы
         private void EnableControls(bool Enable)
@@ -30,35 +34,11 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void FillCertificatesTable()
         {
-            CertificatesList = CertificateRegistryHandler.GetCertificatesRegistry();
-
-            FillTableWithList(CertificatesList);
-            EnableControls(CertificatesTable.RowCount > 0);
-            if (CertificatesTable.RowCount > 0)
-            {
-                CertificatesTable.Rows[0].Selected = true;
-            }
-        }
-
-        private void FillTableWithList(IList<CertificatesListItem> CertificatesList)
-        {
-            CertificatesTable.Rows.Clear();
-
-            for (int i = 0; i < CertificatesList.Count; i++)
-            {
-                CertificatesListItem CurrentCertificate = CertificatesList[i];
-                CertificatesTable.Rows.Add();
-
-                CertificatesTable.Rows[i].Cells["ID"].Value = CurrentCertificate.ID_Certificate;
-                CertificatesTable.Rows[i].Cells["CertificateName"].Value = CurrentCertificate.Name;
-                CertificatesTable.Rows[i].Cells["Number"].Value = CurrentCertificate.Number;
-                CertificatesTable.Rows[i].Cells["BeginDate"].Value = CurrentCertificate.Begin.ToShortDateString();
-                CertificatesTable.Rows[i].Cells["EndDate"].Value = CurrentCertificate.End.ToShortDateString();
-                CertificatesTable.Rows[i].Cells["Organization"].Value = CurrentCertificate.Organization;
-            }
-
-            CertificatesCount.Text = "Всего в базе: " + Convert.ToString(CertificatesList.Count);
-            CertificatesTable.Sort(CertificatesTable.Columns[1], ListSortDirection.Ascending);
+            bsCertificates.DataSource = CertificateRegistryHandler.GetCertificatesRegistry();
+            
+            EnableControls(CertificatesTable.RowCount > 0);            
+            CertificatesTable.Rows[0].Selected = CertificatesTable.RowCount > 0;
+            CertificatesCount.Text = $"Всего в базе: {CertificatesTable.RowCount}";
         }
 
         private void ClearHideSelectedList()
@@ -67,9 +47,10 @@ namespace SertificateRegistry2.PresentationLayer
             SelectedCertificates.Visible = false;
             PrintSelectedBtn.Visible = false;
             isFirstSelection = true;
-            Width = 882;
+            Width = 882; // TODO : переделать
             isFirstSelection = true;
-            SelectedCertificates.Text = "";
+            SelectedCertificates.Clear();
+            SelectedCertificatesList.Clear();
         }
         #endregion
 
@@ -77,19 +58,21 @@ namespace SertificateRegistry2.PresentationLayer
         public CertificatesListViewForm()
         {
             InitializeComponent();
+            CertificateRegistryHandler = new Certificate();
+            SelectedCertificatesList = new List<CertificatesListItem>();
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
-        {
-            CertificateRegistryHandler = new Certificate();
-            FillCertificatesTable();
-            SelectedCertificatesList = new List<CertificatesListItem>();
+        {            
+            FillCertificatesTable();         
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            CertificateForm AddCertificate = new CertificateForm();
-            if (AddCertificate.ShowDialog() == DialogResult.OK)
+            if (CurrentCertificate == null)
+                return;
+            
+            if (new CertificateForm().ShowDialog() == DialogResult.OK)
             {
                 FillCertificatesTable();
             }
@@ -97,13 +80,10 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            CertificateForm EditCertificate = new CertificateForm(new CertificatesListItem( Convert.ToInt32(CertificatesTable.SelectedRows[0].Cells[0].Value),
-                                                                                            Convert.ToString(CertificatesTable.SelectedRows[0].Cells[1].Value),
-                                                                                            Convert.ToString(CertificatesTable.SelectedRows[0].Cells[2].Value),
-                                                                                            Convert.ToDateTime(CertificatesTable.SelectedRows[0].Cells[3].Value),
-                                                                                            Convert.ToDateTime(CertificatesTable.SelectedRows[0].Cells[4].Value),
-                                                                                            Convert.ToString(CertificatesTable.SelectedRows[0].Cells[5].Value)));
-            if (EditCertificate.ShowDialog() == DialogResult.OK)
+            if (CurrentCertificate == null)
+                return;
+
+            if (new CertificateForm(CurrentCertificate).ShowDialog() == DialogResult.OK)
             {
                 FillCertificatesTable();
             }
@@ -111,12 +91,12 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            string Number = Convert.ToString(CertificatesTable.SelectedRows[0].Cells[2].Value);
-            if (MessageBox.Show($"Хотите удалить сертификат № {Number}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (CurrentCertificate == null)
+                return;
+
+            if (MessageBox.Show($"Хотите удалить сертификат № {CurrentCertificate.Number}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                int ID_CertificateToDelete = Convert.ToInt32(CertificatesTable.SelectedRows[0].Cells[0].Value);
-                Certificate CertificateKiller = new Certificate();
-                CertificateKiller.DeleteCertificate(ID_CertificateToDelete);
+                CertificateRegistryHandler.DeleteCertificate(CurrentCertificate.ID_Certificate);
                 FillCertificatesTable();
             }
         }
@@ -128,8 +108,7 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void PrintAllBtn_Click(object sender, EventArgs e)
         {
-            Certificate GetCertificates = new Certificate();
-            IList<CertificatesListItem> Certificates = GetCertificates.GetCertificatesRegistry();
+            IList<CertificatesListItem> Certificates = CertificateRegistryHandler.GetCertificatesRegistry();
 
             TemplateHandler CertificateTemplate = new TemplateHandler();
             string CertificatesTable = CertificateTemplate.FillTemplate(Certificates);
@@ -145,7 +124,6 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Certificate CertificateRegistryHandler = new Certificate();
             IList<CertificatesListItem> CertificatesList = CertificateRegistryHandler.GetCertificatesRegistry();
 
             int Expired = 0;
@@ -169,11 +147,11 @@ namespace SertificateRegistry2.PresentationLayer
                 }
             }
 
-            MessageBox.Show("Заканчивается срок действия сертификатов:" +
-                            "\nСегодня:\t\t\t" + Convert.ToString(Today) +
-                            "\nВ этом месяце:\t\t" + Convert.ToString(ThisMonth) +
-                            "\nЗакончился:\t\t" + Convert.ToString(Expired) +
-                            "\nВсего в базе:\t\t" + Convert.ToString(CertificatesList.Count),
+            MessageBox.Show($"Заканчивается срок действия сертификатов:" +
+                            $"\nСегодня:\t\t\t{Today}" +
+                            $"\nВ этом месяце:\t\t{ThisMonth}" +
+                            $"\nЗакончился:\t\t{Expired}" +
+                            $"\nВсего в базе:\t\t{CertificatesList.Count}",
                             "Статистика",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
@@ -182,35 +160,6 @@ namespace SertificateRegistry2.PresentationLayer
         private void распечататьВсеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PrintAllBtn_Click(sender, e);
-        }
-
-        private void SearchTBox_TextChanged(object sender, EventArgs e)
-        {
-            if (SearchTBox.Text == "")
-            {
-                FillTableWithList(CertificatesList);
-            }
-            else
-            {
-                IList<CertificatesListItem> SearchCertificatesList = new List<CertificatesListItem>();
-                for (int j = 0; j < CertificatesList.Count; j++)
-                {
-                    SearchCertificatesList.Add(CertificatesList[j]);
-                }
-                int i = 0;
-                while (i < SearchCertificatesList.Count)
-                {
-                    if (SearchCertificatesList[i].Name.StartsWith(SearchTBox.Text, true, CultureInfo.CurrentCulture))
-                    {
-                        i++;
-                    }
-                    else
-                    {
-                        SearchCertificatesList.RemoveAt(i);
-                    }
-                }
-                FillTableWithList(SearchCertificatesList);
-            }
         }
 
         private void SelectBtn_Click(object sender, EventArgs e)
@@ -222,17 +171,13 @@ namespace SertificateRegistry2.PresentationLayer
                 SelectedCertificates.Visible = true;
                 PrintSelectedBtn.Visible = true;
                 isFirstSelection = false;
-                Width = 977;
+                Width = 977; // TODO: переделать
             }
-            CertificatesListItem SelectedCertificate = new CertificatesListItem();
-            SelectedCertificate.ID_Certificate = Convert.ToInt32(CertificatesTable.SelectedRows[0].Cells[0].Value);
-            SelectedCertificate.Name = Convert.ToString(CertificatesTable.SelectedRows[0].Cells[1].Value);
-            SelectedCertificate.Number = Convert.ToString(CertificatesTable.SelectedRows[0].Cells[2].Value);
-            SelectedCertificate.Begin = Convert.ToDateTime(CertificatesTable.SelectedRows[0].Cells[3].Value);
-            SelectedCertificate.End = Convert.ToDateTime(CertificatesTable.SelectedRows[0].Cells[4].Value);
-            SelectedCertificate.Organization = Convert.ToString(CertificatesTable.SelectedRows[0].Cells[5].Value);
-            SelectedCertificatesList.Add(SelectedCertificate);
-            SelectedCertificates.Text += SelectedCertificate.Name + "\n----------\n";
+            if (SelectedCertificatesList.IndexOf(CurrentCertificate) < 0)
+            {
+                SelectedCertificatesList.Add(CurrentCertificate);
+                SelectedCertificates.Text += CurrentCertificate.Name + "\n----------\n";
+            }
         }
 
         private void PrintSelectedBtn_Click(object sender, EventArgs e)
@@ -241,9 +186,10 @@ namespace SertificateRegistry2.PresentationLayer
             string CertificatesTable = CertificateTemplate.FillTemplate(SelectedCertificatesList);
 
             RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
-            PrintRegistry.ShowDialog();
-
-            ClearHideSelectedList();
+            if (PrintRegistry.ShowDialog() == DialogResult.OK)
+            {
+                ClearHideSelectedList();
+            }
         }
 
         private void напечататьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -258,7 +204,11 @@ namespace SertificateRegistry2.PresentationLayer
         
         private void CertificatesTable_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Enter)
+            {
+                EditBtn_Click(sender, e);
+            }
+            else if (e.KeyCode == Keys.Delete)
             {
                 DeleteBtn_Click(sender, e);
             }
@@ -266,6 +216,11 @@ namespace SertificateRegistry2.PresentationLayer
             {
                 AddBtn_Click(sender, e);
             }
+        }        
+
+        private void CertificatesTable_DoubleClick(object sender, EventArgs e)
+        {
+            EditBtn_Click(sender, e);
         }
         #endregion
     }

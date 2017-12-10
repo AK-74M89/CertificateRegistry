@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
 
@@ -77,9 +78,9 @@ namespace SertificateRegistry2.DataSourceLayer
         /// Получить список сертификатов
         /// </summary>
         /// <returns>массив записей CertificatesListItem</returns>
-        public static IList<CertificatesListItem> GetCertificatesRegistry()
+        public static BindingList<CertificatesListItem> GetCertificatesRegistry()
         {
-            IList<CertificatesListItem> CertificatesRegistry = new List<CertificatesListItem>();
+            BindingList<CertificatesListItem> CertificatesRegistry = new BindingList<CertificatesListItem>();
             SQLiteCommand Command = new SQLiteCommand(@"SELECT c.id,
                                                                c.name,
                                                                c.number,

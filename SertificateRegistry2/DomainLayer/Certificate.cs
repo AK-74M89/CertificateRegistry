@@ -1,6 +1,7 @@
 ﻿using SertificateRegistry2.DataSourceLayer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SertificateRegistry2.DomainLayer
 {
@@ -76,7 +77,7 @@ namespace SertificateRegistry2.DomainLayer
         /// Получить список сертификатов
         /// </summary>
         /// <returns>массив записей CertificatesListItem</returns>
-        public IList<CertificatesListItem> GetCertificatesRegistry()
+        public BindingList<CertificatesListItem> GetCertificatesRegistry()
         {
             return CertificateGateway.GetCertificatesRegistry();
         }

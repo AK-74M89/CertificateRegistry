@@ -10,10 +10,12 @@ namespace SertificateRegistry2.PresentationLayer
             InitializeComponent();
             
             RegistryPreview.DocumentText = CertificatesTable;
+            DialogResult = DialogResult.OK;
         }
 
         private void отменитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
