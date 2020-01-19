@@ -1,28 +1,26 @@
-﻿using SertificateRegistry2.DomainLayer;
+﻿using CertificateRegistry3.DataSourceLayer;
+using CertificateRegistry3.DomainLayer;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SertificateRegistry2.PresentationLayer
+namespace CertificateRegistry3.PresentationLayer
 {
     public partial class CertificateForm:Form
     {
         private bool isEdit;
         private int ID_Certificate;
         private string CurrentOrganizationName;
-        private Organization OrganizationHandler;
+        private OrganizationManager OrganizationHandler;
 
-        private OrganizationListItem CurrentOrganization
-        {
-            get { return (OrganizationListItem)OrganizationComboBox.SelectedValue; }
-        }
+        private Organization CurrentOrganization => OrganizationComboBox.SelectedValue as Organization;
 
         /// <summary>
         /// Конструктор формы по умолчанию (для добавления сертификата)
         /// </summary>
         public CertificateForm()
         {
-            OrganizationHandler = new Organization();
+            OrganizationHandler = new OrganizationManager();
             InitializeComponent();
             isEdit = false;
         }
@@ -31,16 +29,16 @@ namespace SertificateRegistry2.PresentationLayer
         /// Конструктор формы редактирования сертификата
         /// </summary>
         /// <param name="CertificateToEdit"></param>
-        public CertificateForm(CertificatesListItem CertificateToEdit)
+        public CertificateForm(Certificate CertificateToEdit)
         {
-            OrganizationHandler = new Organization();
+            OrganizationHandler = new OrganizationManager();
             InitializeComponent();
 
             isEdit = true;
             CertificateNameTextBox.Text = CertificateToEdit.Name;
             CertificateNumberTextBox.Text = CertificateToEdit.Number;
-            BeginDatePicker.Value = CertificateToEdit.Begin;
-            EndDatePicker.Value = CertificateToEdit.End;
+            BeginDatePicker.Value = CertificateToEdit.BeginDate;
+            EndDatePicker.Value = CertificateToEdit.EndDate;
             CurrentOrganizationName = CertificateToEdit.Organization;
             ID_Certificate = CertificateToEdit.ID_Certificate;
         }
@@ -52,7 +50,7 @@ namespace SertificateRegistry2.PresentationLayer
             OrganizationComboBox.SelectedIndex = -1;
             if (isEdit)
             {
-                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<OrganizationListItem>).Find(o => o.Name == CurrentOrganizationName));
+                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<Organization>).Find(o => o.Name == CurrentOrganizationName));
             }
         }
 
@@ -84,7 +82,7 @@ namespace SertificateRegistry2.PresentationLayer
                 }
                 else
                 {                    
-                    Certificate CertificatesHandler = new Certificate();
+                    CertificateManager CertificatesHandler = new CertificateManager();
                     if (isEdit)
                     {
                                                 

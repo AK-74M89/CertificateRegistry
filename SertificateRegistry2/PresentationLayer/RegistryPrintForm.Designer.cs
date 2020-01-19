@@ -1,4 +1,4 @@
-﻿namespace SertificateRegistry2.PresentationLayer
+﻿namespace CertificateRegistry3.PresentationLayer
 {
     partial class RegistryPrintForm
     {

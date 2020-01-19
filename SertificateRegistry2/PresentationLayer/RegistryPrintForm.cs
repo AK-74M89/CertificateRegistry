@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace SertificateRegistry2.PresentationLayer
+namespace CertificateRegistry3.PresentationLayer
 {
     public partial class RegistryPrintForm:Form
     {

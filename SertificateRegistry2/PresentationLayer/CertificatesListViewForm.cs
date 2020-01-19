@@ -1,24 +1,22 @@
-﻿using SertificateRegistry2.DomainLayer;
+﻿using CertificateRegistry3.DataSourceLayer;
+using CertificateRegistry3.DomainLayer;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace SertificateRegistry2.PresentationLayer
+namespace CertificateRegistry3.PresentationLayer
 {
     public partial class CertificatesListViewForm : Form
     {
         #region Поля
-        private Certificate CertificateRegistryHandler;
+        private CertificateManager CertificateRegistryHandler;
         
-        private IList<CertificatesListItem> SelectedCertificatesList;
+        private List<Certificate> SelectedCertificatesList;
         private bool isFirstSelection = true;
         #endregion Поля
 
         #region Свойства
-        private CertificatesListItem CurrentCertificate
-        {
-            get { return CertificatesTable.CurrentRow.DataBoundItem as CertificatesListItem; }
-        }
+        private Certificate CurrentCertificate => (Certificate)CertificatesTable.CurrentRow?.DataBoundItem;
         #endregion Свойства
 
         #region Вспомогательные методы
@@ -36,20 +34,21 @@ namespace SertificateRegistry2.PresentationLayer
         {
             bsCertificates.DataSource = CertificateRegistryHandler.GetCertificatesRegistry();
             
-            EnableControls(CertificatesTable.RowCount > 0);            
-            CertificatesTable.Rows[0].Selected = CertificatesTable.RowCount > 0;
+            EnableControls(CertificatesTable.RowCount > 0);
+            if (CertificatesTable.RowCount > 0)
+                CertificatesTable.Rows[0].Selected = true;
             CertificatesCount.Text = $"Всего в базе: {CertificatesTable.RowCount}";
         }
 
         private void ClearHideSelectedList()
         {
             PrintAllBtn.Enabled = true;
-            SelectedCertificates.Visible = false;
+            //SelectedCertificates.Visible = false;
             PrintSelectedBtn.Visible = false;
             isFirstSelection = true;
             Width = 882; // TODO : переделать
             isFirstSelection = true;
-            SelectedCertificates.Clear();
+            //SelectedCertificates.Clear();
             SelectedCertificatesList.Clear();
         }
         #endregion
@@ -58,20 +57,21 @@ namespace SertificateRegistry2.PresentationLayer
         public CertificatesListViewForm()
         {
             InitializeComponent();
-            CertificateRegistryHandler = new Certificate();
-            SelectedCertificatesList = new List<CertificatesListItem>();
+            CertificateRegistryHandler = new CertificateManager();
+            SelectedCertificatesList = new List<Certificate>();
+            for (int i = 0; i < CertificatesTable.Columns.Count; i++)
+            {
+                CertificatesTable.Columns[i].Tag = 0;
+            }
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
         {            
-            FillCertificatesTable();         
+            FillCertificatesTable();
         }
 
         private void AddBtn_Click(object sender, EventArgs e)
-        {
-            if (CurrentCertificate == null)
-                return;
-            
+        {            
             if (new CertificateForm().ShowDialog() == DialogResult.OK)
             {
                 FillCertificatesTable();
@@ -108,9 +108,9 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void PrintAllBtn_Click(object sender, EventArgs e)
         {
-            IList<CertificatesListItem> Certificates = CertificateRegistryHandler.GetCertificatesRegistry();
+            var Certificates = new List<Certificate>(CertificateRegistryHandler.GetCertificatesRegistry());
 
-            TemplateHandler CertificateTemplate = new TemplateHandler();
+            var CertificateTemplate = new TemplateManager();
             string CertificatesTable = CertificateTemplate.FillTemplate(Certificates);
 
             RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
@@ -119,29 +119,29 @@ namespace SertificateRegistry2.PresentationLayer
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{Application.ProductName}, версия {Application.ProductVersion}. \nCopyright © Суханов Александр,  2017", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{Application.ProductName}, версия {Application.ProductVersion}. \nCopyright © Суханов Александр, 2020", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IList<CertificatesListItem> CertificatesList = CertificateRegistryHandler.GetCertificatesRegistry();
+            var CertificatesList = CertificateRegistryHandler.GetCertificatesRegistry();
 
             int Expired = 0;
             int Today = 0;
             int ThisMonth = 0;
             DateTime CurrentDay = DateTime.Now;
 
-            foreach (CertificatesListItem CurrentCertificate in CertificatesList)
+            foreach (var CurrentCertificate in CertificatesList)
             {
-                if (CurrentCertificate.End.Date < CurrentDay.Date)
+                if (CurrentCertificate.EndDate.Date < CurrentDay.Date)
                 {
                     Expired++;
                 }
-                else if (CurrentCertificate.End.Date == CurrentDay.Date)
+                else if (CurrentCertificate.EndDate.Date == CurrentDay.Date)
                 {
                     Today++;
                 }
-                else if (CurrentCertificate.End.Month == CurrentDay.Month)
+                else if (CurrentCertificate.EndDate.Year == CurrentDay.Year && CurrentCertificate.EndDate.Month == CurrentDay.Month)
                 {
                     ThisMonth++;
                 }
@@ -168,7 +168,7 @@ namespace SertificateRegistry2.PresentationLayer
             {
                 PrintAllBtn.Enabled = false;
                 SelectedCertificatesList.Clear();
-                SelectedCertificates.Visible = true;
+                //SelectedCertificates.Visible = true;
                 PrintSelectedBtn.Visible = true;
                 isFirstSelection = false;
                 Width = 977; // TODO: переделать
@@ -176,13 +176,13 @@ namespace SertificateRegistry2.PresentationLayer
             if (SelectedCertificatesList.IndexOf(CurrentCertificate) < 0)
             {
                 SelectedCertificatesList.Add(CurrentCertificate);
-                SelectedCertificates.Text += CurrentCertificate.Name + "\n----------\n";
+                //SelectedCertificates.Text += CurrentCertificate.Name + "\n----------\n";
             }
         }
 
         private void PrintSelectedBtn_Click(object sender, EventArgs e)
         {
-            TemplateHandler CertificateTemplate = new TemplateHandler();
+            TemplateManager CertificateTemplate = new TemplateManager();
             string CertificatesTable = CertificateTemplate.FillTemplate(SelectedCertificatesList);
 
             RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);

@@ -1,8 +1,8 @@
-﻿using SertificateRegistry2.DomainLayer;
+﻿using CertificateRegistry3.DomainLayer;
 using System;
 using System.Windows.Forms;
 
-namespace SertificateRegistry2.PresentationLayer
+namespace CertificateRegistry3.PresentationLayer
 {
     public partial class AddOrganizationForm:Form
     {
@@ -26,7 +26,7 @@ namespace SertificateRegistry2.PresentationLayer
                 }
                 else
                 {
-                    new Organization().AddOrganization(NameTextBox.Text);
+                    new OrganizationManager().AddOrganization(NameTextBox.Text);
                     Close();
                 }
             }

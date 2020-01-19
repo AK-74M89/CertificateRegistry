@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace SertificateRegistry2.DataSourceLayer
+namespace CertificateRegistry3.DataSourceLayer
 {
     class TemplateLoader
     {

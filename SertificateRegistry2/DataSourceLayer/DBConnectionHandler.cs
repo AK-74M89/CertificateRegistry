@@ -1,68 +1,110 @@
-﻿using System.Data;
-using System.Data.SQLite;
-using System.IO;
-using System.Windows.Forms;
+﻿using CertificateRegistry3.Properties;
+using System;
 
-namespace SertificateRegistry2.DataSourceLayer
+namespace CertificateRegistry3.DataSourceLayer
 {
-    static class DBConnectionHandler
+    /// <summary>
+    /// Подключение и работа с конкретной базой данных, в зависимости от настроек
+    /// </summary>
+    public static class DBConnectionHandler
     {
-        private static SQLiteConnection DBConnection = null;
+        private static IDBConnectionHandler connectionHandler;
+        private static ICertificatesGateway certificatesGateway;
+        private static IOrganizationGateway organizationGateway;
 
-        private static void InitDB()
-        {
-            new SQLiteCommand(@"CREATE TABLE IF NOT EXISTS organizations 
-                                (
-                                    id   INTEGER       PRIMARY KEY AUTOINCREMENT,
-                                    name VARCHAR(255) NOT NULL
-                                )", DBConnection).ExecuteNonQuery();
-
-
-            new SQLiteCommand(@"CREATE TABLE IF NOT EXISTS certificates 
-                                (
-                                    id              INTEGER       PRIMARY KEY AUTOINCREMENT,
-                                    name            VARCHAR (255) NOT NULL,
-                                    number          VARCHAR (255) NOT NULL,
-                                    date_begin      DATE          NOT NULL,
-                                    date_end        DATE          NOT NULL,
-                                    id_organization INTEGER       NOT NULL REFERENCES organizations (id)
-                                )", DBConnection).ExecuteNonQuery();
-        }
-
-        public static void Connect()
-        {
-            if (DBConnection == null)
-            {
-                SQLiteConnectionStringBuilder ConnectionStringCreator = new SQLiteConnectionStringBuilder();
-                ConnectionStringCreator.DataSource = Path.Combine(Application.StartupPath, "certificates.sqlite");
-                ConnectionStringCreator.FailIfMissing = false;
-                ConnectionStringCreator.JournalMode = SQLiteJournalModeEnum.Wal;                
-                string ConnectionString = ConnectionStringCreator.ConnectionString;
-                DBConnection = new SQLiteConnection(ConnectionString);
-            }
-            if (DBConnection.State != ConnectionState.Open)
-            {
-                DBConnection.Open();
-                InitDB();
-            }
-        }
-
-        public static void Disconnect()
-        {
-            if ((DBConnection != null) && (DBConnection.State != ConnectionState.Closed))
-            {
-                DBConnection.Close();
-            }
-        }
-
-        public static SQLiteConnection Connection
+        public static IDBConnectionHandler ConnectionHandler
         {
             get
             {
-                if (DBConnection == null)
-                    Connect();
-                return DBConnection;
+                if (connectionHandler == null)
+                {
+                    switch (Settings.Default.DBType)
+                    {
+                        case "PostgreSQL":
+                        {
+                            connectionHandler = new PostgreSQLDBConnectionHandler();
+                            break;
+                        }
+                        case "SQLite":
+                        {
+                            connectionHandler = new SQLiteDBConnectionHandler();
+                            break;
+                        }
+                        default:
+                        {
+                            throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
+                        }
+                    }
+                }
+                return connectionHandler;
             }
+        }
+
+        public static ICertificatesGateway CertificatesGateway
+        {
+            get
+            {
+                if (certificatesGateway == null)
+                {
+                    switch (Settings.Default.DBType)
+                    {
+                        case "PostgreSQL":
+                        {
+                                certificatesGateway = new PostgreSQLCertificateGateway(ConnectionHandler.DBConnection);
+                                break;
+                        }
+                        case "SQLite":
+                        {
+                            certificatesGateway = new SQLiteCertificateGateway(ConnectionHandler.DBConnection);
+                            break;
+                        }
+                        default:
+                        {
+                            throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
+                        }
+                    }
+                }
+                
+                return certificatesGateway;
+            }
+        }
+    
+        public static IOrganizationGateway OrganizationGateway
+        {
+            get
+            {
+                if (organizationGateway == null)
+                {
+                    switch (Settings.Default.DBType)
+                    {
+                        case "PostgreSQL":
+                        {
+                            organizationGateway = new PostgreSQLOrganizationGateway(ConnectionHandler.DBConnection);
+                            break;
+                        }
+                        case "SQLite":
+                        {
+                            organizationGateway = new SQLiteOrganizationGateway(ConnectionHandler.DBConnection);
+                            break;
+                        }
+                        default:
+                        {
+                            throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
+                        }
+                    }
+                }
+                return organizationGateway;
+            }
+        }
+    
+        public static void Connect()
+        {
+            ConnectionHandler.Connect();
+        }
+    
+        public static void Disconnect()
+        {
+            ConnectionHandler.Disconnect();
         }
     }
 }
