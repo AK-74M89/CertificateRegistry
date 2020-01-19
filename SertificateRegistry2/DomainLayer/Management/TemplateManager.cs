@@ -25,7 +25,7 @@ namespace CertificateRegistry3.DomainLayer
             string FilledTemplate = TemplateParts[0];
             for (int i = 0; i < CertificateList.Count; i++)
             {
-                string CurrentTableRow = TemplateParts[1].Replace("#Name#", CertificateList[i].Name);
+                string CurrentTableRow = TemplateParts[1].Replace("#Name#", CertificateList[i].CertificateName);
                 CurrentTableRow = CurrentTableRow.Replace("#Number#", CertificateList[i].Number);
                 CurrentTableRow = CurrentTableRow.Replace("#BeginDate#", CertificateList[i].BeginDate.ToShortDateString());
                 CurrentTableRow = CurrentTableRow.Replace("#EndDate#", CertificateList[i].EndDate.ToShortDateString());

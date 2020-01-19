@@ -223,5 +223,16 @@ namespace CertificateRegistry3.PresentationLayer
             EditBtn_Click(sender, e);
         }
         #endregion
+
+        private void CertificatesListViewForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+                FillCertificatesTable();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            FillCertificatesTable();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using CertificateRegistry3.Properties;
+using Npgsql;
 using System;
 using System.Data;
 using System.Data.Common;
@@ -27,10 +28,10 @@ namespace CertificateRegistry3.DataSourceLayer
             if (connection == null)
             {
                 var ConnectionStringCreator = new NpgsqlConnectionStringBuilder();
-                ConnectionStringCreator.Host = "localhost";
+                ConnectionStringCreator.Host = Settings.Default.DBServer;
                 ConnectionStringCreator.Port = 5432;
-                ConnectionStringCreator.IntegratedSecurity = true;
-                ConnectionStringCreator.Username = $"{Environment.UserName}@{Environment.UserDomainName}";
+                ConnectionStringCreator.Username = Settings.Default.Username;
+                ConnectionStringCreator.Password = Settings.Default.Password;
                 ConnectionStringCreator.Database = "certificates";
                 string ConnectionString = ConnectionStringCreator.ConnectionString;
                 connection = new NpgsqlConnection(ConnectionString);
