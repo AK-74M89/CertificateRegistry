@@ -52,17 +52,17 @@
             this.PrintSelectedBtn = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.CertificatesTable = new System.Windows.Forms.DataGridView();
-            this.pnlTools = new System.Windows.Forms.Panel();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.SearchTBox = new System.Windows.Forms.TextBox();
-            this.SearchLbl = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlTools = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.SearchTBox = new System.Windows.Forms.TextBox();
+            this.SearchLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).BeginInit();
             this.CertificateStatus.SuspendLayout();
             this.CertificatesMainMenu.SuspendLayout();
@@ -282,62 +282,6 @@
             this.CertificatesTable.Size = new System.Drawing.Size(1024, 681);
             this.CertificatesTable.TabIndex = 1;
             // 
-            // pnlTools
-            // 
-            this.pnlTools.Controls.Add(this.btnRefresh);
-            this.pnlTools.Controls.Add(this.AddBtn);
-            this.pnlTools.Controls.Add(this.EditBtn);
-            this.pnlTools.Controls.Add(this.PrintSelectedBtn);
-            this.pnlTools.Controls.Add(this.DeleteBtn);
-            this.pnlTools.Controls.Add(this.SelectBtn);
-            this.pnlTools.Controls.Add(this.PrintAllBtn);
-            this.pnlTools.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlTools.Location = new System.Drawing.Point(1024, 0);
-            this.pnlTools.Name = "pnlTools";
-            this.pnlTools.Size = new System.Drawing.Size(144, 735);
-            this.pnlTools.TabIndex = 14;
-            // 
-            // pnlSearch
-            // 
-            this.pnlSearch.Controls.Add(this.SearchTBox);
-            this.pnlSearch.Controls.Add(this.SearchLbl);
-            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSearch.Location = new System.Drawing.Point(0, 670);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(1024, 39);
-            this.pnlSearch.TabIndex = 15;
-            // 
-            // SearchTBox
-            // 
-            this.SearchTBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchTBox.Location = new System.Drawing.Point(64, 8);
-            this.SearchTBox.Margin = new System.Windows.Forms.Padding(4);
-            this.SearchTBox.Name = "SearchTBox";
-            this.SearchTBox.Size = new System.Drawing.Size(953, 22);
-            this.SearchTBox.TabIndex = 11;
-            // 
-            // SearchLbl
-            // 
-            this.SearchLbl.AutoSize = true;
-            this.SearchLbl.Location = new System.Drawing.Point(8, 8);
-            this.SearchLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.SearchLbl.Name = "SearchLbl";
-            this.SearchLbl.Size = new System.Drawing.Size(48, 17);
-            this.SearchLbl.TabIndex = 10;
-            this.SearchLbl.Text = "Поиск";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(4, 4);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
-            this.btnRefresh.TabIndex = 13;
-            this.btnRefresh.Text = "Обновить";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // cID
             // 
             this.cID.DataPropertyName = "CertificateId";
@@ -396,6 +340,63 @@
             this.clOrganization.ReadOnly = true;
             this.clOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.clOrganization.Width = 200;
+            // 
+            // pnlTools
+            // 
+            this.pnlTools.Controls.Add(this.btnRefresh);
+            this.pnlTools.Controls.Add(this.AddBtn);
+            this.pnlTools.Controls.Add(this.EditBtn);
+            this.pnlTools.Controls.Add(this.PrintSelectedBtn);
+            this.pnlTools.Controls.Add(this.DeleteBtn);
+            this.pnlTools.Controls.Add(this.SelectBtn);
+            this.pnlTools.Controls.Add(this.PrintAllBtn);
+            this.pnlTools.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlTools.Location = new System.Drawing.Point(1024, 0);
+            this.pnlTools.Name = "pnlTools";
+            this.pnlTools.Size = new System.Drawing.Size(144, 735);
+            this.pnlTools.TabIndex = 14;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(4, 4);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
+            this.btnRefresh.TabIndex = 13;
+            this.btnRefresh.Text = "Обновить";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // pnlSearch
+            // 
+            this.pnlSearch.Controls.Add(this.SearchTBox);
+            this.pnlSearch.Controls.Add(this.SearchLbl);
+            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlSearch.Location = new System.Drawing.Point(0, 670);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(1024, 39);
+            this.pnlSearch.TabIndex = 15;
+            // 
+            // SearchTBox
+            // 
+            this.SearchTBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchTBox.Location = new System.Drawing.Point(64, 8);
+            this.SearchTBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SearchTBox.Name = "SearchTBox";
+            this.SearchTBox.Size = new System.Drawing.Size(953, 22);
+            this.SearchTBox.TabIndex = 11;
+            this.SearchTBox.TextChanged += new System.EventHandler(this.SearchTBox_TextChanged);
+            // 
+            // SearchLbl
+            // 
+            this.SearchLbl.AutoSize = true;
+            this.SearchLbl.Location = new System.Drawing.Point(8, 8);
+            this.SearchLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SearchLbl.Name = "SearchLbl";
+            this.SearchLbl.Size = new System.Drawing.Size(48, 17);
+            this.SearchLbl.TabIndex = 10;
+            this.SearchLbl.Text = "Поиск";
             // 
             // CertificatesListViewForm
             // 

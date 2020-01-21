@@ -2,6 +2,8 @@
 using CertificateRegistry3.DomainLayer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CertificateRegistry3.PresentationLayer
@@ -10,7 +12,8 @@ namespace CertificateRegistry3.PresentationLayer
     {
         #region Поля
         private CertificateManager CertificateRegistryHandler;
-        
+
+        private BindingList<Certificate> CertificateDataSource;
         private List<Certificate> SelectedCertificatesList;
         private bool isFirstSelection = true;
         #endregion Поля
@@ -32,7 +35,8 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void FillCertificatesTable()
         {
-            bsCertificates.DataSource = CertificateRegistryHandler.GetCertificatesRegistry();
+            CertificateDataSource = CertificateRegistryHandler.GetCertificatesRegistry();
+            bsCertificates.DataSource = CertificateDataSource;
             
             EnableControls(CertificatesTable.RowCount > 0);
             if (CertificatesTable.RowCount > 0)
@@ -233,6 +237,25 @@ namespace CertificateRegistry3.PresentationLayer
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             FillCertificatesTable();
+        }
+
+        private void SearchTBox_TextChanged(object sender, EventArgs e)
+        {
+            if (SearchTBox.TextLength == 0)
+            {
+                bsCertificates.DataSource = CertificateDataSource;
+            }
+            else
+            {
+                const string DATE_FORMAT = "dd.MM.yyyy";
+                var searchText = SearchTBox.Text;
+                bsCertificates.DataSource = new BindingList<Certificate>(CertificateDataSource.Where(c => c.CertificateName.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                                                                                                            c.Number.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                                                                                                            c.BeginDate.ToString(DATE_FORMAT).IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                                                                                                            c.EndDate.ToString(DATE_FORMAT).IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                                                                                                            c.Organization.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                                                                                                .ToList());
+            }
         }
     }
 }
