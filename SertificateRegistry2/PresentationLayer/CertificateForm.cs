@@ -35,7 +35,7 @@ namespace CertificateRegistry3.PresentationLayer
             InitializeComponent();
 
             isEdit = true;
-            CertificateNameTextBox.Text = CertificateToEdit.Name;
+            CertificateNameTextBox.Text = CertificateToEdit.CertificateName;
             CertificateNumberTextBox.Text = CertificateToEdit.Number;
             BeginDatePicker.Value = CertificateToEdit.BeginDate;
             EndDatePicker.Value = CertificateToEdit.EndDate;

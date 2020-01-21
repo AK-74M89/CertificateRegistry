@@ -56,11 +56,13 @@
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.SearchTBox = new System.Windows.Forms.TextBox();
             this.SearchLbl = new System.Windows.Forms.Label();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Organization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).BeginInit();
             this.CertificateStatus.SuspendLayout();
             this.CertificatesMainMenu.SuspendLayout();
@@ -72,7 +74,7 @@
             // 
             // AddBtn
             // 
-            this.AddBtn.Location = new System.Drawing.Point(4, 4);
+            this.AddBtn.Location = new System.Drawing.Point(4, 73);
             this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(133, 43);
@@ -189,7 +191,7 @@
             // 
             // EditBtn
             // 
-            this.EditBtn.Location = new System.Drawing.Point(4, 55);
+            this.EditBtn.Location = new System.Drawing.Point(4, 124);
             this.EditBtn.Margin = new System.Windows.Forms.Padding(4);
             this.EditBtn.Name = "EditBtn";
             this.EditBtn.Size = new System.Drawing.Size(133, 43);
@@ -200,7 +202,7 @@
             // 
             // DeleteBtn
             // 
-            this.DeleteBtn.Location = new System.Drawing.Point(4, 106);
+            this.DeleteBtn.Location = new System.Drawing.Point(4, 175);
             this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
             this.DeleteBtn.Name = "DeleteBtn";
             this.DeleteBtn.Size = new System.Drawing.Size(133, 43);
@@ -211,7 +213,7 @@
             // 
             // PrintAllBtn
             // 
-            this.PrintAllBtn.Location = new System.Drawing.Point(4, 157);
+            this.PrintAllBtn.Location = new System.Drawing.Point(4, 226);
             this.PrintAllBtn.Margin = new System.Windows.Forms.Padding(4);
             this.PrintAllBtn.Name = "PrintAllBtn";
             this.PrintAllBtn.Size = new System.Drawing.Size(133, 43);
@@ -223,19 +225,20 @@
             // SelectBtn
             // 
             this.SelectBtn.Enabled = false;
-            this.SelectBtn.Location = new System.Drawing.Point(4, 208);
+            this.SelectBtn.Location = new System.Drawing.Point(4, 277);
             this.SelectBtn.Margin = new System.Windows.Forms.Padding(4);
             this.SelectBtn.Name = "SelectBtn";
             this.SelectBtn.Size = new System.Drawing.Size(133, 43);
             this.SelectBtn.TabIndex = 11;
             this.SelectBtn.Text = "Выбрать";
             this.SelectBtn.UseVisualStyleBackColor = true;
+            this.SelectBtn.Visible = false;
             this.SelectBtn.Click += new System.EventHandler(this.SelectBtn_Click);
             // 
             // PrintSelectedBtn
             // 
             this.PrintSelectedBtn.Enabled = false;
-            this.PrintSelectedBtn.Location = new System.Drawing.Point(4, 259);
+            this.PrintSelectedBtn.Location = new System.Drawing.Point(4, 328);
             this.PrintSelectedBtn.Margin = new System.Windows.Forms.Padding(4);
             this.PrintSelectedBtn.Name = "PrintSelectedBtn";
             this.PrintSelectedBtn.Size = new System.Drawing.Size(133, 43);
@@ -261,11 +264,12 @@
             this.CertificatesTable.AutoGenerateColumns = false;
             this.CertificatesTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CertificatesTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
-            this.Number,
-            this.BeginDate,
-            this.EndDate,
-            this.Organization});
+            this.cID,
+            this.clName,
+            this.clNumber,
+            this.clBeginDate,
+            this.clEndDate,
+            this.clOrganization});
             this.CertificatesTable.DataSource = this.bsCertificates;
             this.CertificatesTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CertificatesTable.Location = new System.Drawing.Point(0, 0);
@@ -280,6 +284,7 @@
             // 
             // pnlTools
             // 
+            this.pnlTools.Controls.Add(this.btnRefresh);
             this.pnlTools.Controls.Add(this.AddBtn);
             this.pnlTools.Controls.Add(this.EditBtn);
             this.pnlTools.Controls.Add(this.PrintSelectedBtn);
@@ -322,55 +327,75 @@
             this.SearchLbl.TabIndex = 10;
             this.SearchLbl.Text = "Поиск";
             // 
-            // ID
+            // btnRefresh
             // 
-            this.ID.DataPropertyName = "ID_Certificate";
-            this.ID.HeaderText = "Идентификатор";
-            this.ID.MinimumWidth = 6;
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            this.ID.Width = 6;
+            this.btnRefresh.Location = new System.Drawing.Point(4, 4);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
+            this.btnRefresh.TabIndex = 13;
+            this.btnRefresh.Text = "Обновить";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // Number
+            // cID
             // 
-            this.Number.DataPropertyName = "Number";
-            this.Number.HeaderText = "Номер";
-            this.Number.MinimumWidth = 6;
-            this.Number.Name = "Number";
-            this.Number.ReadOnly = true;
-            this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Number.Width = 150;
+            this.cID.DataPropertyName = "CertificateId";
+            this.cID.HeaderText = "Идентификатор";
+            this.cID.MinimumWidth = 6;
+            this.cID.Name = "cID";
+            this.cID.ReadOnly = true;
+            this.cID.Visible = false;
+            this.cID.Width = 6;
             // 
-            // BeginDate
+            // clName
             // 
-            this.BeginDate.DataPropertyName = "BeginDate";
-            this.BeginDate.HeaderText = "Дата выдачи";
-            this.BeginDate.MinimumWidth = 6;
-            this.BeginDate.Name = "BeginDate";
-            this.BeginDate.ReadOnly = true;
-            this.BeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.BeginDate.Width = 125;
+            this.clName.DataPropertyName = "CertificateName";
+            this.clName.HeaderText = "Название";
+            this.clName.MinimumWidth = 6;
+            this.clName.Name = "clName";
+            this.clName.ReadOnly = true;
+            this.clName.Width = 125;
             // 
-            // EndDate
+            // clNumber
             // 
-            this.EndDate.DataPropertyName = "EndDate";
-            this.EndDate.HeaderText = "Действует до";
-            this.EndDate.MinimumWidth = 6;
-            this.EndDate.Name = "EndDate";
-            this.EndDate.ReadOnly = true;
-            this.EndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.EndDate.Width = 125;
+            this.clNumber.DataPropertyName = "Number";
+            this.clNumber.HeaderText = "Номер";
+            this.clNumber.MinimumWidth = 6;
+            this.clNumber.Name = "clNumber";
+            this.clNumber.ReadOnly = true;
+            this.clNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clNumber.Width = 150;
             // 
-            // Organization
+            // clBeginDate
             // 
-            this.Organization.DataPropertyName = "Organization";
-            this.Organization.HeaderText = "Орган, выдавший сертификат";
-            this.Organization.MinimumWidth = 6;
-            this.Organization.Name = "Organization";
-            this.Organization.ReadOnly = true;
-            this.Organization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.Organization.Width = 200;
+            this.clBeginDate.DataPropertyName = "BeginDate";
+            this.clBeginDate.HeaderText = "Дата выдачи";
+            this.clBeginDate.MinimumWidth = 6;
+            this.clBeginDate.Name = "clBeginDate";
+            this.clBeginDate.ReadOnly = true;
+            this.clBeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clBeginDate.Width = 125;
+            // 
+            // clEndDate
+            // 
+            this.clEndDate.DataPropertyName = "EndDate";
+            this.clEndDate.HeaderText = "Действует до";
+            this.clEndDate.MinimumWidth = 6;
+            this.clEndDate.Name = "clEndDate";
+            this.clEndDate.ReadOnly = true;
+            this.clEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clEndDate.Width = 125;
+            // 
+            // clOrganization
+            // 
+            this.clOrganization.DataPropertyName = "Organization";
+            this.clOrganization.HeaderText = "Орган, выдавший сертификат";
+            this.clOrganization.MinimumWidth = 6;
+            this.clOrganization.Name = "clOrganization";
+            this.clOrganization.ReadOnly = true;
+            this.clOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clOrganization.Width = 200;
             // 
             // CertificatesListViewForm
             // 
@@ -383,12 +408,14 @@
             this.Controls.Add(this.CertificatesMainMenu);
             this.Controls.Add(this.pnlTools);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.CertificatesMainMenu;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CertificatesListViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Реестр сертификатов 3";
             this.Load += new System.EventHandler(this.CertificatesListViewForm_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CertificatesListViewForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).EndInit();
             this.CertificateStatus.ResumeLayout(false);
             this.CertificateStatus.PerformLayout();
@@ -431,10 +458,12 @@
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.TextBox SearchTBox;
         private System.Windows.Forms.Label SearchLbl;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BeginDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EndDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Organization;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clBeginDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clEndDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clOrganization;
     }
 }

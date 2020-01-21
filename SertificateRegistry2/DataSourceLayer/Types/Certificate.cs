@@ -26,7 +26,7 @@ namespace CertificateRegistry3.DataSourceLayer
             get { return certificateId; }
             set { certificateId = value; }
         }
-        public string Name
+        public string CertificateName
         {
             get { return name; }
             set { name = value; }
