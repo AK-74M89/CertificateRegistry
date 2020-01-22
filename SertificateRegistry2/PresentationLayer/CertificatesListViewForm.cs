@@ -10,40 +10,35 @@ namespace CertificateRegistry3.PresentationLayer
 {
     public partial class CertificatesListViewForm : Form
     {
-        #region Поля
-        private CertificateManager CertificateRegistryHandler;
-
-        private BindingList<Certificate> CertificateDataSource;
-        private List<Certificate> SelectedCertificatesList;
+        private CertificateManager certificateRegistryHandler = new CertificateManager();
+        private BindingList<Certificate> certificatesList;
+        private BindingList<Certificate> selectedCertificatesList = new BindingList<Certificate>();
         private bool isFirstSelection = true;
-        #endregion Поля
 
-        #region Свойства
-        private Certificate CurrentCertificate => (Certificate)CertificatesTable.CurrentRow?.DataBoundItem;
-        #endregion Свойства
+        private Certificate currentCertificate => (Certificate)grdCertificates.CurrentRow?.DataBoundItem;
 
-        #region Вспомогательные методы
         private void EnableControls(bool Enable)
         {
             выбраныеToolStripMenuItem.Enabled = 
-                PrintAllBtn.Enabled = 
-                SelectBtn.Enabled = 
-                DeleteBtn.Enabled = 
-                EditBtn.Enabled =
+                btnPrintAll.Enabled = 
+                btnSelect.Enabled = 
+                btnDelete.Enabled = 
+                btnEdit.Enabled =
                 Enable;            
         }
 
         private void FillCertificatesTable()
         {
-            CertificateDataSource = CertificateRegistryHandler.GetCertificatesRegistry();
-            bsCertificates.DataSource = CertificateDataSource;
-            
-            EnableControls(CertificatesTable.RowCount > 0);
-            if (CertificatesTable.RowCount > 0)
-                CertificatesTable.Rows[0].Selected = true;
-            CertificatesCount.Text = $"Всего в базе: {CertificatesTable.RowCount}";
+            certificatesList = certificateRegistryHandler.GetCertificatesRegistry();
 
-            foreach (DataGridViewColumn column in CertificatesTable.Columns)
+            bsCertificates.DataSource = certificatesList;
+
+            EnableControls(grdCertificates.RowCount > 0);
+            if (grdCertificates.RowCount > 0)
+                grdCertificates.Rows[0].Selected = true;
+            lblCertificatesCount.Text = $"Всего в базе: {grdCertificates.RowCount}";
+
+            foreach (DataGridViewColumn column in grdCertificates.Columns)
             {
                 column.Tag = null;
             }
@@ -51,23 +46,18 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void ClearHideSelectedList()
         {
-            PrintAllBtn.Enabled = true;
-            //SelectedCertificates.Visible = false;
-            PrintSelectedBtn.Visible = false;
+            pnlToolsForSelected.Visible = false;
             isFirstSelection = true;
-            Width = 882; // TODO : переделать
-            isFirstSelection = true;
-            //SelectedCertificates.Clear();
-            SelectedCertificatesList.Clear();
+            selectedCertificatesList.Clear();
+            btnPrintAll.Enabled = true;
+            splitCertificates.Panel2Collapsed = true;
         }
-        #endregion
 
-        #region Обработчики событий
         public CertificatesListViewForm()
         {
             InitializeComponent();
-            CertificateRegistryHandler = new CertificateManager();
-            SelectedCertificatesList = new List<Certificate>();
+            bsCertificates.DataSource = certificatesList;
+            bsSelectedCertificates.DataSource = selectedCertificatesList;
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
@@ -75,7 +65,7 @@ namespace CertificateRegistry3.PresentationLayer
             FillCertificatesTable();
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {            
             if (new CertificateForm().ShowDialog() == DialogResult.OK)
             {
@@ -83,25 +73,25 @@ namespace CertificateRegistry3.PresentationLayer
             }
         }
 
-        private void EditBtn_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (CurrentCertificate == null)
+            if (currentCertificate == null)
                 return;
 
-            if (new CertificateForm(CurrentCertificate).ShowDialog() == DialogResult.OK)
+            if (new CertificateForm(currentCertificate).ShowDialog() == DialogResult.OK)
             {
                 FillCertificatesTable();
             }
         }
 
-        private void DeleteBtn_Click(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (CurrentCertificate == null)
+            if (currentCertificate == null)
                 return;
 
-            if (MessageBox.Show($"Хотите удалить сертификат № {CurrentCertificate.Number}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show($"Хотите удалить сертификат № {currentCertificate.Number}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                CertificateRegistryHandler.DeleteCertificate(CurrentCertificate.ID_Certificate);
+                certificateRegistryHandler.DeleteCertificate(currentCertificate.ID_Certificate);
                 FillCertificatesTable();
             }
         }
@@ -111,9 +101,9 @@ namespace CertificateRegistry3.PresentationLayer
             Close();
         }
 
-        private void PrintAllBtn_Click(object sender, EventArgs e)
+        private void btnPrintAll_Click(object sender, EventArgs e)
         {
-            var Certificates = new List<Certificate>(CertificateRegistryHandler.GetCertificatesRegistry());
+            var Certificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
 
             var CertificateTemplate = new TemplateManager();
             string CertificatesTable = CertificateTemplate.FillTemplate(Certificates);
@@ -129,7 +119,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var CertificatesList = CertificateRegistryHandler.GetCertificatesRegistry();
+            var CertificatesList = certificateRegistryHandler.GetCertificatesRegistry();
 
             int Expired = 0;
             int Today = 0;
@@ -164,31 +154,29 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void распечататьВсеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrintAllBtn_Click(sender, e);
+            btnPrintAll_Click(sender, e);
         }
 
-        private void SelectBtn_Click(object sender, EventArgs e)
+        private void btnSelect_Click(object sender, EventArgs e)
         {
             if (isFirstSelection)
-            {
-                PrintAllBtn.Enabled = false;
-                SelectedCertificatesList.Clear();
-                //SelectedCertificates.Visible = true;
-                PrintSelectedBtn.Visible = true;
+            {            
+                selectedCertificatesList.Clear();
+                splitCertificates.Panel2Collapsed = false;
                 isFirstSelection = false;
-                Width = 977; // TODO: переделать
+                btnPrintAll.Enabled = false;
+                pnlToolsForSelected.Visible = true;
             }
-            if (SelectedCertificatesList.IndexOf(CurrentCertificate) < 0)
+            if (selectedCertificatesList.IndexOf(currentCertificate) < 0)
             {
-                SelectedCertificatesList.Add(CurrentCertificate);
-                //SelectedCertificates.Text += CurrentCertificate.Name + "\n----------\n";
+                selectedCertificatesList.Add(currentCertificate);
             }
         }
 
-        private void PrintSelectedBtn_Click(object sender, EventArgs e)
+        private void btnPrintSelected_Click(object sender, EventArgs e)
         {
             TemplateManager CertificateTemplate = new TemplateManager();
-            string CertificatesTable = CertificateTemplate.FillTemplate(SelectedCertificatesList);
+            string CertificatesTable = CertificateTemplate.FillTemplate(selectedCertificatesList.ToList());
 
             RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
             if (PrintRegistry.ShowDialog() == DialogResult.OK)
@@ -199,7 +187,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void напечататьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PrintSelectedBtn_Click(sender, e);
+            btnPrintSelected_Click(sender, e);
         }
 
         private void очиститьСписокToolStripMenuItem_Click(object sender, EventArgs e)
@@ -207,27 +195,26 @@ namespace CertificateRegistry3.PresentationLayer
             ClearHideSelectedList();
         }
         
-        private void CertificatesTable_KeyDown(object sender, KeyEventArgs e)
+        private void grdCertificates_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EditBtn_Click(sender, e);
+                btnEdit_Click(sender, e);
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                DeleteBtn_Click(sender, e);
+                btnDelete_Click(sender, e);
             }
             else if (e.KeyCode == Keys.Insert)
             {
-                AddBtn_Click(sender, e);
+                btnAdd_Click(sender, e);
             }
         }        
 
-        private void CertificatesTable_DoubleClick(object sender, EventArgs e)
+        private void grdCertificates_DoubleClick(object sender, EventArgs e)
         {
-            EditBtn_Click(sender, e);
+            btnEdit_Click(sender, e);
         }
-        #endregion
 
         private void CertificatesListViewForm_KeyUp(object sender, KeyEventArgs e)
         {
@@ -237,20 +224,21 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            ClearHideSelectedList();
             FillCertificatesTable();
         }
 
-        private void SearchTBox_TextChanged(object sender, EventArgs e)
+        private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            if (SearchTBox.TextLength == 0)
+            if (tbSearch.TextLength == 0)
             {
-                bsCertificates.DataSource = CertificateDataSource;
+                bsCertificates.DataSource = certificatesList;
             }
             else
             {
                 const string DATE_FORMAT = "dd.MM.yyyy";
-                var searchText = SearchTBox.Text;
-                bsCertificates.DataSource = new BindingList<Certificate>(CertificateDataSource.Where(c => c.CertificateName.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                var searchText = tbSearch.Text;
+                bsCertificates.DataSource = new BindingList<Certificate>(certificatesList.Where(c => c.CertificateName.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                                                                                                             c.Number.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                                                                                                             c.BeginDate.ToString(DATE_FORMAT).IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                                                                                                             c.EndDate.ToString(DATE_FORMAT).IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
@@ -259,9 +247,9 @@ namespace CertificateRegistry3.PresentationLayer
             }
         }
 
-        private void CertificatesTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void grdCertificates_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {            
-            var affectedColumn = CertificatesTable.Columns[e.ColumnIndex];
+            var affectedColumn = grdCertificates.Columns[e.ColumnIndex];
             // true - сортировка в прямом направлении, false - в обратном
             // если тэг был пустой, то ставим прямую, если нет - меняем на противоположную
             affectedColumn.Tag = affectedColumn.Tag == null ? true : !(bool)affectedColumn.Tag;
@@ -271,29 +259,34 @@ namespace CertificateRegistry3.PresentationLayer
 
             List<Certificate> sortedList = null;
 
-            if (affectedColumn.Name == clName.Name)
+            if (affectedColumn.Name == colName.Name)
             {
-                sortedList = tag ? CertificateDataSource.OrderBy(c => c.CertificateName).ToList() : CertificateDataSource.OrderByDescending(c => c.CertificateName).ToList();
+                sortedList = tag ? certificatesList.OrderBy(c => c.CertificateName).ToList() : certificatesList.OrderByDescending(c => c.CertificateName).ToList();
             }
-            else if (affectedColumn.Name == clNumber.Name)
+            else if (affectedColumn.Name == colNumber.Name)
             {
-                sortedList = tag ? CertificateDataSource.OrderBy(c => c.Number).ToList() : CertificateDataSource.OrderByDescending(c => c.Number).ToList();
+                sortedList = tag ? certificatesList.OrderBy(c => c.Number).ToList() : certificatesList.OrderByDescending(c => c.Number).ToList();
             }
-            else if (affectedColumn.Name == clBeginDate.Name)
+            else if (affectedColumn.Name == colBeginDate.Name)
             {
-                sortedList = tag ? CertificateDataSource.OrderBy(c => c.BeginDate).ToList() : CertificateDataSource.OrderByDescending(c => c.BeginDate).ToList();
+                sortedList = tag ? certificatesList.OrderBy(c => c.BeginDate).ToList() : certificatesList.OrderByDescending(c => c.BeginDate).ToList();
             }
-            else if (affectedColumn.Name == clEndDate.Name)
+            else if (affectedColumn.Name == colEndDate.Name)
             {
-                sortedList = tag ? CertificateDataSource.OrderBy(c => c.EndDate).ToList() : CertificateDataSource.OrderByDescending(c => c.EndDate).ToList();
+                sortedList = tag ? certificatesList.OrderBy(c => c.EndDate).ToList() : certificatesList.OrderByDescending(c => c.EndDate).ToList();
             }
-            else if (affectedColumn.Name == clOrganization.Name)
+            else if (affectedColumn.Name == colOrganization.Name)
             {
-                sortedList = tag ? CertificateDataSource.OrderBy(c => c.Organization).ToList() : CertificateDataSource.OrderByDescending(c => c.Organization).ToList();
+                sortedList = tag ? certificatesList.OrderBy(c => c.Organization).ToList() : certificatesList.OrderByDescending(c => c.Organization).ToList();
             }
             else throw new Exception($"Неизвестное название столбца: {affectedColumn.Name}");
 
             bsCertificates.DataSource = new BindingList<Certificate>(sortedList);
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearHideSelectedList();
         }
     }
 }

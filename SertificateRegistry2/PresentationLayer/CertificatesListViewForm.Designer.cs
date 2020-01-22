@@ -31,95 +31,113 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CertificatesListViewForm));
             this.bsCertificates = new System.Windows.Forms.BindingSource(this.components);
-            this.AddBtn = new System.Windows.Forms.Button();
-            this.CertificateStatus = new System.Windows.Forms.StatusStrip();
-            this.CertificatesCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.CertificatesMainMenu = new System.Windows.Forms.MenuStrip();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.statusCertificate = new System.Windows.Forms.StatusStrip();
+            this.lblCertificatesCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mainMenuCertificates = new System.Windows.Forms.MenuStrip();
             this.сертификатыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.распечататьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.separator1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выбраныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.напечататьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EditBtn = new System.Windows.Forms.Button();
-            this.DeleteBtn = new System.Windows.Forms.Button();
-            this.PrintAllBtn = new System.Windows.Forms.Button();
-            this.SelectBtn = new System.Windows.Forms.Button();
-            this.PrintSelectedBtn = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnPrintAll = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.CertificatesTable = new System.Windows.Forms.DataGridView();
+            this.splitCertificates = new System.Windows.Forms.SplitContainer();
+            this.grdCertificates = new System.Windows.Forms.DataGridView();
+            this.coIID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grdSelectedCertificate = new System.Windows.Forms.DataGridView();
+            this.colSelectedCertificateId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSelectedCertificateName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSelectedCertificateNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSelectedCertificateBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSelectedCertificateEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSelectedCertificateOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bsSelectedCertificates = new System.Windows.Forms.BindingSource(this.components);
             this.pnlTools = new System.Windows.Forms.Panel();
+            this.pnlToolsForSelected = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnPrintSelected = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
-            this.SearchTBox = new System.Windows.Forms.TextBox();
-            this.SearchLbl = new System.Windows.Forms.Label();
-            this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).BeginInit();
-            this.CertificateStatus.SuspendLayout();
-            this.CertificatesMainMenu.SuspendLayout();
+            this.statusCertificate.SuspendLayout();
+            this.mainMenuCertificates.SuspendLayout();
             this.pnlMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CertificatesTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitCertificates)).BeginInit();
+            this.splitCertificates.Panel1.SuspendLayout();
+            this.splitCertificates.Panel2.SuspendLayout();
+            this.splitCertificates.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdCertificates)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdSelectedCertificate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsSelectedCertificates)).BeginInit();
             this.pnlTools.SuspendLayout();
+            this.pnlToolsForSelected.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.SuspendLayout();
             // 
-            // AddBtn
+            // btnAdd
             // 
-            this.AddBtn.Location = new System.Drawing.Point(4, 73);
-            this.AddBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.AddBtn.Name = "AddBtn";
-            this.AddBtn.Size = new System.Drawing.Size(133, 43);
-            this.AddBtn.TabIndex = 2;
-            this.AddBtn.Text = "Добавить";
-            this.AddBtn.UseVisualStyleBackColor = true;
-            this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
+            this.btnAdd.Location = new System.Drawing.Point(4, 73);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(133, 43);
+            this.btnAdd.TabIndex = 2;
+            this.btnAdd.Text = "Добавить";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // CertificateStatus
+            // statusCertificate
             // 
-            this.CertificateStatus.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.CertificateStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CertificatesCount});
-            this.CertificateStatus.Location = new System.Drawing.Point(0, 709);
-            this.CertificateStatus.Name = "CertificateStatus";
-            this.CertificateStatus.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.CertificateStatus.Size = new System.Drawing.Size(1024, 26);
-            this.CertificateStatus.SizingGrip = false;
-            this.CertificateStatus.TabIndex = 3;
+            this.statusCertificate.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusCertificate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblCertificatesCount});
+            this.statusCertificate.Location = new System.Drawing.Point(0, 709);
+            this.statusCertificate.Name = "statusCertificate";
+            this.statusCertificate.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusCertificate.Size = new System.Drawing.Size(1024, 26);
+            this.statusCertificate.SizingGrip = false;
+            this.statusCertificate.TabIndex = 3;
             // 
-            // CertificatesCount
+            // lblCertificatesCount
             // 
-            this.CertificatesCount.Name = "CertificatesCount";
-            this.CertificatesCount.Size = new System.Drawing.Size(99, 20);
-            this.CertificatesCount.Text = "Всего в базе:";
+            this.lblCertificatesCount.Name = "lblCertificatesCount";
+            this.lblCertificatesCount.Size = new System.Drawing.Size(99, 20);
+            this.lblCertificatesCount.Text = "Всего в базе:";
             // 
-            // CertificatesMainMenu
+            // mainMenuCertificates
             // 
-            this.CertificatesMainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.CertificatesMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenuCertificates.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mainMenuCertificates.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сертификатыToolStripMenuItem,
             this.выбраныеToolStripMenuItem,
             this.справкаToolStripMenuItem});
-            this.CertificatesMainMenu.Location = new System.Drawing.Point(0, 0);
-            this.CertificatesMainMenu.Name = "CertificatesMainMenu";
-            this.CertificatesMainMenu.Size = new System.Drawing.Size(1024, 28);
-            this.CertificatesMainMenu.TabIndex = 4;
-            this.CertificatesMainMenu.Text = "menuStrip1";
+            this.mainMenuCertificates.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuCertificates.Name = "mainMenuCertificates";
+            this.mainMenuCertificates.Size = new System.Drawing.Size(1024, 28);
+            this.mainMenuCertificates.TabIndex = 4;
+            this.mainMenuCertificates.Text = "menuStrip1";
             // 
             // сертификатыToolStripMenuItem
             // 
             this.сертификатыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.распечататьВсеToolStripMenuItem,
             this.статистикаToolStripMenuItem,
-            this.toolStripMenuItem1,
+            this.separator1,
             this.выходToolStripMenuItem});
             this.сертификатыToolStripMenuItem.Name = "сертификатыToolStripMenuItem";
             this.сертификатыToolStripMenuItem.Size = new System.Drawing.Size(115, 24);
@@ -139,10 +157,10 @@
             this.статистикаToolStripMenuItem.Text = "Статистика";
             this.статистикаToolStripMenuItem.Click += new System.EventHandler(this.статистикаToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem1
+            // separator1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(200, 6);
+            this.separator1.Name = "separator1";
+            this.separator1.Size = new System.Drawing.Size(200, 6);
             // 
             // выходToolStripMenuItem
             // 
@@ -189,114 +207,302 @@
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
-            // EditBtn
+            // btnEdit
             // 
-            this.EditBtn.Location = new System.Drawing.Point(4, 124);
-            this.EditBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.EditBtn.Name = "EditBtn";
-            this.EditBtn.Size = new System.Drawing.Size(133, 43);
-            this.EditBtn.TabIndex = 5;
-            this.EditBtn.Text = "Редактировать";
-            this.EditBtn.UseVisualStyleBackColor = true;
-            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
+            this.btnEdit.Location = new System.Drawing.Point(4, 124);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(133, 43);
+            this.btnEdit.TabIndex = 5;
+            this.btnEdit.Text = "Редактировать";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // DeleteBtn
+            // btnDelete
             // 
-            this.DeleteBtn.Location = new System.Drawing.Point(4, 175);
-            this.DeleteBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.DeleteBtn.Name = "DeleteBtn";
-            this.DeleteBtn.Size = new System.Drawing.Size(133, 43);
-            this.DeleteBtn.TabIndex = 6;
-            this.DeleteBtn.Text = "Удалить";
-            this.DeleteBtn.UseVisualStyleBackColor = true;
-            this.DeleteBtn.Click += new System.EventHandler(this.DeleteBtn_Click);
+            this.btnDelete.Location = new System.Drawing.Point(4, 175);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(133, 43);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.Text = "Удалить";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // PrintAllBtn
+            // btnPrintAll
             // 
-            this.PrintAllBtn.Location = new System.Drawing.Point(4, 226);
-            this.PrintAllBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.PrintAllBtn.Name = "PrintAllBtn";
-            this.PrintAllBtn.Size = new System.Drawing.Size(133, 43);
-            this.PrintAllBtn.TabIndex = 7;
-            this.PrintAllBtn.Text = "Напечатать реестр";
-            this.PrintAllBtn.UseVisualStyleBackColor = true;
-            this.PrintAllBtn.Click += new System.EventHandler(this.PrintAllBtn_Click);
+            this.btnPrintAll.Location = new System.Drawing.Point(4, 226);
+            this.btnPrintAll.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintAll.Name = "btnPrintAll";
+            this.btnPrintAll.Size = new System.Drawing.Size(133, 43);
+            this.btnPrintAll.TabIndex = 7;
+            this.btnPrintAll.Text = "Напечатать реестр";
+            this.btnPrintAll.UseVisualStyleBackColor = true;
+            this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
-            // SelectBtn
+            // btnSelect
             // 
-            this.SelectBtn.Enabled = false;
-            this.SelectBtn.Location = new System.Drawing.Point(4, 277);
-            this.SelectBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.SelectBtn.Name = "SelectBtn";
-            this.SelectBtn.Size = new System.Drawing.Size(133, 43);
-            this.SelectBtn.TabIndex = 11;
-            this.SelectBtn.Text = "Выбрать";
-            this.SelectBtn.UseVisualStyleBackColor = true;
-            this.SelectBtn.Visible = false;
-            this.SelectBtn.Click += new System.EventHandler(this.SelectBtn_Click);
-            // 
-            // PrintSelectedBtn
-            // 
-            this.PrintSelectedBtn.Enabled = false;
-            this.PrintSelectedBtn.Location = new System.Drawing.Point(4, 328);
-            this.PrintSelectedBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.PrintSelectedBtn.Name = "PrintSelectedBtn";
-            this.PrintSelectedBtn.Size = new System.Drawing.Size(133, 43);
-            this.PrintSelectedBtn.TabIndex = 12;
-            this.PrintSelectedBtn.Text = "Напечатать выбранные";
-            this.PrintSelectedBtn.UseVisualStyleBackColor = true;
-            this.PrintSelectedBtn.Visible = false;
-            this.PrintSelectedBtn.Click += new System.EventHandler(this.PrintSelectedBtn_Click);
+            this.btnSelect.Enabled = false;
+            this.btnSelect.Location = new System.Drawing.Point(4, 296);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(133, 43);
+            this.btnSelect.TabIndex = 11;
+            this.btnSelect.Text = "Выбрать";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // pnlMain
             // 
-            this.pnlMain.Controls.Add(this.CertificatesTable);
+            this.pnlMain.Controls.Add(this.splitCertificates);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 28);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1024, 681);
             this.pnlMain.TabIndex = 13;
             // 
-            // CertificatesTable
+            // splitCertificates
             // 
-            this.CertificatesTable.AllowUserToAddRows = false;
-            this.CertificatesTable.AllowUserToDeleteRows = false;
-            this.CertificatesTable.AutoGenerateColumns = false;
-            this.CertificatesTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CertificatesTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cID,
-            this.clName,
-            this.clNumber,
-            this.clBeginDate,
-            this.clEndDate,
-            this.clOrganization});
-            this.CertificatesTable.DataSource = this.bsCertificates;
-            this.CertificatesTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CertificatesTable.Location = new System.Drawing.Point(0, 0);
-            this.CertificatesTable.Margin = new System.Windows.Forms.Padding(4);
-            this.CertificatesTable.MultiSelect = false;
-            this.CertificatesTable.Name = "CertificatesTable";
-            this.CertificatesTable.ReadOnly = true;
-            this.CertificatesTable.RowHeadersWidth = 51;
-            this.CertificatesTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.CertificatesTable.Size = new System.Drawing.Size(1024, 681);
-            this.CertificatesTable.TabIndex = 1;
-            this.CertificatesTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CertificatesTable_ColumnHeaderMouseClick);
+            this.splitCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitCertificates.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitCertificates.Location = new System.Drawing.Point(0, 0);
+            this.splitCertificates.Name = "splitCertificates";
+            this.splitCertificates.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitCertificates.Panel1
+            // 
+            this.splitCertificates.Panel1.AutoScroll = true;
+            this.splitCertificates.Panel1.Controls.Add(this.grdCertificates);
+            this.splitCertificates.Panel1MinSize = 400;
+            // 
+            // splitCertificates.Panel2
+            // 
+            this.splitCertificates.Panel2.AutoScroll = true;
+            this.splitCertificates.Panel2.Controls.Add(this.grdSelectedCertificate);
+            this.splitCertificates.Panel2Collapsed = true;
+            this.splitCertificates.Panel2MinSize = 100;
+            this.splitCertificates.Size = new System.Drawing.Size(1024, 681);
+            this.splitCertificates.SplitterDistance = 400;
+            this.splitCertificates.TabIndex = 17;
+            // 
+            // grdCertificates
+            // 
+            this.grdCertificates.AllowUserToAddRows = false;
+            this.grdCertificates.AllowUserToDeleteRows = false;
+            this.grdCertificates.AutoGenerateColumns = false;
+            this.grdCertificates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdCertificates.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.coIID,
+            this.colName,
+            this.colNumber,
+            this.colBeginDate,
+            this.colEndDate,
+            this.colOrganization});
+            this.grdCertificates.DataSource = this.bsCertificates;
+            this.grdCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdCertificates.Location = new System.Drawing.Point(0, 0);
+            this.grdCertificates.Margin = new System.Windows.Forms.Padding(4);
+            this.grdCertificates.MultiSelect = false;
+            this.grdCertificates.Name = "grdCertificates";
+            this.grdCertificates.ReadOnly = true;
+            this.grdCertificates.RowHeadersWidth = 51;
+            this.grdCertificates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdCertificates.Size = new System.Drawing.Size(1024, 681);
+            this.grdCertificates.TabIndex = 2;
+            // 
+            // coIID
+            // 
+            this.coIID.DataPropertyName = "CertificateId";
+            this.coIID.HeaderText = "Идентификатор";
+            this.coIID.MinimumWidth = 6;
+            this.coIID.Name = "coIID";
+            this.coIID.ReadOnly = true;
+            this.coIID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.coIID.Visible = false;
+            this.coIID.Width = 6;
+            // 
+            // colName
+            // 
+            this.colName.DataPropertyName = "CertificateName";
+            this.colName.HeaderText = "Название";
+            this.colName.MinimumWidth = 6;
+            this.colName.Name = "colName";
+            this.colName.ReadOnly = true;
+            this.colName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colName.Width = 125;
+            // 
+            // colNumber
+            // 
+            this.colNumber.DataPropertyName = "Number";
+            this.colNumber.HeaderText = "Номер";
+            this.colNumber.MinimumWidth = 6;
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colNumber.Width = 150;
+            // 
+            // colBeginDate
+            // 
+            this.colBeginDate.DataPropertyName = "BeginDate";
+            this.colBeginDate.HeaderText = "Дата выдачи";
+            this.colBeginDate.MinimumWidth = 6;
+            this.colBeginDate.Name = "colBeginDate";
+            this.colBeginDate.ReadOnly = true;
+            this.colBeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colBeginDate.Width = 125;
+            // 
+            // colEndDate
+            // 
+            this.colEndDate.DataPropertyName = "EndDate";
+            this.colEndDate.HeaderText = "Действует до";
+            this.colEndDate.MinimumWidth = 6;
+            this.colEndDate.Name = "colEndDate";
+            this.colEndDate.ReadOnly = true;
+            this.colEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colEndDate.Width = 125;
+            // 
+            // colOrganization
+            // 
+            this.colOrganization.DataPropertyName = "Organization";
+            this.colOrganization.HeaderText = "Орган, выдавший сертификат";
+            this.colOrganization.MinimumWidth = 6;
+            this.colOrganization.Name = "colOrganization";
+            this.colOrganization.ReadOnly = true;
+            this.colOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colOrganization.Width = 200;
+            // 
+            // grdSelectedCertificate
+            // 
+            this.grdSelectedCertificate.AllowUserToAddRows = false;
+            this.grdSelectedCertificate.AllowUserToDeleteRows = false;
+            this.grdSelectedCertificate.AutoGenerateColumns = false;
+            this.grdSelectedCertificate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdSelectedCertificate.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSelectedCertificateId,
+            this.colSelectedCertificateName,
+            this.colSelectedCertificateNumber,
+            this.colSelectedCertificateBeginDate,
+            this.colSelectedCertificateEndDate,
+            this.colSelectedCertificateOrganization});
+            this.grdSelectedCertificate.DataSource = this.bsSelectedCertificates;
+            this.grdSelectedCertificate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grdSelectedCertificate.Location = new System.Drawing.Point(0, 0);
+            this.grdSelectedCertificate.Margin = new System.Windows.Forms.Padding(4);
+            this.grdSelectedCertificate.MultiSelect = false;
+            this.grdSelectedCertificate.Name = "grdSelectedCertificate";
+            this.grdSelectedCertificate.ReadOnly = true;
+            this.grdSelectedCertificate.RowHeadersWidth = 51;
+            this.grdSelectedCertificate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdSelectedCertificate.Size = new System.Drawing.Size(150, 46);
+            this.grdSelectedCertificate.TabIndex = 3;
+            // 
+            // colSelectedCertificateId
+            // 
+            this.colSelectedCertificateId.DataPropertyName = "CertificateId";
+            this.colSelectedCertificateId.HeaderText = "Идентификатор";
+            this.colSelectedCertificateId.MinimumWidth = 6;
+            this.colSelectedCertificateId.Name = "colSelectedCertificateId";
+            this.colSelectedCertificateId.ReadOnly = true;
+            this.colSelectedCertificateId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colSelectedCertificateId.Visible = false;
+            this.colSelectedCertificateId.Width = 6;
+            // 
+            // colSelectedCertificateName
+            // 
+            this.colSelectedCertificateName.DataPropertyName = "CertificateName";
+            this.colSelectedCertificateName.HeaderText = "Название";
+            this.colSelectedCertificateName.MinimumWidth = 6;
+            this.colSelectedCertificateName.Name = "colSelectedCertificateName";
+            this.colSelectedCertificateName.ReadOnly = true;
+            this.colSelectedCertificateName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colSelectedCertificateName.Width = 125;
+            // 
+            // colSelectedCertificateNumber
+            // 
+            this.colSelectedCertificateNumber.DataPropertyName = "Number";
+            this.colSelectedCertificateNumber.HeaderText = "Номер";
+            this.colSelectedCertificateNumber.MinimumWidth = 6;
+            this.colSelectedCertificateNumber.Name = "colSelectedCertificateNumber";
+            this.colSelectedCertificateNumber.ReadOnly = true;
+            this.colSelectedCertificateNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colSelectedCertificateNumber.Width = 150;
+            // 
+            // colSelectedCertificateBeginDate
+            // 
+            this.colSelectedCertificateBeginDate.DataPropertyName = "BeginDate";
+            this.colSelectedCertificateBeginDate.HeaderText = "Дата выдачи";
+            this.colSelectedCertificateBeginDate.MinimumWidth = 6;
+            this.colSelectedCertificateBeginDate.Name = "colSelectedCertificateBeginDate";
+            this.colSelectedCertificateBeginDate.ReadOnly = true;
+            this.colSelectedCertificateBeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colSelectedCertificateBeginDate.Width = 125;
+            // 
+            // colSelectedCertificateEndDate
+            // 
+            this.colSelectedCertificateEndDate.DataPropertyName = "EndDate";
+            this.colSelectedCertificateEndDate.HeaderText = "Действует до";
+            this.colSelectedCertificateEndDate.MinimumWidth = 6;
+            this.colSelectedCertificateEndDate.Name = "colSelectedCertificateEndDate";
+            this.colSelectedCertificateEndDate.ReadOnly = true;
+            this.colSelectedCertificateEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colSelectedCertificateEndDate.Width = 125;
+            // 
+            // colSelectedCertificateOrganization
+            // 
+            this.colSelectedCertificateOrganization.DataPropertyName = "Organization";
+            this.colSelectedCertificateOrganization.HeaderText = "Орган, выдавший сертификат";
+            this.colSelectedCertificateOrganization.MinimumWidth = 6;
+            this.colSelectedCertificateOrganization.Name = "colSelectedCertificateOrganization";
+            this.colSelectedCertificateOrganization.ReadOnly = true;
+            this.colSelectedCertificateOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.colSelectedCertificateOrganization.Width = 200;
             // 
             // pnlTools
             // 
+            this.pnlTools.Controls.Add(this.pnlToolsForSelected);
             this.pnlTools.Controls.Add(this.btnRefresh);
-            this.pnlTools.Controls.Add(this.AddBtn);
-            this.pnlTools.Controls.Add(this.EditBtn);
-            this.pnlTools.Controls.Add(this.PrintSelectedBtn);
-            this.pnlTools.Controls.Add(this.DeleteBtn);
-            this.pnlTools.Controls.Add(this.SelectBtn);
-            this.pnlTools.Controls.Add(this.PrintAllBtn);
+            this.pnlTools.Controls.Add(this.btnAdd);
+            this.pnlTools.Controls.Add(this.btnEdit);
+            this.pnlTools.Controls.Add(this.btnDelete);
+            this.pnlTools.Controls.Add(this.btnSelect);
+            this.pnlTools.Controls.Add(this.btnPrintAll);
             this.pnlTools.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlTools.Location = new System.Drawing.Point(1024, 0);
             this.pnlTools.Name = "pnlTools";
             this.pnlTools.Size = new System.Drawing.Size(144, 735);
             this.pnlTools.TabIndex = 14;
+            // 
+            // pnlToolsForSelected
+            // 
+            this.pnlToolsForSelected.Controls.Add(this.btnClear);
+            this.pnlToolsForSelected.Controls.Add(this.btnPrintSelected);
+            this.pnlToolsForSelected.Location = new System.Drawing.Point(0, 344);
+            this.pnlToolsForSelected.Name = "pnlToolsForSelected";
+            this.pnlToolsForSelected.Size = new System.Drawing.Size(144, 107);
+            this.pnlToolsForSelected.TabIndex = 14;
+            this.pnlToolsForSelected.Visible = false;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(4, 55);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(133, 43);
+            this.btnClear.TabIndex = 14;
+            this.btnClear.Text = "Очистить список";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnPrintSelected
+            // 
+            this.btnPrintSelected.Location = new System.Drawing.Point(4, 4);
+            this.btnPrintSelected.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintSelected.Name = "btnPrintSelected";
+            this.btnPrintSelected.Size = new System.Drawing.Size(133, 43);
+            this.btnPrintSelected.TabIndex = 13;
+            this.btnPrintSelected.Text = "Напечатать выбранные";
+            this.btnPrintSelected.UseVisualStyleBackColor = true;
+            this.btnPrintSelected.Click += new System.EventHandler(this.btnPrintSelected_Click);
             // 
             // btnRefresh
             // 
@@ -311,95 +517,34 @@
             // 
             // pnlSearch
             // 
-            this.pnlSearch.Controls.Add(this.SearchTBox);
-            this.pnlSearch.Controls.Add(this.SearchLbl);
+            this.pnlSearch.Controls.Add(this.tbSearch);
+            this.pnlSearch.Controls.Add(this.lblSearch);
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlSearch.Location = new System.Drawing.Point(0, 670);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(1024, 39);
             this.pnlSearch.TabIndex = 15;
             // 
-            // SearchTBox
+            // tbSearch
             // 
-            this.SearchTBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchTBox.Location = new System.Drawing.Point(64, 8);
-            this.SearchTBox.Margin = new System.Windows.Forms.Padding(4);
-            this.SearchTBox.Name = "SearchTBox";
-            this.SearchTBox.Size = new System.Drawing.Size(953, 22);
-            this.SearchTBox.TabIndex = 11;
-            this.SearchTBox.TextChanged += new System.EventHandler(this.SearchTBox_TextChanged);
+            this.tbSearch.Location = new System.Drawing.Point(64, 8);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(953, 22);
+            this.tbSearch.TabIndex = 11;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
-            // SearchLbl
+            // lblSearch
             // 
-            this.SearchLbl.AutoSize = true;
-            this.SearchLbl.Location = new System.Drawing.Point(8, 8);
-            this.SearchLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.SearchLbl.Name = "SearchLbl";
-            this.SearchLbl.Size = new System.Drawing.Size(48, 17);
-            this.SearchLbl.TabIndex = 10;
-            this.SearchLbl.Text = "Поиск";
-            // 
-            // cID
-            // 
-            this.cID.DataPropertyName = "CertificateId";
-            this.cID.HeaderText = "Идентификатор";
-            this.cID.MinimumWidth = 6;
-            this.cID.Name = "cID";
-            this.cID.ReadOnly = true;
-            this.cID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.cID.Visible = false;
-            this.cID.Width = 6;
-            // 
-            // clName
-            // 
-            this.clName.DataPropertyName = "CertificateName";
-            this.clName.HeaderText = "Название";
-            this.clName.MinimumWidth = 6;
-            this.clName.Name = "clName";
-            this.clName.ReadOnly = true;
-            this.clName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clName.Width = 125;
-            // 
-            // clNumber
-            // 
-            this.clNumber.DataPropertyName = "Number";
-            this.clNumber.HeaderText = "Номер";
-            this.clNumber.MinimumWidth = 6;
-            this.clNumber.Name = "clNumber";
-            this.clNumber.ReadOnly = true;
-            this.clNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clNumber.Width = 150;
-            // 
-            // clBeginDate
-            // 
-            this.clBeginDate.DataPropertyName = "BeginDate";
-            this.clBeginDate.HeaderText = "Дата выдачи";
-            this.clBeginDate.MinimumWidth = 6;
-            this.clBeginDate.Name = "clBeginDate";
-            this.clBeginDate.ReadOnly = true;
-            this.clBeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clBeginDate.Width = 125;
-            // 
-            // clEndDate
-            // 
-            this.clEndDate.DataPropertyName = "EndDate";
-            this.clEndDate.HeaderText = "Действует до";
-            this.clEndDate.MinimumWidth = 6;
-            this.clEndDate.Name = "clEndDate";
-            this.clEndDate.ReadOnly = true;
-            this.clEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clEndDate.Width = 125;
-            // 
-            // clOrganization
-            // 
-            this.clOrganization.DataPropertyName = "Organization";
-            this.clOrganization.HeaderText = "Орган, выдавший сертификат";
-            this.clOrganization.MinimumWidth = 6;
-            this.clOrganization.Name = "clOrganization";
-            this.clOrganization.ReadOnly = true;
-            this.clOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clOrganization.Width = 200;
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(8, 8);
+            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(48, 17);
+            this.lblSearch.TabIndex = 10;
+            this.lblSearch.Text = "Поиск";
             // 
             // CertificatesListViewForm
             // 
@@ -408,12 +553,12 @@
             this.ClientSize = new System.Drawing.Size(1168, 735);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlMain);
-            this.Controls.Add(this.CertificateStatus);
-            this.Controls.Add(this.CertificatesMainMenu);
+            this.Controls.Add(this.statusCertificate);
+            this.Controls.Add(this.mainMenuCertificates);
             this.Controls.Add(this.pnlTools);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MainMenuStrip = this.CertificatesMainMenu;
+            this.MainMenuStrip = this.mainMenuCertificates;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CertificatesListViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -421,13 +566,20 @@
             this.Load += new System.EventHandler(this.CertificatesListViewForm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CertificatesListViewForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).EndInit();
-            this.CertificateStatus.ResumeLayout(false);
-            this.CertificateStatus.PerformLayout();
-            this.CertificatesMainMenu.ResumeLayout(false);
-            this.CertificatesMainMenu.PerformLayout();
+            this.statusCertificate.ResumeLayout(false);
+            this.statusCertificate.PerformLayout();
+            this.mainMenuCertificates.ResumeLayout(false);
+            this.mainMenuCertificates.PerformLayout();
             this.pnlMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.CertificatesTable)).EndInit();
+            this.splitCertificates.Panel1.ResumeLayout(false);
+            this.splitCertificates.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitCertificates)).EndInit();
+            this.splitCertificates.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdCertificates)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdSelectedCertificate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsSelectedCertificates)).EndInit();
             this.pnlTools.ResumeLayout(false);
+            this.pnlToolsForSelected.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
             this.ResumeLayout(false);
@@ -436,38 +588,49 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button AddBtn;
-        private System.Windows.Forms.StatusStrip CertificateStatus;
-        private System.Windows.Forms.MenuStrip CertificatesMainMenu;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.StatusStrip statusCertificate;
+        private System.Windows.Forms.MenuStrip mainMenuCertificates;
         private System.Windows.Forms.ToolStripMenuItem сертификатыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem распечататьВсеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator separator1;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
-        private System.Windows.Forms.Button EditBtn;
-        private System.Windows.Forms.Button DeleteBtn;
-        private System.Windows.Forms.Button PrintAllBtn;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnPrintAll;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripStatusLabel CertificatesCount;
-        private System.Windows.Forms.Button SelectBtn;
-        private System.Windows.Forms.Button PrintSelectedBtn;
+        private System.Windows.Forms.ToolStripStatusLabel lblCertificatesCount;
+        private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ToolStripMenuItem выбраныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem напечататьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem очиститьСписокToolStripMenuItem;
         private System.Windows.Forms.BindingSource bsCertificates;
         private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.DataGridView CertificatesTable;
         private System.Windows.Forms.Panel pnlTools;
         private System.Windows.Forms.Panel pnlSearch;
-        private System.Windows.Forms.TextBox SearchTBox;
-        private System.Windows.Forms.Label SearchLbl;
+        private System.Windows.Forms.TextBox tbSearch;
+        private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clBeginDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clEndDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clOrganization;
+        private System.Windows.Forms.SplitContainer splitCertificates;
+        private System.Windows.Forms.DataGridView grdCertificates;
+        private System.Windows.Forms.DataGridViewTextBoxColumn coIID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBeginDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEndDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colOrganization;
+        private System.Windows.Forms.DataGridView grdSelectedCertificate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateBeginDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateEndDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateOrganization;
+        private System.Windows.Forms.BindingSource bsSelectedCertificates;
+        private System.Windows.Forms.Panel pnlToolsForSelected;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnPrintSelected;
     }
 }
