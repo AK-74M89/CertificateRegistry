@@ -52,17 +52,17 @@
             this.PrintSelectedBtn = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.CertificatesTable = new System.Windows.Forms.DataGridView();
+            this.pnlTools = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.SearchTBox = new System.Windows.Forms.TextBox();
+            this.SearchLbl = new System.Windows.Forms.Label();
             this.cID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlTools = new System.Windows.Forms.Panel();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.SearchTBox = new System.Windows.Forms.TextBox();
-            this.SearchLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).BeginInit();
             this.CertificateStatus.SuspendLayout();
             this.CertificatesMainMenu.SuspendLayout();
@@ -281,65 +281,7 @@
             this.CertificatesTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.CertificatesTable.Size = new System.Drawing.Size(1024, 681);
             this.CertificatesTable.TabIndex = 1;
-            // 
-            // cID
-            // 
-            this.cID.DataPropertyName = "CertificateId";
-            this.cID.HeaderText = "Идентификатор";
-            this.cID.MinimumWidth = 6;
-            this.cID.Name = "cID";
-            this.cID.ReadOnly = true;
-            this.cID.Visible = false;
-            this.cID.Width = 6;
-            // 
-            // clName
-            // 
-            this.clName.DataPropertyName = "CertificateName";
-            this.clName.HeaderText = "Название";
-            this.clName.MinimumWidth = 6;
-            this.clName.Name = "clName";
-            this.clName.ReadOnly = true;
-            this.clName.Width = 125;
-            // 
-            // clNumber
-            // 
-            this.clNumber.DataPropertyName = "Number";
-            this.clNumber.HeaderText = "Номер";
-            this.clNumber.MinimumWidth = 6;
-            this.clNumber.Name = "clNumber";
-            this.clNumber.ReadOnly = true;
-            this.clNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clNumber.Width = 150;
-            // 
-            // clBeginDate
-            // 
-            this.clBeginDate.DataPropertyName = "BeginDate";
-            this.clBeginDate.HeaderText = "Дата выдачи";
-            this.clBeginDate.MinimumWidth = 6;
-            this.clBeginDate.Name = "clBeginDate";
-            this.clBeginDate.ReadOnly = true;
-            this.clBeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clBeginDate.Width = 125;
-            // 
-            // clEndDate
-            // 
-            this.clEndDate.DataPropertyName = "EndDate";
-            this.clEndDate.HeaderText = "Действует до";
-            this.clEndDate.MinimumWidth = 6;
-            this.clEndDate.Name = "clEndDate";
-            this.clEndDate.ReadOnly = true;
-            this.clEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clEndDate.Width = 125;
-            // 
-            // clOrganization
-            // 
-            this.clOrganization.DataPropertyName = "Organization";
-            this.clOrganization.HeaderText = "Орган, выдавший сертификат";
-            this.clOrganization.MinimumWidth = 6;
-            this.clOrganization.Name = "clOrganization";
-            this.clOrganization.ReadOnly = true;
-            this.clOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.clOrganization.Width = 200;
+            this.CertificatesTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.CertificatesTable_ColumnHeaderMouseClick);
             // 
             // pnlTools
             // 
@@ -397,6 +339,67 @@
             this.SearchLbl.Size = new System.Drawing.Size(48, 17);
             this.SearchLbl.TabIndex = 10;
             this.SearchLbl.Text = "Поиск";
+            // 
+            // cID
+            // 
+            this.cID.DataPropertyName = "CertificateId";
+            this.cID.HeaderText = "Идентификатор";
+            this.cID.MinimumWidth = 6;
+            this.cID.Name = "cID";
+            this.cID.ReadOnly = true;
+            this.cID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.cID.Visible = false;
+            this.cID.Width = 6;
+            // 
+            // clName
+            // 
+            this.clName.DataPropertyName = "CertificateName";
+            this.clName.HeaderText = "Название";
+            this.clName.MinimumWidth = 6;
+            this.clName.Name = "clName";
+            this.clName.ReadOnly = true;
+            this.clName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clName.Width = 125;
+            // 
+            // clNumber
+            // 
+            this.clNumber.DataPropertyName = "Number";
+            this.clNumber.HeaderText = "Номер";
+            this.clNumber.MinimumWidth = 6;
+            this.clNumber.Name = "clNumber";
+            this.clNumber.ReadOnly = true;
+            this.clNumber.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clNumber.Width = 150;
+            // 
+            // clBeginDate
+            // 
+            this.clBeginDate.DataPropertyName = "BeginDate";
+            this.clBeginDate.HeaderText = "Дата выдачи";
+            this.clBeginDate.MinimumWidth = 6;
+            this.clBeginDate.Name = "clBeginDate";
+            this.clBeginDate.ReadOnly = true;
+            this.clBeginDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clBeginDate.Width = 125;
+            // 
+            // clEndDate
+            // 
+            this.clEndDate.DataPropertyName = "EndDate";
+            this.clEndDate.HeaderText = "Действует до";
+            this.clEndDate.MinimumWidth = 6;
+            this.clEndDate.Name = "clEndDate";
+            this.clEndDate.ReadOnly = true;
+            this.clEndDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clEndDate.Width = 125;
+            // 
+            // clOrganization
+            // 
+            this.clOrganization.DataPropertyName = "Organization";
+            this.clOrganization.HeaderText = "Орган, выдавший сертификат";
+            this.clOrganization.MinimumWidth = 6;
+            this.clOrganization.Name = "clOrganization";
+            this.clOrganization.ReadOnly = true;
+            this.clOrganization.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.clOrganization.Width = 200;
             // 
             // CertificatesListViewForm
             // 
