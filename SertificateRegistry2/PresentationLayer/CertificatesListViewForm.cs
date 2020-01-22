@@ -42,6 +42,11 @@ namespace CertificateRegistry3.PresentationLayer
             if (CertificatesTable.RowCount > 0)
                 CertificatesTable.Rows[0].Selected = true;
             CertificatesCount.Text = $"Всего в базе: {CertificatesTable.RowCount}";
+
+            foreach (DataGridViewColumn column in CertificatesTable.Columns)
+            {
+                column.Tag = null;
+            }
         }
 
         private void ClearHideSelectedList()
@@ -63,10 +68,6 @@ namespace CertificateRegistry3.PresentationLayer
             InitializeComponent();
             CertificateRegistryHandler = new CertificateManager();
             SelectedCertificatesList = new List<Certificate>();
-            for (int i = 0; i < CertificatesTable.Columns.Count; i++)
-            {
-                CertificatesTable.Columns[i].Tag = 0;
-            }
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
@@ -256,6 +257,43 @@ namespace CertificateRegistry3.PresentationLayer
                                                                                                             c.Organization.IndexOf(searchText, StringComparison.InvariantCultureIgnoreCase) >= 0)
                                                                                                 .ToList());
             }
+        }
+
+        private void CertificatesTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {            
+            var affectedColumn = CertificatesTable.Columns[e.ColumnIndex];
+            // true - сортировка в прямом направлении, false - в обратном
+            // если тэг был пустой, то ставим прямую, если нет - меняем на противоположную
+            affectedColumn.Tag = affectedColumn.Tag == null ? true : !(bool)affectedColumn.Tag;
+            var tag = (bool)affectedColumn.Tag;
+
+            affectedColumn.HeaderCell.SortGlyphDirection = tag ? SortOrder.Ascending : SortOrder.Descending;
+
+            List<Certificate> sortedList = null;
+
+            if (affectedColumn.Name == clName.Name)
+            {
+                sortedList = tag ? CertificateDataSource.OrderBy(c => c.CertificateName).ToList() : CertificateDataSource.OrderByDescending(c => c.CertificateName).ToList();
+            }
+            else if (affectedColumn.Name == clNumber.Name)
+            {
+                sortedList = tag ? CertificateDataSource.OrderBy(c => c.Number).ToList() : CertificateDataSource.OrderByDescending(c => c.Number).ToList();
+            }
+            else if (affectedColumn.Name == clBeginDate.Name)
+            {
+                sortedList = tag ? CertificateDataSource.OrderBy(c => c.BeginDate).ToList() : CertificateDataSource.OrderByDescending(c => c.BeginDate).ToList();
+            }
+            else if (affectedColumn.Name == clEndDate.Name)
+            {
+                sortedList = tag ? CertificateDataSource.OrderBy(c => c.EndDate).ToList() : CertificateDataSource.OrderByDescending(c => c.EndDate).ToList();
+            }
+            else if (affectedColumn.Name == clOrganization.Name)
+            {
+                sortedList = tag ? CertificateDataSource.OrderBy(c => c.Organization).ToList() : CertificateDataSource.OrderByDescending(c => c.Organization).ToList();
+            }
+            else throw new Exception($"Неизвестное название столбца: {affectedColumn.Name}");
+
+            bsCertificates.DataSource = new BindingList<Certificate>(sortedList);
         }
     }
 }
