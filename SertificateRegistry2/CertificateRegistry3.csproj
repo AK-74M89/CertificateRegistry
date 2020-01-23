@@ -28,10 +28,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>false</MapFileExtensions>
+    <SupportUrl>https://github.com/AK-74M89/CertificateRegistry/wiki</SupportUrl>
+    <ErrorReportUrl>https://github.com/AK-74M89/CertificateRegistry/issues</ErrorReportUrl>
     <TargetCulture>ru-RU</TargetCulture>
     <ProductName>Certificate Registry 3</ProductName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>3.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
