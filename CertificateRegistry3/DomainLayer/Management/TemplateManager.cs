@@ -1,6 +1,11 @@
 ﻿using CertificateRegistry3.DataSourceLayer;
-using System;
+using CertificateRegistry3.Properties;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Xsl;
 
 namespace CertificateRegistry3.DomainLayer
 {
@@ -18,23 +23,32 @@ namespace CertificateRegistry3.DomainLayer
 
         public string FillTemplate(List<Certificate> CertificateList)
         {
-            string Template = loader.LoadTemplate();
-            string[] TemplatePartsSeparator = new string[1];
-            TemplatePartsSeparator[0] = "<!-- -->";
-            string[] TemplateParts = Template.Split(TemplatePartsSeparator, StringSplitOptions.None); 
-            string FilledTemplate = TemplateParts[0];
-            for (int i = 0; i < CertificateList.Count; i++)
-            {
-                string CurrentTableRow = TemplateParts[1].Replace("#Name#", CertificateList[i].CertificateName);
-                CurrentTableRow = CurrentTableRow.Replace("#Number#", CertificateList[i].Number);
-                CurrentTableRow = CurrentTableRow.Replace("#BeginDate#", CertificateList[i].BeginDate.ToShortDateString());
-                CurrentTableRow = CurrentTableRow.Replace("#EndDate#", CertificateList[i].EndDate.ToShortDateString());
-                CurrentTableRow = CurrentTableRow.Replace("#Organization#", CertificateList[i].Organization);
-                FilledTemplate += CurrentTableRow;
-            }
-            FilledTemplate += TemplateParts[2];
+            XDocument dataFile = new XDocument(
+                                        new XDeclaration("1.0", "UTF-8", "yes"),
+                                        new XElement("registry",
+                                            new XElement("certificates",
+                                                CertificateList.Select(c => new XElement("certificate",
+                                                                                    new XElement("name", c.CertificateName),
+                                                                                    new XElement("number", c.Number),
+                                                                                    new XElement("begin_date", c.BeginDate.ToShortDateString()),
+                                                                                    new XElement("end_date", c.EndDate.ToShortDateString()),
+                                                                                    new XElement("organization", c.Organization)
+                                                                                )
+                                                )
+                                            ),
+                                            new XElement("address", Settings.Default.PrintAddress)
+                                        )
+                                    );
 
-            return FilledTemplate;
+            var transformedDoc = new XDocument();
+            using (XmlWriter writer = transformedDoc.CreateWriter())
+            {
+                var transform = new XslCompiledTransform();
+                transform.Load(XmlReader.Create(new StringReader(loader.LoadTemplate())));
+                transform.Transform(dataFile.CreateReader(), writer);
+            }
+
+            return transformedDoc.ToString();
         }
     }
 }

@@ -70,5 +70,17 @@ namespace CertificateRegistry3.Properties {
                 this["Password"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PrintAddress {
+            get {
+                return ((string)(this["PrintAddress"]));
+            }
+            set {
+                this["PrintAddress"] = value;
+            }
+        }
     }
 }
