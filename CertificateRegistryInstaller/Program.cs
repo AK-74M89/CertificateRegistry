@@ -131,7 +131,7 @@ class Script
                             new ExeFileShortcut(ProgramFolderName, "[INSTALLDIR]CertificateRegistry3.exe", arguments: ""))
                     );
 
-        project.GUID = new Guid("6f330b47-2577-43ad-9095-1861ba25889b");
+        project.GUID = new Guid("6978ac45-699b-4e9c-a333-0b4db2e1ef47");
         project.UI = WUI.WixUI_InstallDir;
         project.ControlPanelInfo.InstallLocation = "[INSTALLDIR]";
         project.LicenceFile = "license.rtf";
