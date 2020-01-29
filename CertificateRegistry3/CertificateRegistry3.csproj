@@ -137,6 +137,7 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSourceLayer\IDBConnectionHandler.cs" />
@@ -223,7 +224,7 @@
     <Content Include="cr.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\registry.html" />
+    <Content Include="Resources\registry.xslt" />
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="cr.ico">

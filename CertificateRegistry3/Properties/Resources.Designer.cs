@@ -61,22 +61,22 @@ namespace CertificateRegistry3.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на &lt;head&gt;
-        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
-        ///  &lt;title&gt;Реестр сертификатов&lt;/title&gt;
-        ///  &lt;style type=&quot;text/css&quot;&gt;
-        ///    td
-        ///    {
-        ///      text-align: center;
-        ///    }
-        ///  &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;        
+        ///   Ищет локализованную строку, похожую на &lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns=&quot;http://www.w3.org/TR/xhtml1/strict&quot;&gt;
         ///
-        ///  &lt;font size=&quot;5&quot;&gt;
-        ///    &lt;div&gt;
-        ///      &lt;p&gt;Данное приложение является подтверждением факта сертификации.&lt;/p&gt;
-        ///      &lt;p&gt;Основание: 	Постановление Правительства Российской Федерации от 19 января 1998 г. № 55, в редакции постановлений от 20 октября 1998 г. № 122, от 02 октября 1999 г. № [остаток строки не уместился]&quot;;.
+        ///  &lt;xsl:template match=&quot;/&quot;&gt;
+        ///    &lt;head&gt;
+        ///      &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;
+        ///        &lt;title&gt;Реестр сертификатов&lt;/title&gt;
+        ///        &lt;style type=&quot;text/css&quot;&gt;
+        ///          table.registry
+        ///          {
+        ///          cellspacing:0;
+        ///          border-width: 1;
+        ///          border-color: black;
+        ///          width: 100%;
+        ///          text-align: center;
+        ///          }
+        /// [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string registry {
             get {
