@@ -14,14 +14,7 @@ namespace CertificateRegistry3.DomainLayer
     /// </summary>
     class TemplateManager
     {
-        private TemplateLoader loader;
-
-        public TemplateManager()
-        {
-            loader = new TemplateLoader();
-        }
-
-        public string FillTemplate(List<Certificate> CertificateList)
+        public static string FillTemplate(List<Certificate> CertificateList)
         {
             XDocument dataFile = new XDocument(
                                         new XDeclaration("1.0", "UTF-8", "yes"),
@@ -44,7 +37,7 @@ namespace CertificateRegistry3.DomainLayer
             using (XmlWriter writer = transformedDoc.CreateWriter())
             {
                 var transform = new XslCompiledTransform();
-                transform.Load(XmlReader.Create(new StringReader(loader.LoadTemplate())));
+                transform.Load(XmlReader.Create(new StringReader(Resources.registry)));
                 transform.Transform(dataFile.CreateReader(), writer);
             }
 

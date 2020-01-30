@@ -32,9 +32,9 @@
             this.RegistryPrintMenu = new System.Windows.Forms.MenuStrip();
             this.печатьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.печатьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.предварительныйПросмотрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.отменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.предварительныйПросмотрToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RegistryPrintMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,21 +71,9 @@
             // печатьToolStripMenuItem1
             // 
             this.печатьToolStripMenuItem1.Name = "печатьToolStripMenuItem1";
-            this.печатьToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.печатьToolStripMenuItem1.Size = new System.Drawing.Size(233, 22);
             this.печатьToolStripMenuItem1.Text = "Печать";
             this.печатьToolStripMenuItem1.Click += new System.EventHandler(this.печатьToolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // отменитьToolStripMenuItem
-            // 
-            this.отменитьToolStripMenuItem.Name = "отменитьToolStripMenuItem";
-            this.отменитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.отменитьToolStripMenuItem.Text = "Отменить";
-            this.отменитьToolStripMenuItem.Click += new System.EventHandler(this.отменитьToolStripMenuItem_Click);
             // 
             // предварительныйПросмотрToolStripMenuItem
             // 
@@ -93,6 +81,18 @@
             this.предварительныйПросмотрToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
             this.предварительныйПросмотрToolStripMenuItem.Text = "Предварительный просмотр";
             this.предварительныйПросмотрToolStripMenuItem.Click += new System.EventHandler(this.предварительныйПросмотрToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(230, 6);
+            // 
+            // отменитьToolStripMenuItem
+            // 
+            this.отменитьToolStripMenuItem.Name = "отменитьToolStripMenuItem";
+            this.отменитьToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.отменитьToolStripMenuItem.Text = "Отменить";
+            this.отменитьToolStripMenuItem.Click += new System.EventHandler(this.отменитьToolStripMenuItem_Click);
             // 
             // RegistryPrintForm
             // 
@@ -105,7 +105,7 @@
             this.Name = "RegistryPrintForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
-            this.Text = "RegistryPrintForm";
+            this.Text = "Печать реестра";
             this.RegistryPrintMenu.ResumeLayout(false);
             this.RegistryPrintMenu.PerformLayout();
             this.ResumeLayout(false);
