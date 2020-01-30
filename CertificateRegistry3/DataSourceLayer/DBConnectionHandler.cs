@@ -20,12 +20,12 @@ namespace CertificateRegistry3.DataSourceLayer
                 {
                     switch (Settings.Default.DBType)
                     {
-                        case "PostgreSQL":
+                        case Constants.POSTGRESQL:
                         {
                             connectionHandler = new PostgreSQLDBConnectionHandler();
                             break;
                         }
-                        case "SQLite":
+                        case Constants.SQLITE:
                         {
                             connectionHandler = new SQLiteDBConnectionHandler();
                             break;
@@ -48,12 +48,12 @@ namespace CertificateRegistry3.DataSourceLayer
                 {
                     switch (Settings.Default.DBType)
                     {
-                        case "PostgreSQL":
+                        case Constants.POSTGRESQL:
                         {
                                 certificatesGateway = new PostgreSQLCertificateGateway(ConnectionHandler.DBConnection);
                                 break;
                         }
-                        case "SQLite":
+                        case Constants.SQLITE:
                         {
                             certificatesGateway = new SQLiteCertificateGateway(ConnectionHandler.DBConnection);
                             break;
@@ -77,12 +77,12 @@ namespace CertificateRegistry3.DataSourceLayer
                 {
                     switch (Settings.Default.DBType)
                     {
-                        case "PostgreSQL":
+                        case Constants.POSTGRESQL:
                         {
                             organizationGateway = new PostgreSQLOrganizationGateway(ConnectionHandler.DBConnection);
                             break;
                         }
-                        case "SQLite":
+                        case Constants.SQLITE:
                         {
                             organizationGateway = new SQLiteOrganizationGateway(ConnectionHandler.DBConnection);
                             break;
