@@ -105,9 +105,7 @@ namespace CertificateRegistry3.PresentationLayer
         {
             var сertificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
 
-            string certificatesTable = new TemplateManager().FillTemplate(сertificates);
-
-            var printRegistryForm = new RegistryPrintForm(certificatesTable);
+            var printRegistryForm = new RegistryPrintForm(TemplateManager.FillTemplate(сertificates));
             printRegistryForm.ShowDialog();
         }
 
@@ -174,7 +172,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnPrintSelected_Click(object sender, EventArgs e)
         {
-            string certificatesTable = new TemplateManager().FillTemplate(selectedCertificatesList.ToList());
+            string certificatesTable = TemplateManager.FillTemplate(selectedCertificatesList.ToList());
 
             if (new RegistryPrintForm(certificatesTable, "Печать выбранных").ShowDialog() == DialogResult.OK)
             {

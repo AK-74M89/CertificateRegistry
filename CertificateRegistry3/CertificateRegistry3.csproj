@@ -150,7 +150,6 @@
     <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLOrganizationGateway.cs" />
     <Compile Include="DataSourceLayer\SQLite\SQLiteDBConnectionHandler.cs" />
     <Compile Include="DataSourceLayer\SQLite\SQLiteOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\TemplateLoader.cs" />
     <Compile Include="DomainLayer\Management\CertificateManager.cs" />
     <Compile Include="DomainLayer\Management\Checker.cs" />
     <Compile Include="DomainLayer\Types\DomainException.cs" />
