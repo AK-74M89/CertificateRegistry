@@ -103,13 +103,12 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
-            var Certificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
+            var сertificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
 
-            var CertificateTemplate = new TemplateManager();
-            string CertificatesTable = CertificateTemplate.FillTemplate(Certificates);
+            string certificatesTable = new TemplateManager().FillTemplate(сertificates);
 
-            RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
-            PrintRegistry.ShowDialog();
+            var printRegistryForm = new RegistryPrintForm(certificatesTable);
+            printRegistryForm.ShowDialog();
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,11 +174,9 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnPrintSelected_Click(object sender, EventArgs e)
         {
-            TemplateManager CertificateTemplate = new TemplateManager();
-            string CertificatesTable = CertificateTemplate.FillTemplate(selectedCertificatesList.ToList());
+            string certificatesTable = new TemplateManager().FillTemplate(selectedCertificatesList.ToList());
 
-            RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
-            if (PrintRegistry.ShowDialog() == DialogResult.OK)
+            if (new RegistryPrintForm(certificatesTable, "Печать выбранных").ShowDialog() == DialogResult.OK)
             {
                 ClearHideSelectedList();
             }
