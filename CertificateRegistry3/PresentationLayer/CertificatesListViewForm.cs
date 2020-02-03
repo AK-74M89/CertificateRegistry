@@ -19,12 +19,10 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void EnableControls(bool Enable)
         {
-            выбраныеToolStripMenuItem.Enabled = 
-                btnPrintAll.Enabled = 
+            btnPrintAll.Enabled = 
                 btnSelect.Enabled = 
                 btnDelete.Enabled = 
-                btnEdit.Enabled =
-                Enable;            
+                btnEdit.Enabled = Enable;            
         }
 
         private void FillCertificatesTable()
@@ -51,6 +49,7 @@ namespace CertificateRegistry3.PresentationLayer
             selectedCertificatesList.Clear();
             btnPrintAll.Enabled = true;
             splitCertificates.Panel2Collapsed = true;
+            выбраныеToolStripMenuItem.Enabled = false;
         }
 
         public CertificatesListViewForm()
@@ -163,6 +162,7 @@ namespace CertificateRegistry3.PresentationLayer
                 isFirstSelection = false;
                 btnPrintAll.Enabled = false;
                 pnlToolsForSelected.Visible = true;
+                выбраныеToolStripMenuItem.Enabled = true;
             }
             if (selectedCertificatesList.IndexOf(currentCertificate) < 0)
             {
