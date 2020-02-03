@@ -90,6 +90,11 @@ namespace CertificateRegistry3.PresentationLayer
 
             if (MessageBox.Show($"Хотите удалить сертификат № {currentCertificate.Number}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                selectedCertificatesList.Remove(selectedCertificatesList.FirstOrDefault(c => c.ID_Certificate == currentCertificate.ID_Certificate));
+                if (selectedCertificatesList.Count == 0)
+                {
+                    ClearHideSelectedList();
+                }
                 certificateRegistryHandler.DeleteCertificate(currentCertificate.ID_Certificate);
                 FillCertificatesTable();
             }
