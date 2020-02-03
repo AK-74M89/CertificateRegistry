@@ -1,5 +1,6 @@
 ﻿using CertificateRegistry3.DataSourceLayer;
 using CertificateRegistry3.DomainLayer;
+using CertificateRegistry3.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,6 +59,8 @@ namespace CertificateRegistry3.PresentationLayer
             InitializeComponent();
             bsCertificates.DataSource = certificatesList;
             bsSelectedCertificates.DataSource = selectedCertificatesList;
+
+            lblCurrentDBType.Text = $"Тип БД: {Settings.Default.DBType}";
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
@@ -291,7 +294,17 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog();
+            var settingsForm = new SettingsForm();
+            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.DBSettingsChanged)
+            {
+                if (MessageBox.Show("Изменились настройки БД. Необходимо перезапустить приложение. Перезапустить?", 
+                                    "Запрос", 
+                                    MessageBoxButtons.YesNo, 
+                                    MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Application.Restart();
+                }
+            }
         }
     }
 }

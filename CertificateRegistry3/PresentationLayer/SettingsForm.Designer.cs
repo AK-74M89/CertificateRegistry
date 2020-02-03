@@ -55,17 +55,20 @@
             this.pnlButtons.Controls.Add(this.btnCancel);
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlButtons.Location = new System.Drawing.Point(0, 198);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 243);
+            this.pnlButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(785, 42);
+            this.pnlButtons.Size = new System.Drawing.Size(739, 52);
             this.pnlButtons.TabIndex = 1;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(702, 11);
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(628, 14);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -74,9 +77,11 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(621, 11);
+            this.btnSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnSave.Location = new System.Drawing.Point(520, 14);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(100, 28);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -87,19 +92,21 @@
             this.tcSettings.Controls.Add(this.tpDBSettings);
             this.tcSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tcSettings.Location = new System.Drawing.Point(0, 0);
+            this.tcSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tcSettings.Name = "tcSettings";
             this.tcSettings.SelectedIndex = 0;
-            this.tcSettings.Size = new System.Drawing.Size(785, 198);
+            this.tcSettings.Size = new System.Drawing.Size(739, 243);
             this.tcSettings.TabIndex = 3;
             // 
             // tpDBSettings
             // 
             this.tpDBSettings.Controls.Add(this.gbConnectionSettings);
             this.tpDBSettings.Controls.Add(this.gbDBType);
-            this.tpDBSettings.Location = new System.Drawing.Point(4, 22);
+            this.tpDBSettings.Location = new System.Drawing.Point(4, 25);
+            this.tpDBSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tpDBSettings.Name = "tpDBSettings";
-            this.tpDBSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDBSettings.Size = new System.Drawing.Size(777, 172);
+            this.tpDBSettings.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tpDBSettings.Size = new System.Drawing.Size(731, 214);
             this.tpDBSettings.TabIndex = 0;
             this.tpDBSettings.Text = "Настройки базы данных";
             this.tpDBSettings.UseVisualStyleBackColor = true;
@@ -113,9 +120,11 @@
             this.gbConnectionSettings.Controls.Add(this.lbHostOrAddress);
             this.gbConnectionSettings.Controls.Add(this.teHostOrAddress);
             this.gbConnectionSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbConnectionSettings.Location = new System.Drawing.Point(3, 68);
+            this.gbConnectionSettings.Location = new System.Drawing.Point(4, 84);
+            this.gbConnectionSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbConnectionSettings.Name = "gbConnectionSettings";
-            this.gbConnectionSettings.Size = new System.Drawing.Size(771, 100);
+            this.gbConnectionSettings.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbConnectionSettings.Size = new System.Drawing.Size(723, 123);
             this.gbConnectionSettings.TabIndex = 4;
             this.gbConnectionSettings.TabStop = false;
             this.gbConnectionSettings.Text = "Настройки подключения";
@@ -123,50 +132,56 @@
             // lbPassword
             // 
             this.lbPassword.AutoSize = true;
-            this.lbPassword.Location = new System.Drawing.Point(12, 74);
+            this.lbPassword.Location = new System.Drawing.Point(16, 91);
+            this.lbPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPassword.Name = "lbPassword";
-            this.lbPassword.Size = new System.Drawing.Size(45, 13);
+            this.lbPassword.Size = new System.Drawing.Size(57, 17);
             this.lbPassword.TabIndex = 5;
             this.lbPassword.Text = "Пароль";
             // 
             // tePassword
             // 
-            this.tePassword.Location = new System.Drawing.Point(166, 71);
+            this.tePassword.Location = new System.Drawing.Point(221, 87);
+            this.tePassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tePassword.Name = "tePassword";
             this.tePassword.PasswordChar = '*';
-            this.tePassword.Size = new System.Drawing.Size(371, 20);
+            this.tePassword.Size = new System.Drawing.Size(493, 22);
             this.tePassword.TabIndex = 4;
             // 
             // lbUsername
             // 
             this.lbUsername.AutoSize = true;
-            this.lbUsername.Location = new System.Drawing.Point(12, 48);
+            this.lbUsername.Location = new System.Drawing.Point(16, 59);
+            this.lbUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbUsername.Name = "lbUsername";
-            this.lbUsername.Size = new System.Drawing.Size(103, 13);
+            this.lbUsername.Size = new System.Drawing.Size(131, 17);
             this.lbUsername.TabIndex = 3;
             this.lbUsername.Text = "Имя пользователя";
             // 
             // teUsername
             // 
-            this.teUsername.Location = new System.Drawing.Point(166, 45);
+            this.teUsername.Location = new System.Drawing.Point(221, 55);
+            this.teUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.teUsername.Name = "teUsername";
-            this.teUsername.Size = new System.Drawing.Size(371, 20);
+            this.teUsername.Size = new System.Drawing.Size(493, 22);
             this.teUsername.TabIndex = 2;
             // 
             // lbHostOrAddress
             // 
             this.lbHostOrAddress.AutoSize = true;
-            this.lbHostOrAddress.Location = new System.Drawing.Point(12, 22);
+            this.lbHostOrAddress.Location = new System.Drawing.Point(16, 27);
+            this.lbHostOrAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbHostOrAddress.Name = "lbHostOrAddress";
-            this.lbHostOrAddress.Size = new System.Drawing.Size(148, 13);
+            this.lbHostOrAddress.Size = new System.Drawing.Size(189, 17);
             this.lbHostOrAddress.TabIndex = 1;
             this.lbHostOrAddress.Text = "Адрес или имя компьютера";
             // 
             // teHostOrAddress
             // 
-            this.teHostOrAddress.Location = new System.Drawing.Point(166, 19);
+            this.teHostOrAddress.Location = new System.Drawing.Point(221, 23);
+            this.teHostOrAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.teHostOrAddress.Name = "teHostOrAddress";
-            this.teHostOrAddress.Size = new System.Drawing.Size(371, 20);
+            this.teHostOrAddress.Size = new System.Drawing.Size(493, 22);
             this.teHostOrAddress.TabIndex = 0;
             // 
             // gbDBType
@@ -174,9 +189,11 @@
             this.gbDBType.Controls.Add(this.rbSQLite);
             this.gbDBType.Controls.Add(this.rbPostgreSQL);
             this.gbDBType.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gbDBType.Location = new System.Drawing.Point(3, 3);
+            this.gbDBType.Location = new System.Drawing.Point(4, 4);
+            this.gbDBType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbDBType.Name = "gbDBType";
-            this.gbDBType.Size = new System.Drawing.Size(771, 65);
+            this.gbDBType.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbDBType.Size = new System.Drawing.Size(723, 80);
             this.gbDBType.TabIndex = 3;
             this.gbDBType.TabStop = false;
             this.gbDBType.Text = "Тип базы данных";
@@ -184,9 +201,10 @@
             // rbSQLite
             // 
             this.rbSQLite.AutoSize = true;
-            this.rbSQLite.Location = new System.Drawing.Point(12, 42);
+            this.rbSQLite.Location = new System.Drawing.Point(16, 52);
+            this.rbSQLite.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbSQLite.Name = "rbSQLite";
-            this.rbSQLite.Size = new System.Drawing.Size(57, 17);
+            this.rbSQLite.Size = new System.Drawing.Size(72, 21);
             this.rbSQLite.TabIndex = 1;
             this.rbSQLite.TabStop = true;
             this.rbSQLite.Text = "SQLite";
@@ -196,9 +214,10 @@
             // rbPostgreSQL
             // 
             this.rbPostgreSQL.AutoSize = true;
-            this.rbPostgreSQL.Location = new System.Drawing.Point(12, 19);
+            this.rbPostgreSQL.Location = new System.Drawing.Point(16, 23);
+            this.rbPostgreSQL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbPostgreSQL.Name = "rbPostgreSQL";
-            this.rbPostgreSQL.Size = new System.Drawing.Size(82, 17);
+            this.rbPostgreSQL.Size = new System.Drawing.Size(106, 21);
             this.rbPostgreSQL.TabIndex = 0;
             this.rbPostgreSQL.TabStop = true;
             this.rbPostgreSQL.Text = "PostgreSQL";
@@ -207,12 +226,13 @@
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(785, 240);
+            this.ClientSize = new System.Drawing.Size(739, 295);
             this.Controls.Add(this.tcSettings);
             this.Controls.Add(this.pnlButtons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "SettingsForm";
             this.Text = "Настройки";
             this.TopMost = true;
