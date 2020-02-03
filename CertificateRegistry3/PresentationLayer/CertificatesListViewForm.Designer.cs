@@ -173,6 +173,7 @@
             this.выбраныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.напечататьToolStripMenuItem,
             this.очиститьСписокToolStripMenuItem});
+            this.выбраныеToolStripMenuItem.Enabled = false;
             this.выбраныеToolStripMenuItem.Name = "выбраныеToolStripMenuItem";
             this.выбраныеToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.выбраныеToolStripMenuItem.Text = "Выбраные";
@@ -252,7 +253,7 @@
             this.pnlMain.Controls.Add(this.splitCertificates);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 24);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(768, 551);
             this.pnlMain.TabIndex = 13;
@@ -262,7 +263,7 @@
             this.splitCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitCertificates.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitCertificates.Location = new System.Drawing.Point(0, 0);
-            this.splitCertificates.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitCertificates.Margin = new System.Windows.Forms.Padding(2);
             this.splitCertificates.Name = "splitCertificates";
             this.splitCertificates.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -389,7 +390,7 @@
             this.grdSelectedCertificate.ReadOnly = true;
             this.grdSelectedCertificate.RowHeadersWidth = 51;
             this.grdSelectedCertificate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSelectedCertificate.Size = new System.Drawing.Size(112, 37);
+            this.grdSelectedCertificate.Size = new System.Drawing.Size(150, 46);
             this.grdSelectedCertificate.TabIndex = 3;
             // 
             // colSelectedCertificateId
@@ -464,7 +465,7 @@
             this.pnlTools.Controls.Add(this.btnPrintAll);
             this.pnlTools.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlTools.Location = new System.Drawing.Point(768, 0);
-            this.pnlTools.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTools.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTools.Name = "pnlTools";
             this.pnlTools.Size = new System.Drawing.Size(108, 597);
             this.pnlTools.TabIndex = 14;
@@ -474,7 +475,7 @@
             this.pnlToolsForSelected.Controls.Add(this.btnClear);
             this.pnlToolsForSelected.Controls.Add(this.btnPrintSelected);
             this.pnlToolsForSelected.Location = new System.Drawing.Point(0, 280);
-            this.pnlToolsForSelected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlToolsForSelected.Margin = new System.Windows.Forms.Padding(2);
             this.pnlToolsForSelected.Name = "pnlToolsForSelected";
             this.pnlToolsForSelected.Size = new System.Drawing.Size(108, 87);
             this.pnlToolsForSelected.TabIndex = 14;
@@ -516,7 +517,7 @@
             this.pnlSearch.Controls.Add(this.lblSearch);
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlSearch.Location = new System.Drawing.Point(0, 543);
-            this.pnlSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(768, 32);
             this.pnlSearch.TabIndex = 15;
