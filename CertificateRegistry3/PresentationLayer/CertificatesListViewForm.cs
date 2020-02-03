@@ -1,5 +1,6 @@
 ﻿using CertificateRegistry3.DataSourceLayer;
 using CertificateRegistry3.DomainLayer;
+using CertificateRegistry3.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,6 +58,11 @@ namespace CertificateRegistry3.PresentationLayer
             InitializeComponent();
             bsCertificates.DataSource = certificatesList;
             bsSelectedCertificates.DataSource = selectedCertificatesList;
+
+            if (Settings.Default.DBType == "SQLite")
+            {
+                pnlRefresh.Visible = false;
+            }
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
