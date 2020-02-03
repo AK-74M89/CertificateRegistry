@@ -17,6 +17,8 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void LoadSettings()
         {
+            teAddress.Text = Settings.Default.PrintAddress;
+
             switch (Settings.Default.DBType)
             {
                 case Constants.POSTGRESQL:
@@ -35,6 +37,8 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void SaveSettings()
         {
+            Settings.Default.PrintAddress = teAddress.Text;
+
             string dbType;
             if (rbPostgreSQL.Checked)
             {
@@ -74,8 +78,8 @@ namespace CertificateRegistry3.PresentationLayer
                     Settings.Default.Password = tePassword.Text;
                 }
             }
-            if (dbSettingsChanged)
-                Settings.Default.Save();
+            
+            Settings.Default.Save();
         }
 
         private bool CheckField(TextBox textBox, Label label)
