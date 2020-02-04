@@ -11,7 +11,6 @@ namespace CertificateRegistry3.PresentationLayer
         private bool isEdit;
         private int ID_Certificate;
         private string CurrentOrganizationName;
-        private OrganizationManager OrganizationHandler;
 
         private Organization CurrentOrganization => OrganizationComboBox.SelectedValue as Organization;
 
@@ -20,7 +19,6 @@ namespace CertificateRegistry3.PresentationLayer
         /// </summary>
         public CertificateForm()
         {
-            OrganizationHandler = new OrganizationManager();
             InitializeComponent();
             isEdit = false;
         }
@@ -31,7 +29,6 @@ namespace CertificateRegistry3.PresentationLayer
         /// <param name="CertificateToEdit"></param>
         public CertificateForm(Certificate CertificateToEdit)
         {
-            OrganizationHandler = new OrganizationManager();
             InitializeComponent();
 
             isEdit = true;
@@ -45,7 +42,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void FillOrganizationComboBox()
         {           
-            OrganizationComboBox.DataSource = OrganizationHandler.GetOrganizationList();
+            OrganizationComboBox.DataSource = OrganizationManager.GetOrganizationList();
 
             OrganizationComboBox.SelectedIndex = -1;
             if (isEdit)
@@ -91,7 +88,7 @@ namespace CertificateRegistry3.PresentationLayer
                                                             CertificateNumberTextBox.Text,
                                                             BeginDatePicker.Value,
                                                             EndDatePicker.Value,
-                                                            CurrentOrganization.ID_Organization);
+                                                            CurrentOrganization.OrganizationId);
                     }
                     else
                     {
@@ -99,7 +96,7 @@ namespace CertificateRegistry3.PresentationLayer
                                                           CertificateNumberTextBox.Text,
                                                           BeginDatePicker.Value,
                                                           EndDatePicker.Value,
-                                                          CurrentOrganization.ID_Organization);
+                                                          CurrentOrganization.OrganizationId);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
@@ -125,14 +122,14 @@ namespace CertificateRegistry3.PresentationLayer
         private void DeleteOrganizationBtn_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show($"Вы хотите удалить организацию{CurrentOrganization.Name}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {                
-                OrganizationHandler.DeleteOrganization(CurrentOrganization.ID_Organization);
+            {
+                OrganizationManager.DeleteOrganization(CurrentOrganization.OrganizationId);
             }
         }
 
         private void AddOrganizationBtn_Click(object sender, EventArgs e)
         {
-            AddOrganizationForm AddOrganization = new AddOrganizationForm();
+            OrganizationForm AddOrganization = new OrganizationForm();
             if (AddOrganization.ShowDialog() == DialogResult.OK)
             {
                 FillOrganizationComboBox();

@@ -1,5 +1,4 @@
-﻿using CertificateRegistry3.DomainLayer;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CertificateRegistry3.DataSourceLayer
 {
@@ -9,6 +8,10 @@ namespace CertificateRegistry3.DataSourceLayer
     public interface IOrganizationGateway
     {
         int AddOrganization(string Name);
+
+        void EditOrganization(int OrganizationId, string Name);
+
+        bool CanDelete(int OrganizationId);
 
         void DeleteOrganization(int OrganizationId);
 

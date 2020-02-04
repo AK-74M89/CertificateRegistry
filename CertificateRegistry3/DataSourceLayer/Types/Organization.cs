@@ -11,7 +11,7 @@
             name = Name;
         }
 
-        public int ID_Organization
+        public int OrganizationId
         {
             get { return id_organization; }
             set { id_organization = value; }

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("SertificateRegistry3")]
+[assembly: AssemblyTitle("Certificate Registry 3")]
 [assembly: AssemblyDescription("Реестр сертификатов, версия 3.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SertificateRegistry3")]
+[assembly: AssemblyProduct("Certificate Registry 3")]
 [assembly: AssemblyCopyright("Copyright © Суханов Александр,  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

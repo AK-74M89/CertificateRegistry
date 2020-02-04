@@ -1,6 +1,6 @@
 ﻿namespace CertificateRegistry3.PresentationLayer
 {
-    partial class CertificatesListViewForm
+    partial class CertificatesListForm
     {
         /// <summary>
         /// Требуется переменная конструктора.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CertificatesListViewForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CertificatesListForm));
             this.bsCertificates = new System.Windows.Forms.BindingSource(this.components);
             this.statusCertificate = new System.Windows.Forms.StatusStrip();
             this.lblCertificatesCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -42,6 +42,8 @@
             this.выбраныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.напечататьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.организацииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.списокОрганизацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
@@ -62,12 +64,6 @@
             this.colSelectedCertificateOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bsSelectedCertificates = new System.Windows.Forms.BindingSource(this.components);
             this.pnlTools = new System.Windows.Forms.Panel();
-            this.pnlSearch = new System.Windows.Forms.Panel();
-            this.tbSearch = new System.Windows.Forms.TextBox();
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.pnlSeparator1 = new System.Windows.Forms.Panel();
-            this.pnlRefresh = new System.Windows.Forms.Panel();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlMainTools = new System.Windows.Forms.Panel();
             this.pnlToolsForSelected = new System.Windows.Forms.Panel();
             this.btnClear = new System.Windows.Forms.Button();
@@ -77,6 +73,12 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSelect = new System.Windows.Forms.Button();
             this.btnPrintAll = new System.Windows.Forms.Button();
+            this.pnlRefresh = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pnlSeparator1 = new System.Windows.Forms.Panel();
+            this.pnlSearch = new System.Windows.Forms.Panel();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).BeginInit();
             this.statusCertificate.SuspendLayout();
             this.mainMenuCertificates.SuspendLayout();
@@ -89,10 +91,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdSelectedCertificate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSelectedCertificates)).BeginInit();
             this.pnlTools.SuspendLayout();
-            this.pnlSearch.SuspendLayout();
-            this.pnlRefresh.SuspendLayout();
             this.pnlMainTools.SuspendLayout();
             this.pnlToolsForSelected.SuspendLayout();
+            this.pnlRefresh.SuspendLayout();
+            this.pnlSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusCertificate
@@ -119,11 +121,12 @@
             this.mainMenuCertificates.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.сертификатыToolStripMenuItem,
             this.выбраныеToolStripMenuItem,
+            this.организацииToolStripMenuItem,
             this.справкаToolStripMenuItem});
             this.mainMenuCertificates.Location = new System.Drawing.Point(0, 0);
             this.mainMenuCertificates.Name = "mainMenuCertificates";
             this.mainMenuCertificates.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.mainMenuCertificates.Size = new System.Drawing.Size(1024, 30);
+            this.mainMenuCertificates.Size = new System.Drawing.Size(1024, 28);
             this.mainMenuCertificates.TabIndex = 4;
             this.mainMenuCertificates.Text = "menuStrip1";
             // 
@@ -135,7 +138,7 @@
             this.separator1,
             this.выходToolStripMenuItem});
             this.сертификатыToolStripMenuItem.Name = "сертификатыToolStripMenuItem";
-            this.сертификатыToolStripMenuItem.Size = new System.Drawing.Size(115, 26);
+            this.сертификатыToolStripMenuItem.Size = new System.Drawing.Size(115, 24);
             this.сертификатыToolStripMenuItem.Text = "Сертификаты";
             // 
             // распечататьВсеToolStripMenuItem
@@ -171,7 +174,7 @@
             this.очиститьСписокToolStripMenuItem});
             this.выбраныеToolStripMenuItem.Enabled = false;
             this.выбраныеToolStripMenuItem.Name = "выбраныеToolStripMenuItem";
-            this.выбраныеToolStripMenuItem.Size = new System.Drawing.Size(97, 26);
+            this.выбраныеToolStripMenuItem.Size = new System.Drawing.Size(97, 24);
             this.выбраныеToolStripMenuItem.Text = "Выбраные";
             // 
             // напечататьToolStripMenuItem
@@ -188,12 +191,27 @@
             this.очиститьСписокToolStripMenuItem.Text = "Очистить список";
             this.очиститьСписокToolStripMenuItem.Click += new System.EventHandler(this.очиститьСписокToolStripMenuItem_Click);
             // 
+            // организацииToolStripMenuItem
+            // 
+            this.организацииToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.списокОрганизацийToolStripMenuItem});
+            this.организацииToolStripMenuItem.Name = "организацииToolStripMenuItem";
+            this.организацииToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
+            this.организацииToolStripMenuItem.Text = "Организации";
+            // 
+            // списокОрганизацийToolStripMenuItem
+            // 
+            this.списокОрганизацийToolStripMenuItem.Name = "списокОрганизацийToolStripMenuItem";
+            this.списокОрганизацийToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
+            this.списокОрганизацийToolStripMenuItem.Text = "Список организаций";
+            this.списокОрганизацийToolStripMenuItem.Click += new System.EventHandler(this.списокОрганизацийToolStripMenuItem_Click);
+            // 
             // справкаToolStripMenuItem
             // 
             this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.оПрограммеToolStripMenuItem});
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // оПрограммеToolStripMenuItem
@@ -207,10 +225,10 @@
             // 
             this.pnlMain.Controls.Add(this.splitCertificates);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 30);
+            this.pnlMain.Location = new System.Drawing.Point(0, 28);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1024, 679);
+            this.pnlMain.Size = new System.Drawing.Size(1024, 681);
             this.pnlMain.TabIndex = 13;
             // 
             // splitCertificates
@@ -234,7 +252,7 @@
             this.splitCertificates.Panel2.Controls.Add(this.grdSelectedCertificate);
             this.splitCertificates.Panel2Collapsed = true;
             this.splitCertificates.Panel2MinSize = 100;
-            this.splitCertificates.Size = new System.Drawing.Size(1024, 679);
+            this.splitCertificates.Size = new System.Drawing.Size(1024, 681);
             this.splitCertificates.SplitterDistance = 400;
             this.splitCertificates.TabIndex = 17;
             // 
@@ -254,13 +272,13 @@
             this.grdCertificates.DataSource = this.bsCertificates;
             this.grdCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdCertificates.Location = new System.Drawing.Point(0, 0);
-            this.grdCertificates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grdCertificates.Margin = new System.Windows.Forms.Padding(4);
             this.grdCertificates.MultiSelect = false;
             this.grdCertificates.Name = "grdCertificates";
             this.grdCertificates.ReadOnly = true;
             this.grdCertificates.RowHeadersWidth = 51;
             this.grdCertificates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCertificates.Size = new System.Drawing.Size(1024, 679);
+            this.grdCertificates.Size = new System.Drawing.Size(1024, 681);
             this.grdCertificates.TabIndex = 2;
             // 
             // coIID
@@ -340,13 +358,13 @@
             this.grdSelectedCertificate.DataSource = this.bsSelectedCertificates;
             this.grdSelectedCertificate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdSelectedCertificate.Location = new System.Drawing.Point(0, 0);
-            this.grdSelectedCertificate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grdSelectedCertificate.Margin = new System.Windows.Forms.Padding(4);
             this.grdSelectedCertificate.MultiSelect = false;
             this.grdSelectedCertificate.Name = "grdSelectedCertificate";
             this.grdSelectedCertificate.ReadOnly = true;
             this.grdSelectedCertificate.RowHeadersWidth = 51;
             this.grdSelectedCertificate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSelectedCertificate.Size = new System.Drawing.Size(200, 57);
+            this.grdSelectedCertificate.Size = new System.Drawing.Size(150, 46);
             this.grdSelectedCertificate.TabIndex = 3;
             // 
             // colSelectedCertificateId
@@ -421,66 +439,6 @@
             this.pnlTools.Name = "pnlTools";
             this.pnlTools.Size = new System.Drawing.Size(144, 735);
             this.pnlTools.TabIndex = 14;
-            // 
-            // pnlSearch
-            // 
-            this.pnlSearch.Controls.Add(this.tbSearch);
-            this.pnlSearch.Controls.Add(this.lblSearch);
-            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSearch.Location = new System.Drawing.Point(0, 670);
-            this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(1024, 39);
-            this.pnlSearch.TabIndex = 15;
-            // 
-            // tbSearch
-            // 
-            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearch.Location = new System.Drawing.Point(64, 7);
-            this.tbSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(953, 22);
-            this.tbSearch.TabIndex = 11;
-            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(8, 7);
-            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(48, 17);
-            this.lblSearch.TabIndex = 10;
-            this.lblSearch.Text = "Поиск";
-            // 
-            // pnlSeparator1
-            // 
-            this.pnlSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSeparator1.Location = new System.Drawing.Point(0, 0);
-            this.pnlSeparator1.Name = "pnlSeparator1";
-            this.pnlSeparator1.Size = new System.Drawing.Size(144, 27);
-            this.pnlSeparator1.TabIndex = 17;
-            // 
-            // pnlRefresh
-            // 
-            this.pnlRefresh.Controls.Add(this.btnRefresh);
-            this.pnlRefresh.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlRefresh.Location = new System.Drawing.Point(0, 27);
-            this.pnlRefresh.Name = "pnlRefresh";
-            this.pnlRefresh.Size = new System.Drawing.Size(144, 56);
-            this.pnlRefresh.TabIndex = 18;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(4, 1);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
-            this.btnRefresh.TabIndex = 14;
-            this.btnRefresh.Text = "Обновить";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // pnlMainTools
             // 
@@ -586,7 +544,67 @@
             this.btnPrintAll.UseVisualStyleBackColor = true;
             this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
-            // CertificatesListViewForm
+            // pnlRefresh
+            // 
+            this.pnlRefresh.Controls.Add(this.btnRefresh);
+            this.pnlRefresh.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRefresh.Location = new System.Drawing.Point(0, 27);
+            this.pnlRefresh.Name = "pnlRefresh";
+            this.pnlRefresh.Size = new System.Drawing.Size(144, 56);
+            this.pnlRefresh.TabIndex = 18;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(4, 1);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
+            this.btnRefresh.TabIndex = 14;
+            this.btnRefresh.Text = "Обновить";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // pnlSeparator1
+            // 
+            this.pnlSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSeparator1.Location = new System.Drawing.Point(0, 0);
+            this.pnlSeparator1.Name = "pnlSeparator1";
+            this.pnlSeparator1.Size = new System.Drawing.Size(144, 27);
+            this.pnlSeparator1.TabIndex = 17;
+            // 
+            // pnlSearch
+            // 
+            this.pnlSearch.Controls.Add(this.tbSearch);
+            this.pnlSearch.Controls.Add(this.lblSearch);
+            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlSearch.Location = new System.Drawing.Point(0, 670);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(1024, 39);
+            this.pnlSearch.TabIndex = 15;
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearch.Location = new System.Drawing.Point(64, 7);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(953, 22);
+            this.tbSearch.TabIndex = 11;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(8, 7);
+            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(48, 17);
+            this.lblSearch.TabIndex = 10;
+            this.lblSearch.Text = "Поиск";
+            // 
+            // CertificatesListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -599,8 +617,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.mainMenuCertificates;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.Name = "CertificatesListViewForm";
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "CertificatesListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Реестр сертификатов 3";
             this.Load += new System.EventHandler(this.CertificatesListViewForm_Load);
@@ -619,11 +637,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdSelectedCertificate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSelectedCertificates)).EndInit();
             this.pnlTools.ResumeLayout(false);
-            this.pnlSearch.ResumeLayout(false);
-            this.pnlSearch.PerformLayout();
-            this.pnlRefresh.ResumeLayout(false);
             this.pnlMainTools.ResumeLayout(false);
             this.pnlToolsForSelected.ResumeLayout(false);
+            this.pnlRefresh.ResumeLayout(false);
+            this.pnlSearch.ResumeLayout(false);
+            this.pnlSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -677,5 +695,7 @@
         private System.Windows.Forms.Button btnPrintAll;
         private System.Windows.Forms.Panel pnlRefresh;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ToolStripMenuItem организацииToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem списокОрганизацийToolStripMenuItem;
     }
 }
