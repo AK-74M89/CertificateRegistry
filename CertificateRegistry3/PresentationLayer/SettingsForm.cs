@@ -1,4 +1,5 @@
-﻿using CertificateRegistry3.Properties;
+﻿using CertificateRegistry3.DomainLayer;
+using CertificateRegistry3.Properties;
 using System;
 using System.Windows.Forms;
 
@@ -6,7 +7,17 @@ namespace CertificateRegistry3.PresentationLayer
 {
     public partial class SettingsForm : Form
     {
-        private bool dbSettingsChanged = false;
+        /// <summary>
+        /// Менялись ли настройки
+        /// </summary>
+        private bool hasChanges => newSettings == null ? false : newSettings.SettingsHasChanges;
+
+        private ProgramSettings newSettings = null;
+
+        /// <summary>
+        /// Менялись ли настройки БД - для их применения требуется перезапуск приложения
+        /// </summary>
+        private bool dbSettingsChanged = false; 
 
         public bool DBSettingsChanged { get { return dbSettingsChanged; } }
 
@@ -17,100 +28,63 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void LoadSettings()
         {
-            teAddress.Text = Settings.Default.PrintAddress;
-
-            switch (Settings.Default.DBType)
+            newSettings = new ProgramSettings(Settings.Default);
+            switch (newSettings.OldDBType)
             {
-                case Constants.POSTGRESQL:
+                case Constants.DB_TYPE_POSTGRESQL:
+                {
                     rbPostgreSQL.Checked = true;
                     break;
-                case Constants.SQLITE:
+                }
+                case Constants.DB_TYPE_SQLITE:
+                {
                     rbSQLite.Checked = true;
                     break;
-                default: throw new NotImplementedException($"Настройки для БД {Settings.Default.DBType} ещё не реализованы!");
+                }
+                default: throw new NotImplementedException($"Настройки для типа БД {newSettings.OldDBType} не реализованы!");
             }
-
-            teHostOrAddress.Text = Settings.Default.DBServer;
-            teUsername.Text = Settings.Default.Username;
-            tePassword.Text = Settings.Default.Password;
+            teHostOrAddress.Text = newSettings.OldHostOrAddress;
+            teUsername.Text = newSettings.OldUsername;
+            tePassword.Text = newSettings.OldPassword;
+            teAddress.Text = newSettings.OldPrintAddress;
         }
 
         private void SaveSettings()
         {
-            Settings.Default.PrintAddress = teAddress.Text;
-
-            string dbType;
-            if (rbPostgreSQL.Checked)
-            {
-                dbType = Constants.POSTGRESQL;
-            }
-            else if (rbSQLite.Checked)
-            {
-                dbType = Constants.SQLITE;
-            }
-            else
-            {
-                throw new Exception("Необходимо выбрать тип базы данных!");
-            }
-            if (Settings.Default.DBType != dbType)
-            {
-                dbSettingsChanged = true;
-                Settings.Default.DBType = dbType;
-            }
-
-            if (gbConnectionSettings.Enabled)
-            {
-                if (teHostOrAddress.Text != string.Empty && teHostOrAddress.Text != Settings.Default.DBServer)
-                {
-                    dbSettingsChanged = true;
-                    Settings.Default.DBServer = teHostOrAddress.Text;
-                }
-
-                if (teUsername.Text != string.Empty && teUsername.Text != Settings.Default.Username)
-                {
-                    dbSettingsChanged = true;
-                    Settings.Default.Username = teUsername.Text;
-                }
-
-                if (tePassword.Text != string.Empty && tePassword.Text != Settings.Default.Password)
-                {
-                    dbSettingsChanged = true;
-                    Settings.Default.Password = tePassword.Text;
-                }
-            }
-            
-            Settings.Default.Save();
-        }
-
-        private bool CheckField(TextBox textBox, Label label)
-        {
-            if (textBox.Text == string.Empty)
-            {
-                MessageBox.Show($"Необходимо заполнить поле {label.Text}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
+            dbSettingsChanged = newSettings.DBSettingsHasChanges;
+            ProgramSettingsManager.SaveSettings(Settings.Default, ref newSettings);
         }
 
         private bool CheckSettings()
         {
-            if (gbConnectionSettings.Enabled)
+            var errorMessage = ProgramSettingsManager.CheckSettings(newSettings);
+            if (errorMessage != string.Empty)
             {
-                return CheckField(teHostOrAddress, lbHostOrAddress) &&
-                        CheckField(teUsername, lbUsername) &&
-                        CheckField(tePassword, lbPassword);
+                MessageBox.Show(errorMessage, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            return true;
+            else
+            {
+                return true;
+            }
         }
 
         private void rbPostgreSQL_CheckedChanged(object sender, EventArgs e)
         {            
             gbConnectionSettings.Enabled = rbPostgreSQL.Checked;
+            if (rbPostgreSQL.Checked)
+            {
+                newSettings.NewDBType = Constants.DB_TYPE_POSTGRESQL;
+            }
         }
 
         private void rbSQLite_CheckedChanged(object sender, EventArgs e)
         {
             gbConnectionSettings.Enabled = !rbSQLite.Checked;
+            if (rbSQLite.Checked)
+            {
+                newSettings.NewDBType = Constants.DB_TYPE_SQLITE;
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -120,6 +94,8 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // на всякий случай, чтобы сработали события на контролах
+            btnSave.Focus();
             if (CheckSettings())
             {
                 SaveSettings();
@@ -134,6 +110,50 @@ namespace CertificateRegistry3.PresentationLayer
         private void SettingsForm_Load(object sender, EventArgs e)
         {
             LoadSettings();
+        }
+
+        private void SettingsForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (hasChanges)
+            {
+                switch (MessageBox.Show("Настройки изменились. Сохранить?", "Запрос", MessageBoxButtons.YesNoCancel))
+                {
+                    case DialogResult.Yes:
+                    {
+                        btnSave_Click(sender, e);
+                        break;
+                    }
+                    case DialogResult.No:
+                    {
+                        break;
+                    }
+                    default:
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void teHostOrAddress_Leave(object sender, EventArgs e)
+        {
+            newSettings.NewHostOrAddress = teHostOrAddress.Text;
+        }
+
+        private void teUsername_Leave(object sender, EventArgs e)
+        {
+            newSettings.NewUsername = teUsername.Text;
+        }
+
+        private void tePassword_Leave(object sender, EventArgs e)
+        {
+            newSettings.NewPassword = tePassword.Text;
+        }
+
+        private void teAddress_Leave(object sender, EventArgs e)
+        {
+            newSettings.NewPrintAddress = teAddress.Text;
         }
     }
 }

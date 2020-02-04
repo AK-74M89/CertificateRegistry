@@ -20,12 +20,12 @@ namespace CertificateRegistry3.DataSourceLayer
                 {
                     switch (Settings.Default.DBType)
                     {
-                        case Constants.POSTGRESQL:
+                        case Constants.DB_TYPE_POSTGRESQL:
                         {
                             connectionHandler = new PostgreSQLDBConnectionHandler();
                             break;
                         }
-                        case Constants.SQLITE:
+                        case Constants.DB_TYPE_SQLITE:
                         {
                             connectionHandler = new SQLiteDBConnectionHandler();
                             break;
@@ -48,12 +48,12 @@ namespace CertificateRegistry3.DataSourceLayer
                 {
                     switch (Settings.Default.DBType)
                     {
-                        case Constants.POSTGRESQL:
+                        case Constants.DB_TYPE_POSTGRESQL:
                         {
                                 certificatesGateway = new PostgreSQLCertificateGateway(ConnectionHandler.DBConnection);
                                 break;
                         }
-                        case Constants.SQLITE:
+                        case Constants.DB_TYPE_SQLITE:
                         {
                             certificatesGateway = new SQLiteCertificateGateway(ConnectionHandler.DBConnection);
                             break;
@@ -77,12 +77,12 @@ namespace CertificateRegistry3.DataSourceLayer
                 {
                     switch (Settings.Default.DBType)
                     {
-                        case Constants.POSTGRESQL:
+                        case Constants.DB_TYPE_POSTGRESQL:
                         {
                             organizationGateway = new PostgreSQLOrganizationGateway(ConnectionHandler.DBConnection);
                             break;
                         }
-                        case Constants.SQLITE:
+                        case Constants.DB_TYPE_SQLITE:
                         {
                             organizationGateway = new SQLiteOrganizationGateway(ConnectionHandler.DBConnection);
                             break;
@@ -95,8 +95,8 @@ namespace CertificateRegistry3.DataSourceLayer
                 }
                 return organizationGateway;
             }
-        }
-    
+        }        
+
         public static void Connect()
         {
             ConnectionHandler.Connect();

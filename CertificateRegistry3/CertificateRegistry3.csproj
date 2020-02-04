@@ -141,19 +141,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="DataSourceLayer\IDBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\IOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\SQLite\SQLiteCertificateGateway.cs" />
-    <Compile Include="DataSourceLayer\DBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\ICertificatesGateway.cs" />
-    <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLCertificateGateway.cs" />
-    <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLDBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\SQLite\SQLiteDBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\SQLite\SQLiteOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\TemplateLoader.cs" />
+    <Compile Include="DomainLayer\Management\PostgreSQLDBSettingsValidator.cs" />
+    <Compile Include="DomainLayer\Management\BaseDBSettingsValidator.cs" />
+    <Compile Include="DataSourceLayer\Types\IDBConnectionHandler.cs" />
+    <Compile Include="DomainLayer\Management\IDBSettingsValidator.cs" />
+    <Compile Include="DataSourceLayer\Types\IOrganizationGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\SQLite\SQLiteCertificateGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\DBConnectionHandler.cs" />
+    <Compile Include="DataSourceLayer\Types\ICertificatesGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLCertificateGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLDBConnectionHandler.cs" />
+    <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLOrganizationGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\SQLite\SQLiteDBConnectionHandler.cs" />
+    <Compile Include="DataSourceLayer\Management\SQLite\SQLiteOrganizationGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\TemplateLoader.cs" />
     <Compile Include="DomainLayer\Management\CertificateManager.cs" />
     <Compile Include="DomainLayer\Management\Checker.cs" />
+    <Compile Include="DomainLayer\Management\ProgramSettingsManager.cs" />
+    <Compile Include="DomainLayer\Types\ProgramSettings.cs" />
     <Compile Include="DomainLayer\Types\DomainException.cs" />
     <Compile Include="DomainLayer\Management\OrganizationManager.cs" />
     <Compile Include="DomainLayer\Management\TemplateManager.cs" />
