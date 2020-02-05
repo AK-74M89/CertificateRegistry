@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CertificatesListViewForm));
             this.bsCertificates = new System.Windows.Forms.BindingSource(this.components);
-            this.btnAdd = new System.Windows.Forms.Button();
             this.statusCertificate = new System.Windows.Forms.StatusStrip();
             this.lblCurrentDBType = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCertificatesCount = new System.Windows.Forms.ToolStripStatusLabel();
@@ -48,10 +47,6 @@
             this.очиститьСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnPrintAll = new System.Windows.Forms.Button();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.splitCertificates = new System.Windows.Forms.SplitContainer();
             this.grdCertificates = new System.Windows.Forms.DataGridView();
@@ -70,13 +65,21 @@
             this.colSelectedCertificateOrganization = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bsSelectedCertificates = new System.Windows.Forms.BindingSource(this.components);
             this.pnlTools = new System.Windows.Forms.Panel();
-            this.pnlToolsForSelected = new System.Windows.Forms.Panel();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnPrintSelected = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.pnlSearch = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.lblSearch = new System.Windows.Forms.Label();
+            this.pnlSeparator1 = new System.Windows.Forms.Panel();
+            this.pnlRefresh = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pnlMainTools = new System.Windows.Forms.Panel();
+            this.pnlToolsForSelected = new System.Windows.Forms.Panel();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnPrintSelected = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.btnPrintAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bsCertificates)).BeginInit();
             this.statusCertificate.SuspendLayout();
             this.mainMenuCertificates.SuspendLayout();
@@ -89,19 +92,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdSelectedCertificate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSelectedCertificates)).BeginInit();
             this.pnlTools.SuspendLayout();
-            this.pnlToolsForSelected.SuspendLayout();
             this.pnlSearch.SuspendLayout();
+            this.pnlRefresh.SuspendLayout();
+            this.pnlMainTools.SuspendLayout();
+            this.pnlToolsForSelected.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(3, 59);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 35);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "Добавить";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // statusCertificate
             // 
@@ -136,8 +131,8 @@
             this.справкаToolStripMenuItem});
             this.mainMenuCertificates.Location = new System.Drawing.Point(0, 0);
             this.mainMenuCertificates.Name = "mainMenuCertificates";
-            this.mainMenuCertificates.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.mainMenuCertificates.Size = new System.Drawing.Size(768, 24);
+            this.mainMenuCertificates.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.mainMenuCertificates.Size = new System.Drawing.Size(1024, 30);
             this.mainMenuCertificates.TabIndex = 4;
             this.mainMenuCertificates.Text = "menuStrip1";
             // 
@@ -151,7 +146,7 @@
             this.separator1,
             this.выходToolStripMenuItem});
             this.сертификатыToolStripMenuItem.Name = "сертификатыToolStripMenuItem";
-            this.сертификатыToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.сертификатыToolStripMenuItem.Size = new System.Drawing.Size(115, 26);
             this.сертификатыToolStripMenuItem.Text = "Сертификаты";
             // 
             // распечататьВсеToolStripMenuItem
@@ -197,8 +192,9 @@
             this.выбраныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.напечататьToolStripMenuItem,
             this.очиститьСписокToolStripMenuItem});
+            this.выбраныеToolStripMenuItem.Enabled = false;
             this.выбраныеToolStripMenuItem.Name = "выбраныеToolStripMenuItem";
-            this.выбраныеToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.выбраныеToolStripMenuItem.Size = new System.Drawing.Size(97, 26);
             this.выбраныеToolStripMenuItem.Text = "Выбраные";
             // 
             // напечататьToolStripMenuItem
@@ -220,7 +216,7 @@
             this.справкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.оПрограммеToolStripMenuItem});
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 26);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // оПрограммеToolStripMenuItem
@@ -230,55 +226,14 @@
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(3, 101);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(100, 35);
-            this.btnEdit.TabIndex = 5;
-            this.btnEdit.Text = "Редактировать";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(3, 142);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(100, 35);
-            this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "Удалить";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnPrintAll
-            // 
-            this.btnPrintAll.Location = new System.Drawing.Point(3, 184);
-            this.btnPrintAll.Name = "btnPrintAll";
-            this.btnPrintAll.Size = new System.Drawing.Size(100, 35);
-            this.btnPrintAll.TabIndex = 7;
-            this.btnPrintAll.Text = "Напечатать реестр";
-            this.btnPrintAll.UseVisualStyleBackColor = true;
-            this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
-            // 
-            // btnSelect
-            // 
-            this.btnSelect.Enabled = false;
-            this.btnSelect.Location = new System.Drawing.Point(3, 240);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(100, 35);
-            this.btnSelect.TabIndex = 11;
-            this.btnSelect.Text = "Выбрать";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
             // pnlMain
             // 
             this.pnlMain.Controls.Add(this.splitCertificates);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(0, 24);
-            this.pnlMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlMain.Location = new System.Drawing.Point(0, 30);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(768, 551);
+            this.pnlMain.Size = new System.Drawing.Size(1024, 679);
             this.pnlMain.TabIndex = 13;
             // 
             // splitCertificates
@@ -286,7 +241,7 @@
             this.splitCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitCertificates.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitCertificates.Location = new System.Drawing.Point(0, 0);
-            this.splitCertificates.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitCertificates.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitCertificates.Name = "splitCertificates";
             this.splitCertificates.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -302,7 +257,7 @@
             this.splitCertificates.Panel2.Controls.Add(this.grdSelectedCertificate);
             this.splitCertificates.Panel2Collapsed = true;
             this.splitCertificates.Panel2MinSize = 100;
-            this.splitCertificates.Size = new System.Drawing.Size(768, 551);
+            this.splitCertificates.Size = new System.Drawing.Size(1024, 679);
             this.splitCertificates.SplitterDistance = 400;
             this.splitCertificates.SplitterWidth = 3;
             this.splitCertificates.TabIndex = 17;
@@ -323,12 +278,13 @@
             this.grdCertificates.DataSource = this.bsCertificates;
             this.grdCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdCertificates.Location = new System.Drawing.Point(0, 0);
+            this.grdCertificates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grdCertificates.MultiSelect = false;
             this.grdCertificates.Name = "grdCertificates";
             this.grdCertificates.ReadOnly = true;
             this.grdCertificates.RowHeadersWidth = 51;
             this.grdCertificates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdCertificates.Size = new System.Drawing.Size(768, 551);
+            this.grdCertificates.Size = new System.Drawing.Size(1024, 679);
             this.grdCertificates.TabIndex = 2;
             // 
             // coIID
@@ -408,12 +364,13 @@
             this.grdSelectedCertificate.DataSource = this.bsSelectedCertificates;
             this.grdSelectedCertificate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdSelectedCertificate.Location = new System.Drawing.Point(0, 0);
+            this.grdSelectedCertificate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.grdSelectedCertificate.MultiSelect = false;
             this.grdSelectedCertificate.Name = "grdSelectedCertificate";
             this.grdSelectedCertificate.ReadOnly = true;
             this.grdSelectedCertificate.RowHeadersWidth = 51;
             this.grdSelectedCertificate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSelectedCertificate.Size = new System.Drawing.Size(112, 37);
+            this.grdSelectedCertificate.Size = new System.Drawing.Size(200, 57);
             this.grdSelectedCertificate.TabIndex = 3;
             // 
             // colSelectedCertificateId
@@ -479,29 +436,100 @@
             // 
             // pnlTools
             // 
-            this.pnlTools.Controls.Add(this.pnlToolsForSelected);
-            this.pnlTools.Controls.Add(this.btnRefresh);
-            this.pnlTools.Controls.Add(this.btnAdd);
-            this.pnlTools.Controls.Add(this.btnEdit);
-            this.pnlTools.Controls.Add(this.btnDelete);
-            this.pnlTools.Controls.Add(this.btnSelect);
-            this.pnlTools.Controls.Add(this.btnPrintAll);
+            this.pnlTools.Controls.Add(this.pnlMainTools);
+            this.pnlTools.Controls.Add(this.pnlRefresh);
+            this.pnlTools.Controls.Add(this.pnlSeparator1);
             this.pnlTools.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlTools.Location = new System.Drawing.Point(768, 0);
-            this.pnlTools.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlTools.Location = new System.Drawing.Point(1024, 0);
+            this.pnlTools.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTools.Name = "pnlTools";
             this.pnlTools.Size = new System.Drawing.Size(108, 597);
             this.pnlTools.TabIndex = 14;
+            // 
+            // pnlSearch
+            // 
+            this.pnlSearch.Controls.Add(this.tbSearch);
+            this.pnlSearch.Controls.Add(this.lblSearch);
+            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlSearch.Location = new System.Drawing.Point(0, 670);
+            this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlSearch.Name = "pnlSearch";
+            this.pnlSearch.Size = new System.Drawing.Size(1024, 39);
+            this.pnlSearch.TabIndex = 15;
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearch.Location = new System.Drawing.Point(64, 7);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(953, 22);
+            this.tbSearch.TabIndex = 11;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(8, 7);
+            this.lblSearch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(48, 17);
+            this.lblSearch.TabIndex = 10;
+            this.lblSearch.Text = "Поиск";
+            // 
+            // pnlSeparator1
+            // 
+            this.pnlSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlSeparator1.Location = new System.Drawing.Point(0, 0);
+            this.pnlSeparator1.Name = "pnlSeparator1";
+            this.pnlSeparator1.Size = new System.Drawing.Size(144, 27);
+            this.pnlSeparator1.TabIndex = 17;
+            // 
+            // pnlRefresh
+            // 
+            this.pnlRefresh.Controls.Add(this.btnRefresh);
+            this.pnlRefresh.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlRefresh.Location = new System.Drawing.Point(0, 27);
+            this.pnlRefresh.Name = "pnlRefresh";
+            this.pnlRefresh.Size = new System.Drawing.Size(144, 56);
+            this.pnlRefresh.TabIndex = 18;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(4, 1);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(133, 43);
+            this.btnRefresh.TabIndex = 14;
+            this.btnRefresh.Text = "Обновить";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // pnlMainTools
+            // 
+            this.pnlMainTools.Controls.Add(this.pnlToolsForSelected);
+            this.pnlMainTools.Controls.Add(this.btnAdd);
+            this.pnlMainTools.Controls.Add(this.btnEdit);
+            this.pnlMainTools.Controls.Add(this.btnDelete);
+            this.pnlMainTools.Controls.Add(this.btnSelect);
+            this.pnlMainTools.Controls.Add(this.btnPrintAll);
+            this.pnlMainTools.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMainTools.Location = new System.Drawing.Point(0, 83);
+            this.pnlMainTools.Name = "pnlMainTools";
+            this.pnlMainTools.Size = new System.Drawing.Size(144, 387);
+            this.pnlMainTools.TabIndex = 19;
             // 
             // pnlToolsForSelected
             // 
             this.pnlToolsForSelected.Controls.Add(this.btnClear);
             this.pnlToolsForSelected.Controls.Add(this.btnPrintSelected);
+            this.pnlToolsForSelected.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlToolsForSelected.Location = new System.Drawing.Point(0, 280);
-            this.pnlToolsForSelected.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlToolsForSelected.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlToolsForSelected.Name = "pnlToolsForSelected";
-            this.pnlToolsForSelected.Size = new System.Drawing.Size(108, 87);
-            this.pnlToolsForSelected.TabIndex = 14;
+            this.pnlToolsForSelected.Size = new System.Drawing.Size(144, 107);
+            this.pnlToolsForSelected.TabIndex = 20;
             this.pnlToolsForSelected.Visible = false;
             // 
             // btnClear
@@ -524,45 +552,61 @@
             this.btnPrintSelected.UseVisualStyleBackColor = true;
             this.btnPrintSelected.Click += new System.EventHandler(this.btnPrintSelected_Click);
             // 
-            // btnRefresh
+            // btnAdd
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(3, 3);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(100, 35);
-            this.btnRefresh.TabIndex = 13;
-            this.btnRefresh.Text = "Обновить";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.btnAdd.Location = new System.Drawing.Point(4, 1);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(133, 43);
+            this.btnAdd.TabIndex = 15;
+            this.btnAdd.Text = "Добавить";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // pnlSearch
+            // btnEdit
+            //
+            this.btnEdit.Location = new System.Drawing.Point(4, 52);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(133, 43);
+            this.btnEdit.TabIndex = 16;
+            this.btnEdit.Text = "Редактировать";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            this.pnlSearch.Controls.Add(this.tbSearch);
-            this.pnlSearch.Controls.Add(this.lblSearch);
-            this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSearch.Location = new System.Drawing.Point(0, 543);
-            this.pnlSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(768, 32);
-            this.pnlSearch.TabIndex = 15;
+            // btnDelete
             // 
-            // tbSearch
+            this.btnDelete.Location = new System.Drawing.Point(4, 103);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(133, 43);
+            this.btnDelete.TabIndex = 17;
+            this.btnDelete.Text = "Удалить";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearch.Location = new System.Drawing.Point(48, 6);
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(716, 20);
-            this.tbSearch.TabIndex = 11;
-            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // btnSelect
             // 
-            // lblSearch
+            this.btnSelect.Enabled = false;
+            this.btnSelect.Location = new System.Drawing.Point(4, 229);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(133, 43);
+            this.btnSelect.TabIndex = 19;
+            this.btnSelect.Text = "Выбрать";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(6, 6);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(39, 13);
-            this.lblSearch.TabIndex = 10;
-            this.lblSearch.Text = "Поиск";
+            // btnPrintAll
+            // 
+            this.btnPrintAll.Location = new System.Drawing.Point(4, 154);
+            this.btnPrintAll.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintAll.Name = "btnPrintAll";
+            this.btnPrintAll.Size = new System.Drawing.Size(133, 43);
+            this.btnPrintAll.TabIndex = 18;
+            this.btnPrintAll.Text = "Напечатать реестр";
+            this.btnPrintAll.UseVisualStyleBackColor = true;
+            this.btnPrintAll.Click += new System.EventHandler(this.btnPrintAll_Click);
             // 
             // CertificatesListViewForm
             // 
@@ -577,6 +621,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.mainMenuCertificates;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CertificatesListViewForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Реестр сертификатов 3";
@@ -596,16 +641,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdSelectedCertificate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsSelectedCertificates)).EndInit();
             this.pnlTools.ResumeLayout(false);
-            this.pnlToolsForSelected.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlSearch.PerformLayout();
+            this.pnlRefresh.ResumeLayout(false);
+            this.pnlMainTools.ResumeLayout(false);
+            this.pnlToolsForSelected.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.StatusStrip statusCertificate;
         private System.Windows.Forms.MenuStrip mainMenuCertificates;
         private System.Windows.Forms.ToolStripMenuItem сертификатыToolStripMenuItem;
@@ -613,13 +659,9 @@
         private System.Windows.Forms.ToolStripMenuItem статистикаToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator separator1;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnPrintAll;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel lblCertificatesCount;
-        private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ToolStripMenuItem выбраныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem напечататьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem очиститьСписокToolStripMenuItem;
@@ -629,7 +671,6 @@
         private System.Windows.Forms.Panel pnlSearch;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.SplitContainer splitCertificates;
         private System.Windows.Forms.DataGridView grdCertificates;
         private System.Windows.Forms.DataGridViewTextBoxColumn coIID;
@@ -646,11 +687,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateEndDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSelectedCertificateOrganization;
         private System.Windows.Forms.BindingSource bsSelectedCertificates;
+        private System.Windows.Forms.Panel pnlSeparator1;
+        private System.Windows.Forms.Panel pnlMainTools;
         private System.Windows.Forms.Panel pnlToolsForSelected;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnPrintSelected;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel lblCurrentDBType;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.Button btnPrintAll;
+        private System.Windows.Forms.Panel pnlRefresh;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

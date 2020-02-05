@@ -20,12 +20,10 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void EnableControls(bool Enable)
         {
-            выбраныеToolStripMenuItem.Enabled = 
-                btnPrintAll.Enabled = 
+            btnPrintAll.Enabled = 
                 btnSelect.Enabled = 
                 btnDelete.Enabled = 
-                btnEdit.Enabled =
-                Enable;            
+                btnEdit.Enabled = Enable;            
         }
 
         private void FillCertificatesTable()
@@ -52,6 +50,7 @@ namespace CertificateRegistry3.PresentationLayer
             selectedCertificatesList.Clear();
             btnPrintAll.Enabled = true;
             splitCertificates.Panel2Collapsed = true;
+            выбраныеToolStripMenuItem.Enabled = false;
         }
 
         public CertificatesListViewForm()
@@ -61,6 +60,11 @@ namespace CertificateRegistry3.PresentationLayer
             bsSelectedCertificates.DataSource = selectedCertificatesList;
 
             lblCurrentDBType.Text = $"Тип БД: {Settings.Default.DBType}";
+            
+            if (Settings.Default.DBType == "SQLite")
+            {
+                pnlRefresh.Visible = false;
+            }
         }
 
         private void CertificatesListViewForm_Load(object sender, EventArgs e)
@@ -94,6 +98,11 @@ namespace CertificateRegistry3.PresentationLayer
 
             if (MessageBox.Show($"Хотите удалить сертификат № {currentCertificate.Number}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
+                selectedCertificatesList.Remove(selectedCertificatesList.FirstOrDefault(c => c.ID_Certificate == currentCertificate.ID_Certificate));
+                if (selectedCertificatesList.Count == 0)
+                {
+                    ClearHideSelectedList();
+                }
                 certificateRegistryHandler.DeleteCertificate(currentCertificate.ID_Certificate);
                 FillCertificatesTable();
             }
@@ -106,13 +115,10 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
-            var Certificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
+            var сertificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
 
-            var CertificateTemplate = new TemplateManager();
-            string CertificatesTable = CertificateTemplate.FillTemplate(Certificates);
-
-            RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
-            PrintRegistry.ShowDialog();
+            var printRegistryForm = new RegistryPrintForm(TemplateManager.FillTemplate(сertificates));
+            printRegistryForm.ShowDialog();
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,6 +175,7 @@ namespace CertificateRegistry3.PresentationLayer
                 isFirstSelection = false;
                 btnPrintAll.Enabled = false;
                 pnlToolsForSelected.Visible = true;
+                выбраныеToolStripMenuItem.Enabled = true;
             }
             if (selectedCertificatesList.IndexOf(currentCertificate) < 0)
             {
@@ -178,11 +185,9 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnPrintSelected_Click(object sender, EventArgs e)
         {
-            TemplateManager CertificateTemplate = new TemplateManager();
-            string CertificatesTable = CertificateTemplate.FillTemplate(selectedCertificatesList.ToList());
+            string certificatesTable = TemplateManager.FillTemplate(selectedCertificatesList.ToList());
 
-            RegistryPrintForm PrintRegistry = new RegistryPrintForm(CertificatesTable);
-            if (PrintRegistry.ShowDialog() == DialogResult.OK)
+            if (new RegistryPrintForm(certificatesTable, "Печать выбранных").ShowDialog() == DialogResult.OK)
             {
                 ClearHideSelectedList();
             }
