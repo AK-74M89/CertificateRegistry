@@ -1,5 +1,4 @@
-﻿using CertificateRegistry3.DomainLayer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CertificateRegistry3.DataSourceLayer

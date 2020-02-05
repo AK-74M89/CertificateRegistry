@@ -140,18 +140,25 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSourceLayer\IDBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\IOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\SQLite\SQLiteCertificateGateway.cs" />
-    <Compile Include="DataSourceLayer\DBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\ICertificatesGateway.cs" />
-    <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLCertificateGateway.cs" />
-    <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLDBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\PostgreSQL\PostgreSQLOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\SQLite\SQLiteDBConnectionHandler.cs" />
-    <Compile Include="DataSourceLayer\SQLite\SQLiteOrganizationGateway.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DomainLayer\Management\PostgreSQLDBSettingsValidator.cs" />
+    <Compile Include="DomainLayer\Management\BaseDBSettingsValidator.cs" />
+    <Compile Include="DataSourceLayer\Types\IDBConnectionHandler.cs" />
+    <Compile Include="DomainLayer\Management\IDBSettingsValidator.cs" />
+    <Compile Include="DataSourceLayer\Types\IOrganizationGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\SQLite\SQLiteCertificateGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\DBConnectionHandler.cs" />
+    <Compile Include="DataSourceLayer\Types\ICertificatesGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLCertificateGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLDBConnectionHandler.cs" />
+    <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLOrganizationGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\SQLite\SQLiteDBConnectionHandler.cs" />
+    <Compile Include="DataSourceLayer\Management\SQLite\SQLiteOrganizationGateway.cs" />
+    <Compile Include="DataSourceLayer\Management\TemplateLoader.cs" />
     <Compile Include="DomainLayer\Management\CertificateManager.cs" />
     <Compile Include="DomainLayer\Management\Checker.cs" />
+    <Compile Include="DomainLayer\Management\ProgramSettingsManager.cs" />
+    <Compile Include="DomainLayer\Types\ProgramSettings.cs" />
     <Compile Include="DomainLayer\Types\DomainException.cs" />
     <Compile Include="DomainLayer\Management\OrganizationManager.cs" />
     <Compile Include="DomainLayer\Management\TemplateManager.cs" />
@@ -179,6 +186,12 @@
     <Compile Include="PresentationLayer\RegistryPrintForm.Designer.cs">
       <DependentUpon>RegistryPrintForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataSourceLayer\Types\Certificate.cs" />
@@ -194,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\RegistryPrintForm.resx">
       <DependentUpon>RegistryPrintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

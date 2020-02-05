@@ -59,6 +59,8 @@ namespace CertificateRegistry3.PresentationLayer
             bsCertificates.DataSource = certificatesList;
             bsSelectedCertificates.DataSource = selectedCertificatesList;
 
+            lblCurrentDBType.Text = $"Тип БД: {Settings.Default.DBType}";
+            
             if (Settings.Default.DBType == "SQLite")
             {
                 pnlRefresh.Visible = false;
@@ -293,6 +295,21 @@ namespace CertificateRegistry3.PresentationLayer
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearHideSelectedList();
+        }
+
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var settingsForm = new SettingsForm();
+            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.DBSettingsChanged)
+            {
+                if (MessageBox.Show("Изменились настройки БД. Необходимо перезапустить приложение. Перезапустить?", 
+                                    "Запрос", 
+                                    MessageBoxButtons.YesNo, 
+                                    MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Application.Restart();
+                }
+            }
         }
     }
 }

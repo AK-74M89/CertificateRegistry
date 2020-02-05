@@ -32,11 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CertificatesListViewForm));
             this.bsCertificates = new System.Windows.Forms.BindingSource(this.components);
             this.statusCertificate = new System.Windows.Forms.StatusStrip();
+            this.lblCurrentDBType = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblCertificatesCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenuCertificates = new System.Windows.Forms.MenuStrip();
             this.сертификатыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.распечататьВсеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.статистикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.separator1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выбраныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,18 +102,24 @@
             // 
             this.statusCertificate.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusCertificate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblCurrentDBType,
             this.lblCertificatesCount});
-            this.statusCertificate.Location = new System.Drawing.Point(0, 709);
+            this.statusCertificate.Location = new System.Drawing.Point(0, 575);
             this.statusCertificate.Name = "statusCertificate";
-            this.statusCertificate.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusCertificate.Size = new System.Drawing.Size(1024, 26);
+            this.statusCertificate.Size = new System.Drawing.Size(768, 22);
             this.statusCertificate.SizingGrip = false;
             this.statusCertificate.TabIndex = 3;
+            // 
+            // lblCurrentDBType
+            // 
+            this.lblCurrentDBType.Name = "lblCurrentDBType";
+            this.lblCurrentDBType.Size = new System.Drawing.Size(49, 17);
+            this.lblCurrentDBType.Text = "Тип БД:";
             // 
             // lblCertificatesCount
             // 
             this.lblCertificatesCount.Name = "lblCertificatesCount";
-            this.lblCertificatesCount.Size = new System.Drawing.Size(99, 20);
+            this.lblCertificatesCount.Size = new System.Drawing.Size(77, 17);
             this.lblCertificatesCount.Text = "Всего в базе:";
             // 
             // mainMenuCertificates
@@ -132,6 +141,8 @@
             this.сертификатыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.распечататьВсеToolStripMenuItem,
             this.статистикаToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.настройкиToolStripMenuItem,
             this.separator1,
             this.выходToolStripMenuItem});
             this.сертификатыToolStripMenuItem.Name = "сертификатыToolStripMenuItem";
@@ -141,26 +152,38 @@
             // распечататьВсеToolStripMenuItem
             // 
             this.распечататьВсеToolStripMenuItem.Name = "распечататьВсеToolStripMenuItem";
-            this.распечататьВсеToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.распечататьВсеToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.распечататьВсеToolStripMenuItem.Text = "Распечатать все";
             this.распечататьВсеToolStripMenuItem.Click += new System.EventHandler(this.распечататьВсеToolStripMenuItem_Click);
             // 
             // статистикаToolStripMenuItem
             // 
             this.статистикаToolStripMenuItem.Name = "статистикаToolStripMenuItem";
-            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.статистикаToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.статистикаToolStripMenuItem.Text = "Статистика";
             this.статистикаToolStripMenuItem.Click += new System.EventHandler(this.статистикаToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
+            // 
+            // настройкиToolStripMenuItem
+            // 
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
             // 
             // separator1
             // 
             this.separator1.Name = "separator1";
-            this.separator1.Size = new System.Drawing.Size(200, 6);
+            this.separator1.Size = new System.Drawing.Size(159, 6);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(203, 26);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -177,14 +200,14 @@
             // напечататьToolStripMenuItem
             // 
             this.напечататьToolStripMenuItem.Name = "напечататьToolStripMenuItem";
-            this.напечататьToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
+            this.напечататьToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.напечататьToolStripMenuItem.Text = "Напечатать";
             this.напечататьToolStripMenuItem.Click += new System.EventHandler(this.напечататьToolStripMenuItem_Click);
             // 
             // очиститьСписокToolStripMenuItem
             // 
             this.очиститьСписокToolStripMenuItem.Name = "очиститьСписокToolStripMenuItem";
-            this.очиститьСписокToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
+            this.очиститьСписокToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.очиститьСписокToolStripMenuItem.Text = "Очистить список";
             this.очиститьСписокToolStripMenuItem.Click += new System.EventHandler(this.очиститьСписокToolStripMenuItem_Click);
             // 
@@ -199,7 +222,7 @@
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
@@ -236,6 +259,7 @@
             this.splitCertificates.Panel2MinSize = 100;
             this.splitCertificates.Size = new System.Drawing.Size(1024, 679);
             this.splitCertificates.SplitterDistance = 400;
+            this.splitCertificates.SplitterWidth = 3;
             this.splitCertificates.TabIndex = 17;
             // 
             // grdCertificates
@@ -419,7 +443,7 @@
             this.pnlTools.Location = new System.Drawing.Point(1024, 0);
             this.pnlTools.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlTools.Name = "pnlTools";
-            this.pnlTools.Size = new System.Drawing.Size(144, 735);
+            this.pnlTools.Size = new System.Drawing.Size(108, 597);
             this.pnlTools.TabIndex = 14;
             // 
             // pnlSearch
@@ -510,10 +534,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(4, 55);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClear.Location = new System.Drawing.Point(3, 45);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(133, 43);
+            this.btnClear.Size = new System.Drawing.Size(100, 35);
             this.btnClear.TabIndex = 14;
             this.btnClear.Text = "Очистить список";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -521,10 +544,9 @@
             // 
             // btnPrintSelected
             // 
-            this.btnPrintSelected.Location = new System.Drawing.Point(4, 4);
-            this.btnPrintSelected.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPrintSelected.Location = new System.Drawing.Point(3, 3);
             this.btnPrintSelected.Name = "btnPrintSelected";
-            this.btnPrintSelected.Size = new System.Drawing.Size(133, 43);
+            this.btnPrintSelected.Size = new System.Drawing.Size(100, 35);
             this.btnPrintSelected.TabIndex = 13;
             this.btnPrintSelected.Text = "Напечатать выбранные";
             this.btnPrintSelected.UseVisualStyleBackColor = true;
@@ -542,7 +564,7 @@
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
-            // 
+            //
             this.btnEdit.Location = new System.Drawing.Point(4, 52);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
             this.btnEdit.Name = "btnEdit";
@@ -588,9 +610,9 @@
             // 
             // CertificatesListViewForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1168, 735);
+            this.ClientSize = new System.Drawing.Size(876, 597);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.statusCertificate);
@@ -670,6 +692,9 @@
         private System.Windows.Forms.Panel pnlToolsForSelected;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnPrintSelected;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel lblCurrentDBType;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
