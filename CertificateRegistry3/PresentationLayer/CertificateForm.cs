@@ -8,11 +8,11 @@ namespace CertificateRegistry3.PresentationLayer
 {
     public partial class CertificateForm:Form
     {
-        private bool isEdit;
-        private int ID_Certificate;
-        private string CurrentOrganizationName;
+        private readonly bool isEdit;
+        private readonly int certificateId;
+        private readonly string currentOrganizationName;
 
-        private Organization CurrentOrganization => OrganizationComboBox.SelectedValue as Organization;
+        private Organization currentOrganization => OrganizationComboBox.SelectedValue as Organization;
 
         /// <summary>
         /// Конструктор формы по умолчанию (для добавления сертификата)
@@ -31,13 +31,16 @@ namespace CertificateRegistry3.PresentationLayer
         {
             InitializeComponent();
 
+            if (CertificateToEdit == null)
+                throw new ArgumentNullException(nameof(CertificateToEdit), "Неправильный вызов формы для редактирования: пустой аргумент.");
+
             isEdit = true;
             CertificateNameTextBox.Text = CertificateToEdit.CertificateName;
             CertificateNumberTextBox.Text = CertificateToEdit.Number;
             BeginDatePicker.Value = CertificateToEdit.BeginDate;
             EndDatePicker.Value = CertificateToEdit.EndDate;
-            CurrentOrganizationName = CertificateToEdit.Organization;
-            ID_Certificate = CertificateToEdit.ID_Certificate;
+            currentOrganizationName = CertificateToEdit.Organization;
+            certificateId = CertificateToEdit.ID_Certificate;
         }
 
         private void FillOrganizationComboBox()
@@ -47,7 +50,7 @@ namespace CertificateRegistry3.PresentationLayer
             OrganizationComboBox.SelectedIndex = -1;
             if (isEdit)
             {
-                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<Organization>).Find(o => o.Name == CurrentOrganizationName));
+                OrganizationComboBox.SelectedIndex = OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<Organization>).Find(o => o.Name == currentOrganizationName));
             }
         }
 
@@ -65,15 +68,15 @@ namespace CertificateRegistry3.PresentationLayer
         {
             try
             {
-                if (CertificateNameTextBox.Text == "")
+                if (string.IsNullOrEmpty(CertificateNameTextBox.Text))
                 {
                     MessageBox.Show("Поле \"Название\" должно быть заполнено", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if (CertificateNumberTextBox.Text == "")
+                else if (string.IsNullOrEmpty(CertificateNumberTextBox.Text))
                 {
                     MessageBox.Show("Поле \"Номер сертификата\" должно быть заполнено", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                else if (OrganizationComboBox.Text == "")
+                else if (string.IsNullOrEmpty(OrganizationComboBox.Text))
                 {
                     MessageBox.Show("Нужно выбрать организацию", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -83,12 +86,12 @@ namespace CertificateRegistry3.PresentationLayer
                     if (isEdit)
                     {
                                                 
-                        CertificatesHandler.EditCertificate(ID_Certificate,
+                        CertificatesHandler.EditCertificate(certificateId,
                                                             CertificateNameTextBox.Text,
                                                             CertificateNumberTextBox.Text,
                                                             BeginDatePicker.Value,
                                                             EndDatePicker.Value,
-                                                            CurrentOrganization.OrganizationId);
+                                                            currentOrganization.OrganizationId);
                     }
                     else
                     {
@@ -96,7 +99,7 @@ namespace CertificateRegistry3.PresentationLayer
                                                           CertificateNumberTextBox.Text,
                                                           BeginDatePicker.Value,
                                                           EndDatePicker.Value,
-                                                          CurrentOrganization.OrganizationId);
+                                                          currentOrganization.OrganizationId);
                     }
                     DialogResult = DialogResult.OK;
                     Close();
@@ -118,21 +121,15 @@ namespace CertificateRegistry3.PresentationLayer
             }
         }
 
-        // переделать
-        private void DeleteOrganizationBtn_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show($"Вы хотите удалить организацию{CurrentOrganization.Name}?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                OrganizationManager.DeleteOrganization(CurrentOrganization.OrganizationId);
-            }
-        }
-
         private void AddOrganizationBtn_Click(object sender, EventArgs e)
         {
-            OrganizationForm AddOrganization = new OrganizationForm();
-            if (AddOrganization.ShowDialog() == DialogResult.OK)
+            var organizationsFrom = new OrganizationsListForm(LookupMode:true);
+            if (organizationsFrom.ShowDialog() == DialogResult.OK)
             {
                 FillOrganizationComboBox();
+                OrganizationComboBox.SelectedIndex = 
+                    OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<Organization>)
+                    .Find(o => o.OrganizationId == organizationsFrom.CurrentOrganization.OrganizationId));
             }
         }
 

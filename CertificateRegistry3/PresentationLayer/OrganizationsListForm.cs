@@ -13,9 +13,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         public bool OrganizationsListChanged { get; private set; } = false;
 
-        private Organization currentOrganization => (Organization)grdOrganizations.CurrentRow?.DataBoundItem;
-
-        public int SelectedOrganizationId => currentOrganization.OrganizationId;
+        public Organization CurrentOrganization => (Organization)grdOrganizations.CurrentRow?.DataBoundItem;
 
         private void FillOrganizationsTable()
         {
@@ -46,8 +44,8 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void grdOrganizations_SelectionChanged(object sender, EventArgs e)
         {
-            редактироватьToolStripMenuItem.Enabled = currentOrganization != null;
-            удалитьToolStripMenuItem.Enabled = currentOrganization != null && OrganizationManager.CanDelete(currentOrganization.OrganizationId);
+            редактироватьToolStripMenuItem.Enabled = CurrentOrganization != null;
+            удалитьToolStripMenuItem.Enabled = CurrentOrganization != null && OrganizationManager.CanDelete(CurrentOrganization.OrganizationId);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -78,7 +76,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (new OrganizationForm(currentOrganization).ShowDialog() == DialogResult.OK)
+            if (new OrganizationForm(CurrentOrganization).ShowDialog() == DialogResult.OK)
             {
                 OrganizationsListChanged = true;
                 FillOrganizationsTable();
@@ -87,10 +85,10 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show($"Удалить организацию \"{currentOrganization.Name}\"?", "Запрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show($"Удалить организацию \"{CurrentOrganization.Name}\"?", "Запрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 OrganizationsListChanged = true;
-                OrganizationManager.DeleteOrganization(currentOrganization.OrganizationId);
+                OrganizationManager.DeleteOrganization(CurrentOrganization.OrganizationId);
                 FillOrganizationsTable();
             }
         }
