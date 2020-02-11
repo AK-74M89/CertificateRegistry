@@ -29,14 +29,32 @@ namespace CertificateRegistry3.DataSourceLayer
             NpgsqlCommand Command = new NpgsqlCommand("organization_add", connection);
             Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Varchar;
+            Command.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar));
             Command.Parameters[0].Value = Name;            
 
             Object Result = Command.ExecuteScalar();
             return Convert.ToInt32(Result);
         }
-    
+
+        /// <summary>
+        /// Изменить организацию
+        /// </summary>
+        /// <param name="OrganizationId">Идентификатор организации</param>
+        /// <param name="Name">Новое название организации</param>
+        public void EditOrganization(int OrganizationId, string Name)
+        {
+            NpgsqlCommand Command = new NpgsqlCommand("organization_edit", connection);
+            Command.CommandType = CommandType.StoredProcedure;
+
+            Command.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Integer));
+            Command.Parameters[0].Value = OrganizationId;
+
+            Command.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar));
+            Command.Parameters[1].Value = Name;
+
+            Command.ExecuteNonQuery();
+        }
+
         /// <summary>
         /// Удалить организацию
         /// </summary>
@@ -77,6 +95,17 @@ namespace CertificateRegistry3.DataSourceLayer
             dr.Close();
 
             return OrganizationList;
+        }
+
+        public bool CanDelete(int OrganizationId)
+        {
+            NpgsqlCommand Command = new NpgsqlCommand("organization_can_delete", connection);
+            Command.CommandType = CommandType.StoredProcedure;
+
+            Command.Parameters.Add(new NpgsqlParameter("organization_id", NpgsqlDbType.Integer) { Value = OrganizationId});
+
+            Object Result = Command.ExecuteScalar();
+            return Convert.ToBoolean(Result);
         }
     }
 }

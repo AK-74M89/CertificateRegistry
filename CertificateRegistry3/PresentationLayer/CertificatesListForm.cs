@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CertificateRegistry3.PresentationLayer
 {
-    public partial class CertificatesListViewForm : Form
+    public partial class CertificatesListForm : Form
     {
         private CertificateManager certificateRegistryHandler = new CertificateManager();
         private BindingList<Certificate> certificatesList;
@@ -53,7 +53,7 @@ namespace CertificateRegistry3.PresentationLayer
             выбраныеToolStripMenuItem.Enabled = false;
         }
 
-        public CertificatesListViewForm()
+        public CertificatesListForm()
         {
             InitializeComponent();
             bsCertificates.DataSource = certificatesList;
@@ -309,6 +309,16 @@ namespace CertificateRegistry3.PresentationLayer
                 {
                     Application.Restart();
                 }
+            }
+        }
+        
+        private void списокОрганизацийToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var organizationsForm = new OrganizationsListForm(LookupMode: false);
+            organizationsForm.ShowDialog();
+            if (organizationsForm.OrganizationsListChanged)
+            {
+                FillCertificatesTable();
             }
         }
     }

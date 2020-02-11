@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SQLite;
@@ -11,7 +10,7 @@ namespace CertificateRegistry3.DataSourceLayer
     /// </summary>
     public class SQLiteOrganizationGateway : IOrganizationGateway
     {
-        private SQLiteConnection connection;
+        private readonly SQLiteConnection connection;
 
         public SQLiteOrganizationGateway(DbConnection Connection)
         {
@@ -31,9 +30,9 @@ namespace CertificateRegistry3.DataSourceLayer
 
             Command.Parameters.Add("@name", DbType.AnsiString).Value = Name;
 
-            return Convert.ToInt32(Command.ExecuteScalar());
+            return (int)Command.ExecuteScalar();
         }
-    
+
         /// <summary>
         /// Удалить организацию
         /// </summary>
@@ -69,6 +68,36 @@ namespace CertificateRegistry3.DataSourceLayer
             dr.Close();
 
             return OrganizationList;
+        }
+
+        /// <summary>
+        /// Изменить организацию
+        /// </summary>
+        /// <param name="OrganizationId">Идентификатор организации</param>
+        /// <param name="Name">Новое название организации</param>
+        public void EditOrganization(int OrganizationId, string Name)
+        {
+            SQLiteCommand Command = new SQLiteCommand(@"UPDATE organizations
+                                                           SET name = @name
+                                                         WHERE id = @id",
+                                                        connection);
+
+            Command.Parameters.Add("@id", DbType.Int32).Value = OrganizationId;
+            Command.Parameters.Add("@name", DbType.AnsiString).Value = Name;
+
+            Command.ExecuteNonQuery();
+        }
+
+        public bool CanDelete(int OrganizationId)
+        {
+            SQLiteCommand Command = new SQLiteCommand(@"SELECT count(*)
+                                                        FROM certificate c
+                                                        WHERE c.id_organization = @id",
+                                                        connection);
+
+            Command.Parameters.Add("@id", DbType.Int32).Value = OrganizationId;
+
+            return (int)Command.ExecuteScalar() == 0;
         }
     }
 }

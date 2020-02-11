@@ -16,7 +16,7 @@ namespace CertificateRegistry3
             DBConnectionHandler.Connect();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CertificatesListViewForm());
+            Application.Run(new CertificatesListForm());
             DBConnectionHandler.Disconnect();
         }
     }

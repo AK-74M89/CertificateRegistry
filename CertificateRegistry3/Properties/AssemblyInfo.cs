@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Реестр сертификатов, версия 3.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Sertificate Registry 3")]
+[assembly: AssemblyProduct("Certificate Registry 3")]
 [assembly: AssemblyCopyright("Copyright © Суханов Александр,  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
