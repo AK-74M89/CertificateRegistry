@@ -11,7 +11,6 @@ namespace CertificateRegistry3.PresentationLayer
 {
     public partial class CertificatesListForm : Form
     {
-        private CertificateManager certificateRegistryHandler = new CertificateManager();
         private BindingList<Certificate> certificatesList;
         private BindingList<Certificate> selectedCertificatesList = new BindingList<Certificate>();
         private bool isFirstSelection = true;
@@ -28,7 +27,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void FillCertificatesTable()
         {
-            certificatesList = certificateRegistryHandler.GetCertificatesRegistry();
+            certificatesList = CertificateManager.GetCertificatesRegistry();
 
             bsCertificates.DataSource = certificatesList;
 
@@ -103,7 +102,7 @@ namespace CertificateRegistry3.PresentationLayer
                 {
                     ClearHideSelectedList();
                 }
-                certificateRegistryHandler.DeleteCertificate(currentCertificate.ID_Certificate);
+                CertificateManager.DeleteCertificate(currentCertificate.ID_Certificate);
                 FillCertificatesTable();
             }
         }
@@ -115,7 +114,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void btnPrintAll_Click(object sender, EventArgs e)
         {
-            var сertificates = new List<Certificate>(certificateRegistryHandler.GetCertificatesRegistry());
+            var сertificates = new List<Certificate>(CertificateManager.GetCertificatesRegistry());
 
             var printRegistryForm = new RegistryPrintForm(TemplateManager.FillTemplate(сertificates));
             printRegistryForm.ShowDialog();
@@ -128,7 +127,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var CertificatesList = certificateRegistryHandler.GetCertificatesRegistry();
+            var CertificatesList = CertificateManager.GetCertificatesRegistry();
 
             int Expired = 0;
             int Today = 0;

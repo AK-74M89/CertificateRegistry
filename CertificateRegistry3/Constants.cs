@@ -2,7 +2,7 @@
 
 namespace CertificateRegistry3
 {
-    public class Constants
+    public static class Constants
     {
         public const string DB_TYPE_POSTGRESQL = "PostgreSQL";
         public const string DB_TYPE_SQLITE = "SQLite";

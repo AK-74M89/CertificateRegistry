@@ -18,25 +18,28 @@ namespace CertificateRegistry3.DataSourceLayer
             {
                 if (connectionHandler == null)
                 {
-                    switch (Settings.Default.DBType)
-                    {
-                        case Constants.DB_TYPE_POSTGRESQL:
-                        {
-                            connectionHandler = new PostgreSQLDBConnectionHandler();
-                            break;
-                        }
-                        case Constants.DB_TYPE_SQLITE:
-                        {
-                            connectionHandler = new SQLiteDBConnectionHandler();
-                            break;
-                        }
-                        default:
-                        {
-                            throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
-                        }
-                    }
+                    connectionHandler = InitConnectionHandler();
                 }
                 return connectionHandler;
+            }
+        }
+
+        private static IDBConnectionHandler InitConnectionHandler()
+        {
+            switch (Settings.Default.DBType)
+            {
+                case Constants.DB_TYPE_POSTGRESQL:
+                {
+                    return new PostgreSQLDBConnectionHandler();
+                }
+                case Constants.DB_TYPE_SQLITE:
+                {
+                    return new SQLiteDBConnectionHandler();
+                }
+                default:
+                {
+                    throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
+                }
             }
         }
 
@@ -46,56 +49,62 @@ namespace CertificateRegistry3.DataSourceLayer
             {
                 if (certificatesGateway == null)
                 {
-                    switch (Settings.Default.DBType)
-                    {
-                        case Constants.DB_TYPE_POSTGRESQL:
-                        {
-                                certificatesGateway = new PostgreSQLCertificateGateway(ConnectionHandler.DBConnection);
-                                break;
-                        }
-                        case Constants.DB_TYPE_SQLITE:
-                        {
-                            certificatesGateway = new SQLiteCertificateGateway(ConnectionHandler.DBConnection);
-                            break;
-                        }
-                        default:
-                        {
-                            throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
-                        }
-                    }
+                    certificatesGateway = InitCertificatesGateway();
                 }
                 
                 return certificatesGateway;
             }
         }
-    
+
+        private static ICertificatesGateway InitCertificatesGateway()
+        {
+            switch (Settings.Default.DBType)
+            {
+                case Constants.DB_TYPE_POSTGRESQL:
+                {
+                    return new PostgreSQLCertificateGateway(ConnectionHandler.DBConnection);
+                }
+                case Constants.DB_TYPE_SQLITE:
+                {
+                    return new SQLiteCertificateGateway(ConnectionHandler.DBConnection);
+                }
+                default:
+                {
+                    throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
+                }
+            }
+        }
+
         public static IOrganizationGateway OrganizationGateway
         {
             get
             {
                 if (organizationGateway == null)
                 {
-                    switch (Settings.Default.DBType)
-                    {
-                        case Constants.DB_TYPE_POSTGRESQL:
-                        {
-                            organizationGateway = new PostgreSQLOrganizationGateway(ConnectionHandler.DBConnection);
-                            break;
-                        }
-                        case Constants.DB_TYPE_SQLITE:
-                        {
-                            organizationGateway = new SQLiteOrganizationGateway(ConnectionHandler.DBConnection);
-                            break;
-                        }
-                        default:
-                        {
-                            throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
-                        }
-                    }
+                    organizationGateway = InitOrganizationGateway();
                 }
                 return organizationGateway;
             }
-        }        
+        }
+
+        private static IOrganizationGateway InitOrganizationGateway()
+        {
+            switch (Settings.Default.DBType)
+            {
+                case Constants.DB_TYPE_POSTGRESQL:
+                {
+                    return new PostgreSQLOrganizationGateway(ConnectionHandler.DBConnection);
+                }
+                case Constants.DB_TYPE_SQLITE:
+                {
+                    return new SQLiteOrganizationGateway(ConnectionHandler.DBConnection);
+                }
+                default:
+                {
+                    throw new NotImplementedException($"Подключение к {Settings.Default.DBType} не реализовано");
+                }
+            }
+        }
 
         public static void Connect()
         {

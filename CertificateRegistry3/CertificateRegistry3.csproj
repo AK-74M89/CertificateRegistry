@@ -39,7 +39,7 @@
     <ProductName>Certificate Registry 3</ProductName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>3.5.0.0</ApplicationVersion>
+    <ApplicationVersion>3.6.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -159,7 +159,6 @@
     <Compile Include="DataSourceLayer\Management\PostgreSQL\PostgreSQLOrganizationGateway.cs" />
     <Compile Include="DataSourceLayer\Management\SQLite\SQLiteDBConnectionHandler.cs" />
     <Compile Include="DataSourceLayer\Management\SQLite\SQLiteOrganizationGateway.cs" />
-    <Compile Include="DataSourceLayer\Management\TemplateLoader.cs" />
     <Compile Include="DomainLayer\Management\CertificateManager.cs" />
     <Compile Include="DomainLayer\Management\Checker.cs" />
     <Compile Include="DomainLayer\Management\ProgramSettingsManager.cs" />

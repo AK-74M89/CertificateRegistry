@@ -9,7 +9,7 @@ namespace CertificateRegistry3.PresentationLayer
         {
             InitializeComponent();
 
-            Text = text == "" ? Text : text;
+            Text = string.IsNullOrEmpty(text) ? Text : text;
             RegistryPreview.DocumentText = certificatesTable;
             DialogResult = DialogResult.OK;
         }

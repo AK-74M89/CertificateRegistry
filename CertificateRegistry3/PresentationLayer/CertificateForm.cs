@@ -82,11 +82,10 @@ namespace CertificateRegistry3.PresentationLayer
                 }
                 else
                 {                    
-                    CertificateManager CertificatesHandler = new CertificateManager();
                     if (isEdit)
                     {
-                                                
-                        CertificatesHandler.EditCertificate(certificateId,
+
+                        CertificateManager.EditCertificate(certificateId,
                                                             CertificateNameTextBox.Text,
                                                             CertificateNumberTextBox.Text,
                                                             BeginDatePicker.Value,
@@ -95,7 +94,7 @@ namespace CertificateRegistry3.PresentationLayer
                     }
                     else
                     {
-                        CertificatesHandler.AddCertificate(CertificateNameTextBox.Text,
+                        CertificateManager.AddCertificate(CertificateNameTextBox.Text,
                                                           CertificateNumberTextBox.Text,
                                                           BeginDatePicker.Value,
                                                           EndDatePicker.Value,

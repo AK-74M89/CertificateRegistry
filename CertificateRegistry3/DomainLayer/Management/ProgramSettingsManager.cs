@@ -1,8 +1,9 @@
 ﻿using CertificateRegistry3.Properties;
+using System;
 
 namespace CertificateRegistry3.DomainLayer
 {
-    public class ProgramSettingsManager
+    public static class ProgramSettingsManager
     {
         private static IDBSettingsValidator validator = null;
 
@@ -34,6 +35,9 @@ namespace CertificateRegistry3.DomainLayer
         
         public static string CheckSettings(ProgramSettings settingsToCheck)
         {
+            if (settingsToCheck == null)
+                throw new ArgumentNullException(nameof(settingsToCheck));
+
             if (settingsToCheck.DBSettingsHasChanges)
             {                                
                 string requirements;

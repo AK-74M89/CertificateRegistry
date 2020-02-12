@@ -13,7 +13,7 @@
         /// <returns></returns>
         public static bool CheckRegularString(string RegularString)
         {
-            return (RegularString.Length >= 0) && (RegularString.Length <= 255);
+            return (!string.IsNullOrEmpty(RegularString) && RegularString.Length >= 0) && (RegularString.Length <= 255);
         }
     }
 }

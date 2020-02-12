@@ -7,9 +7,9 @@ namespace CertificateRegistry3.DomainLayer
     /// <summary>
     /// Бизнес-логика работы с сертификатами
     /// </summary>
-    public class CertificateManager
+    public static class CertificateManager
     {
-        private void CheckCertificateFields(string Name, string Number, DateTime Begin, DateTime End)
+        private static void CheckCertificateFields(string Name, string Number, DateTime Begin, DateTime End)
         {
             if (!Checker.CheckRegularString(Name))
             {
@@ -33,7 +33,7 @@ namespace CertificateRegistry3.DomainLayer
         /// <param name="BeginDate">дата выдачи</param>
         /// <param name="EndDate">дата завершения</param>
         /// <param name="OrganizationId">идентификатор организации</param>
-        public void AddCertificate(string Name, string Number, DateTime BeginDate, DateTime EndDate, int OrganizationId)
+        public static void AddCertificate(string Name, string Number, DateTime BeginDate, DateTime EndDate, int OrganizationId)
         {
             CheckCertificateFields(Name, Number, BeginDate, EndDate);
             DBConnectionHandler.CertificatesGateway.AddCertificate(Name, Number, BeginDate, EndDate, OrganizationId);
@@ -48,7 +48,7 @@ namespace CertificateRegistry3.DomainLayer
         /// <param name="BeginDate">дата выдачи</param>
         /// <param name="EndDate">дата завершения</param>
         /// <param name="OrganizationId">идентификатор организации</param>
-        public void EditCertificate(int CertificateId, string Name, string Number, DateTime BeginDate, DateTime EndDate, int OrganizationId)
+        public static void EditCertificate(int CertificateId, string Name, string Number, DateTime BeginDate, DateTime EndDate, int OrganizationId)
         {
             CheckCertificateFields(Name, Number, BeginDate, EndDate);
             DBConnectionHandler.CertificatesGateway.EditCertificate(CertificateId, Name, Number, BeginDate, EndDate, OrganizationId);
@@ -58,7 +58,7 @@ namespace CertificateRegistry3.DomainLayer
         /// Удалить сертификат
         /// </summary>
         /// <param name="CertificateId">идентификатор сертификата</param>
-        public void DeleteCertificate(int CertificateId)
+        public static void DeleteCertificate(int CertificateId)
         {
             DBConnectionHandler.CertificatesGateway.DeleteCertificate(CertificateId);
         }
@@ -67,7 +67,7 @@ namespace CertificateRegistry3.DomainLayer
         /// Получить список сертификатов
         /// </summary>
         /// <returns>BindingList объектов класса Certificate для отображения</returns>
-        public BindingList<Certificate> GetCertificatesRegistry()
+        public static BindingList<Certificate> GetCertificatesRegistry()
         {
             return new BindingList<Certificate>(DBConnectionHandler.CertificatesGateway.GetCertificatesRegistry());
         }
