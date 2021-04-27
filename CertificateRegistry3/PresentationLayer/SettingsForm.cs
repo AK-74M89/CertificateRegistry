@@ -58,7 +58,7 @@ namespace CertificateRegistry3.PresentationLayer
         private bool CheckSettings()
         {
             var errorMessage = ProgramSettingsManager.CheckSettings(newSettings);
-            if (string.IsNullOrEmpty(errorMessage))
+            if (!string.IsNullOrEmpty(errorMessage))
             {
                 MessageBox.Show(errorMessage, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
