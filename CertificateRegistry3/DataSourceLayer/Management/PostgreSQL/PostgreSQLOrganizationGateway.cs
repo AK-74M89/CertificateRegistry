@@ -12,7 +12,7 @@ namespace CertificateRegistry3.DataSourceLayer
     /// </summary>
     public class PostgreSQLOrganizationGateway: IOrganizationGateway
     {
-        private NpgsqlConnection connection;
+        private readonly NpgsqlConnection connection;
 
         public PostgreSQLOrganizationGateway(DbConnection Connection)
         {
@@ -26,14 +26,16 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <returns>Идентификатор добавленной организации</returns>
         public int AddOrganization(string Name)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("organization_add", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("organization_add", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar));
-            Command.Parameters[0].Value = Name;            
+                Command.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar));
+                Command.Parameters[0].Value = Name;
 
-            Object Result = Command.ExecuteScalar();
-            return Convert.ToInt32(Result);
+                var Result = Command.ExecuteScalar();
+                return Convert.ToInt32(Result);
+            }
         }
 
         /// <summary>
@@ -43,16 +45,18 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <param name="Name">Новое название организации</param>
         public void EditOrganization(int OrganizationId, string Name)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("organization_edit", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("organization_edit", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Integer));
-            Command.Parameters[0].Value = OrganizationId;
+                Command.Parameters.Add(new NpgsqlParameter("id", NpgsqlDbType.Integer));
+                Command.Parameters[0].Value = OrganizationId;
 
-            Command.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar));
-            Command.Parameters[1].Value = Name;
+                Command.Parameters.Add(new NpgsqlParameter("name", NpgsqlDbType.Varchar));
+                Command.Parameters[1].Value = Name;
 
-            Command.ExecuteNonQuery();
+                Command.ExecuteNonQuery();
+            }
         }
 
         /// <summary>
@@ -61,14 +65,16 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <param name="OrganizationId">Идентификатор организации</param>
         public void DeleteOrganization(int OrganizationId)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("organization_delete", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("organization_delete", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Integer;
-            Command.Parameters[0].Value = OrganizationId;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Integer;
+                Command.Parameters[0].Value = OrganizationId;
 
-            Command.ExecuteNonQuery();
+                Command.ExecuteNonQuery();
+            }
         }
 
         /// <summary>
@@ -77,35 +83,36 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <returns>Список объектов класса Organization</returns>
         public List<Organization> GetOrganizationList()
         {
-            var OrganizationList = new List<Organization>();
-
-            NpgsqlCommand Command = new NpgsqlCommand("organization_get_all", connection);
-            Command.CommandType = CommandType.StoredProcedure;
-
-            NpgsqlDataReader dr = Command.ExecuteReader();
-
-            while (dr.Read())
+            using (var Command = new NpgsqlCommand("organization_get_all", connection))
             {
-                var CurrentOrganizationRecord = new Organization(ID_Organization: dr.GetInt32(0),
-                                                                    Name: dr.GetString(1)); 
+                Command.CommandType = CommandType.StoredProcedure;
 
-                OrganizationList.Add(CurrentOrganizationRecord);
+                var OrganizationList = new List<Organization>();
+
+                var dr = Command.ExecuteReader();
+                while (dr.Read())
+                {
+                    var CurrentOrganizationRecord = new Organization(ID_Organization: dr.GetInt32(0), Name: dr.GetString(1));
+
+                    OrganizationList.Add(CurrentOrganizationRecord);
+                }
+                dr.Close();
+
+                return OrganizationList;
             }
-
-            dr.Close();
-
-            return OrganizationList;
         }
 
         public bool CanDelete(int OrganizationId)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("organization_can_delete", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("organization_can_delete", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter("organization_id", NpgsqlDbType.Integer) { Value = OrganizationId});
+                Command.Parameters.Add(new NpgsqlParameter("organization_id", NpgsqlDbType.Integer) { Value = OrganizationId });
 
-            Object Result = Command.ExecuteScalar();
-            return Convert.ToBoolean(Result);
+                var Result = Command.ExecuteScalar();
+                return Convert.ToBoolean(Result);
+            }
         }
     }
 }

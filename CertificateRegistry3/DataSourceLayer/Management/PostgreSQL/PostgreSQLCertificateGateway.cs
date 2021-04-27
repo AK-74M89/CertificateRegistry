@@ -10,11 +10,11 @@ namespace CertificateRegistry3.DataSourceLayer
     /// <summary>
     /// Управление объектами Certificate в базе данных PostgreSQL
     /// </summary>
-    public class PostgreSQLCertificateGateway : ICertificatesGateway
+    public class PostgreSqlCertificateGateway : ICertificatesGateway
     {
-        private NpgsqlConnection connection;
+        private readonly NpgsqlConnection connection;
 
-        public PostgreSQLCertificateGateway(DbConnection Connection)
+        public PostgreSqlCertificateGateway(DbConnection Connection)
         {
             connection = Connection as NpgsqlConnection;
         }
@@ -30,31 +30,33 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <returns>идентификатор добавленного сертификата</returns>
         public int AddCertificate(string Name, string Number, DateTime BeginDate, DateTime EndDate, int OrganizationId)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("certificate_add", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("certificate_add", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Varchar;
-            Command.Parameters[0].Value = Name;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Varchar;
+                Command.Parameters[0].Value = Name;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[1].NpgsqlDbType = NpgsqlDbType.Varchar;
-            Command.Parameters[1].Value = Number;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[1].NpgsqlDbType = NpgsqlDbType.Varchar;
+                Command.Parameters[1].Value = Number;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[2].NpgsqlDbType = NpgsqlDbType.Date;
-            Command.Parameters[2].Value = BeginDate;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[2].NpgsqlDbType = NpgsqlDbType.Date;
+                Command.Parameters[2].Value = BeginDate;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[3].NpgsqlDbType = NpgsqlDbType.Date;
-            Command.Parameters[3].Value = EndDate;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[3].NpgsqlDbType = NpgsqlDbType.Date;
+                Command.Parameters[3].Value = EndDate;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[4].NpgsqlDbType = NpgsqlDbType.Integer;
-            Command.Parameters[4].Value = OrganizationId;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[4].NpgsqlDbType = NpgsqlDbType.Integer;
+                Command.Parameters[4].Value = OrganizationId;
 
-            Object Result = Command.ExecuteScalar();
-            return Convert.ToInt32(Result);
+                var Result = Command.ExecuteScalar();
+                return Convert.ToInt32(Result);
+            }
         }
 
         /// <summary>
@@ -68,34 +70,36 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <param name="OrganizationId">Идентификатор организации</param>
         public void EditCertificate(int CertificateId, string Name, string Number, DateTime BeginDate, DateTime EndDate, int OrganizationId)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("certificate_edit", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("certificate_edit", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Integer;
-            Command.Parameters[0].Value = CertificateId;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Integer;
+                Command.Parameters[0].Value = CertificateId;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[1].NpgsqlDbType = NpgsqlDbType.Varchar;
-            Command.Parameters[1].Value = Name;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[1].NpgsqlDbType = NpgsqlDbType.Varchar;
+                Command.Parameters[1].Value = Name;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[2].NpgsqlDbType = NpgsqlDbType.Varchar;
-            Command.Parameters[2].Value = Number;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[2].NpgsqlDbType = NpgsqlDbType.Varchar;
+                Command.Parameters[2].Value = Number;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[3].NpgsqlDbType = NpgsqlDbType.Date;
-            Command.Parameters[3].Value = BeginDate;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[3].NpgsqlDbType = NpgsqlDbType.Date;
+                Command.Parameters[3].Value = BeginDate;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[4].NpgsqlDbType = NpgsqlDbType.Date;
-            Command.Parameters[4].Value = EndDate;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[4].NpgsqlDbType = NpgsqlDbType.Date;
+                Command.Parameters[4].Value = EndDate;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[5].NpgsqlDbType = NpgsqlDbType.Integer;
-            Command.Parameters[5].Value = OrganizationId;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[5].NpgsqlDbType = NpgsqlDbType.Integer;
+                Command.Parameters[5].Value = OrganizationId;
 
-            Command.ExecuteNonQuery();
+                Command.ExecuteNonQuery();
+            }
         }
 
         /// <summary>
@@ -104,14 +108,16 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <param name="CertificateId">Идентификатор сертификата</param>
         public void DeleteCertificate(int CertificateId)
         {
-            NpgsqlCommand Command = new NpgsqlCommand("certificate_delete", connection);
-            Command.CommandType = CommandType.StoredProcedure;
+            using (var Command = new NpgsqlCommand("certificate_delete", connection))
+            {
+                Command.CommandType = CommandType.StoredProcedure;
 
-            Command.Parameters.Add(new NpgsqlParameter());
-            Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Integer;
-            Command.Parameters[0].Value = CertificateId;
+                Command.Parameters.Add(new NpgsqlParameter());
+                Command.Parameters[0].NpgsqlDbType = NpgsqlDbType.Integer;
+                Command.Parameters[0].Value = CertificateId;
 
-            Command.ExecuteNonQuery();
+                Command.ExecuteNonQuery();
+            }
         }
 
         /// <summary>
@@ -120,28 +126,28 @@ namespace CertificateRegistry3.DataSourceLayer
         /// <returns>Список объектов класса Certificate</returns>
         public List<Certificate> GetCertificatesRegistry()
         {
-            var CertificatesRegistry = new List<Certificate>();
-
-            NpgsqlCommand Command = new NpgsqlCommand("certificate_get_registry", connection);
-            Command.CommandType = CommandType.StoredProcedure;            
-
-            NpgsqlDataReader dr = Command.ExecuteReader();
-
-            while (dr.Read())
+            using (var Command = new NpgsqlCommand("certificate_get_registry", connection))
             {
-                var CurrentCertificateRecord = new Certificate(CertificateId: dr.GetInt32(0),
-                                                                Name: dr.GetString(1),
-                                                                Number: dr.GetString(2),
-                                                                BeginDate: dr.GetDateTime(3),
-                                                                EndDate: dr.GetDateTime(4),
-                                                                OrganizationName: dr.GetString(5));
+                Command.CommandType = CommandType.StoredProcedure;
 
-                CertificatesRegistry.Add(CurrentCertificateRecord);
+                var CertificatesRegistry = new List<Certificate>();
+
+                var dr = Command.ExecuteReader();
+                while (dr.Read())
+                {
+                    var CurrentCertificateRecord = new Certificate(CertificateId: dr.GetInt32(0),
+                                                                    Name: dr.GetString(1),
+                                                                    Number: dr.GetString(2),
+                                                                    BeginDate: dr.GetDateTime(3),
+                                                                    EndDate: dr.GetDateTime(4),
+                                                                    OrganizationName: dr.GetString(5));
+
+                    CertificatesRegistry.Add(CurrentCertificateRecord);
+                }
+                dr.Close();
+
+                return CertificatesRegistry;
             }
-
-            dr.Close();
-
-            return CertificatesRegistry;
         }
     }
 }

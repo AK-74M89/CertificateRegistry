@@ -12,10 +12,10 @@ namespace CertificateRegistry3.PresentationLayer
     public partial class CertificatesListForm : Form
     {
         private BindingList<Certificate> certificatesList;
-        private BindingList<Certificate> selectedCertificatesList = new BindingList<Certificate>();
+        private readonly BindingList<Certificate> selectedCertificatesList = new BindingList<Certificate>();
         private bool isFirstSelection = true;
 
-        private Certificate currentCertificate => (Certificate)grdCertificates.CurrentRow?.DataBoundItem;
+        private Certificate currentCertificate => grdCertificates.CurrentRow?.DataBoundItem as Certificate;
 
         private void EnableControls(bool Enable)
         {
@@ -72,10 +72,13 @@ namespace CertificateRegistry3.PresentationLayer
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
-        {            
-            if (new CertificateForm().ShowDialog() == DialogResult.OK)
+        {
+            using (var form = new CertificateForm())
             {
-                FillCertificatesTable();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    FillCertificatesTable();
+                }
             }
         }
 
@@ -84,9 +87,12 @@ namespace CertificateRegistry3.PresentationLayer
             if (currentCertificate == null)
                 return;
 
-            if (new CertificateForm(currentCertificate).ShowDialog() == DialogResult.OK)
+            using (var form = new CertificateForm(currentCertificate))
             {
-                FillCertificatesTable();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    FillCertificatesTable();
+                }
             }
         }
 
@@ -116,8 +122,10 @@ namespace CertificateRegistry3.PresentationLayer
         {
             var сertificates = new List<Certificate>(CertificateManager.GetCertificatesRegistry());
 
-            var printRegistryForm = new RegistryPrintForm(TemplateManager.FillTemplate(сertificates));
-            printRegistryForm.ShowDialog();
+            using (var printRegistryForm = new RegistryPrintForm(TemplateManager.FillTemplate(сertificates)))
+            {
+                printRegistryForm.ShowDialog();
+            }
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,9 +194,12 @@ namespace CertificateRegistry3.PresentationLayer
         {
             string certificatesTable = TemplateManager.FillTemplate(selectedCertificatesList.ToList());
 
-            if (new RegistryPrintForm(certificatesTable, "Печать выбранных").ShowDialog() == DialogResult.OK)
+            using (var form = new RegistryPrintForm(certificatesTable, "Печать выбранных"))
             {
-                ClearHideSelectedList();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    ClearHideSelectedList();
+                }
             }
         }
 
@@ -259,7 +270,7 @@ namespace CertificateRegistry3.PresentationLayer
             var affectedColumn = grdCertificates.Columns[e.ColumnIndex];
             // true - сортировка в прямом направлении, false - в обратном
             // если тэг был пустой, то ставим прямую, если нет - меняем на противоположную
-            affectedColumn.Tag = affectedColumn.Tag == null ? true : !(bool)affectedColumn.Tag;
+            affectedColumn.Tag = affectedColumn.Tag == null || !(bool)affectedColumn.Tag;
             var tag = (bool)affectedColumn.Tag;
 
             affectedColumn.HeaderCell.SortGlyphDirection = tag ? SortOrder.Ascending : SortOrder.Descending;
@@ -298,27 +309,36 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var settingsForm = new SettingsForm();
-            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.DBSettingsChanged)
+            using (var settingsForm = new SettingsForm())
             {
-                if (MessageBox.Show("Изменились настройки БД. Необходимо перезапустить приложение. Перезапустить?", 
-                                    "Запрос", 
-                                    MessageBoxButtons.YesNo, 
-                                    MessageBoxIcon.Question) == DialogResult.Yes)
+                if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.DBSettingsChanged)
                 {
-                    Application.Restart();
+                    if (MessageBox.Show("Изменились настройки БД. Необходимо перезапустить приложение. Перезапустить?",
+                                        "Запрос",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        Application.Restart();
+                    }
                 }
             }
         }
         
         private void списокОрганизацийToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var organizationsForm = new OrganizationsListForm(LookupMode: false);
-            organizationsForm.ShowDialog();
-            if (organizationsForm.OrganizationsListChanged)
+            using (var organizationsForm = new OrganizationsListForm(LookupMode: false))
             {
-                FillCertificatesTable();
+                organizationsForm.ShowDialog();
+                if (organizationsForm.OrganizationsListChanged)
+                {
+                    FillCertificatesTable();
+                }
             }
+        }
+
+        private void grdCertificates_SelectionChanged(object sender, EventArgs e)
+        {
+            btnDelete.Enabled = btnEdit.Enabled = btnSelect.Enabled = currentCertificate != null;
         }
     }
 }

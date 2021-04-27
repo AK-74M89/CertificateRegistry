@@ -296,7 +296,7 @@
             this.grdCertificates.DataSource = this.bsCertificates;
             this.grdCertificates.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdCertificates.Location = new System.Drawing.Point(0, 0);
-            this.grdCertificates.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.grdCertificates.Margin = new System.Windows.Forms.Padding(5);
             this.grdCertificates.MultiSelect = false;
             this.grdCertificates.Name = "grdCertificates";
             this.grdCertificates.ReadOnly = true;
@@ -304,6 +304,7 @@
             this.grdCertificates.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdCertificates.Size = new System.Drawing.Size(1058, 681);
             this.grdCertificates.TabIndex = 2;
+            this.grdCertificates.SelectionChanged += new System.EventHandler(this.grdCertificates_SelectionChanged);
             // 
             // coIID
             // 
@@ -382,13 +383,13 @@
             this.grdSelectedCertificate.DataSource = this.bsSelectedCertificates;
             this.grdSelectedCertificate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grdSelectedCertificate.Location = new System.Drawing.Point(0, 0);
-            this.grdSelectedCertificate.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.grdSelectedCertificate.Margin = new System.Windows.Forms.Padding(5);
             this.grdSelectedCertificate.MultiSelect = false;
             this.grdSelectedCertificate.Name = "grdSelectedCertificate";
             this.grdSelectedCertificate.ReadOnly = true;
             this.grdSelectedCertificate.RowHeadersWidth = 51;
             this.grdSelectedCertificate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdSelectedCertificate.Size = new System.Drawing.Size(200, 57);
+            this.grdSelectedCertificate.Size = new System.Drawing.Size(150, 46);
             this.grdSelectedCertificate.TabIndex = 3;
             // 
             // colSelectedCertificateId
@@ -474,7 +475,7 @@
             this.pnlMainTools.Controls.Add(this.btnPrintAll);
             this.pnlMainTools.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMainTools.Location = new System.Drawing.Point(0, 86);
-            this.pnlMainTools.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMainTools.Margin = new System.Windows.Forms.Padding(4);
             this.pnlMainTools.Name = "pnlMainTools";
             this.pnlMainTools.Size = new System.Drawing.Size(144, 476);
             this.pnlMainTools.TabIndex = 19;
@@ -494,7 +495,7 @@
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(4, 55);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(133, 43);
             this.btnClear.TabIndex = 14;
@@ -505,7 +506,7 @@
             // btnPrintSelected
             // 
             this.btnPrintSelected.Location = new System.Drawing.Point(4, 4);
-            this.btnPrintSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintSelected.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintSelected.Name = "btnPrintSelected";
             this.btnPrintSelected.Size = new System.Drawing.Size(133, 43);
             this.btnPrintSelected.TabIndex = 13;
@@ -516,7 +517,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(5, 1);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(5);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(133, 43);
             this.btnAdd.TabIndex = 15;
@@ -527,7 +528,7 @@
             // btnEdit
             // 
             this.btnEdit.Location = new System.Drawing.Point(5, 64);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(5);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(133, 43);
             this.btnEdit.TabIndex = 16;
@@ -538,7 +539,7 @@
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(5, 127);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(133, 43);
             this.btnDelete.TabIndex = 17;
@@ -550,7 +551,7 @@
             // 
             this.btnSelect.Enabled = false;
             this.btnSelect.Location = new System.Drawing.Point(5, 282);
-            this.btnSelect.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(5);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(133, 43);
             this.btnSelect.TabIndex = 19;
@@ -561,7 +562,7 @@
             // btnPrintAll
             // 
             this.btnPrintAll.Location = new System.Drawing.Point(5, 190);
-            this.btnPrintAll.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnPrintAll.Margin = new System.Windows.Forms.Padding(5);
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(133, 43);
             this.btnPrintAll.TabIndex = 18;
@@ -574,7 +575,7 @@
             this.pnlRefresh.Controls.Add(this.btnRefresh);
             this.pnlRefresh.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlRefresh.Location = new System.Drawing.Point(0, 33);
-            this.pnlRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlRefresh.Margin = new System.Windows.Forms.Padding(4);
             this.pnlRefresh.Name = "pnlRefresh";
             this.pnlRefresh.Size = new System.Drawing.Size(144, 53);
             this.pnlRefresh.TabIndex = 18;
@@ -582,7 +583,7 @@
             // btnRefresh
             // 
             this.btnRefresh.Location = new System.Drawing.Point(5, 1);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(5);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(133, 43);
             this.btnRefresh.TabIndex = 14;
@@ -594,7 +595,7 @@
             // 
             this.pnlSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSeparator1.Location = new System.Drawing.Point(0, 0);
-            this.pnlSeparator1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlSeparator1.Margin = new System.Windows.Forms.Padding(4);
             this.pnlSeparator1.Name = "pnlSeparator1";
             this.pnlSeparator1.Size = new System.Drawing.Size(144, 33);
             this.pnlSeparator1.TabIndex = 17;
@@ -615,7 +616,7 @@
             this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSearch.Location = new System.Drawing.Point(85, 9);
-            this.tbSearch.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(5);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(962, 22);
             this.tbSearch.TabIndex = 11;
@@ -644,7 +645,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.mainMenuCertificates;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "CertificatesListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Реестр сертификатов 3";

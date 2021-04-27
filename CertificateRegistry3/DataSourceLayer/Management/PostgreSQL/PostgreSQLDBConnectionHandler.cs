@@ -15,26 +15,21 @@ namespace CertificateRegistry3.DataSourceLayer
 
         private NpgsqlConnection connection;
 
-        public DbConnection DBConnection
-        { 
-            get
-            {
-                return connection;
-            }
-        }
+        public DbConnection DBConnection => connection;
 
         public void Connect()
         {
             if (connection == null)
             {
-                var ConnectionStringCreator = new NpgsqlConnectionStringBuilder();
-                ConnectionStringCreator.Host = Settings.Default.DBServer;
-                ConnectionStringCreator.Port = 5432;
-                ConnectionStringCreator.Username = Settings.Default.Username;
-                ConnectionStringCreator.Password = Settings.Default.Password;
-                ConnectionStringCreator.Database = "certificates";
-                string ConnectionString = ConnectionStringCreator.ConnectionString;
-                connection = new NpgsqlConnection(ConnectionString);
+                var ConnectionStringCreator = new NpgsqlConnectionStringBuilder
+                {
+                    Host = Settings.Default.DBServer,
+                    Port = 5432,
+                    Username = Settings.Default.Username,
+                    Password = Settings.Default.Password,
+                    Database = "certificates"
+                };
+                connection = new NpgsqlConnection(ConnectionStringCreator.ConnectionString);
             }
             if (connection.State != ConnectionState.Open)
             {

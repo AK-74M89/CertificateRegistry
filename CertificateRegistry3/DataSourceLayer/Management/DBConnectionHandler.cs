@@ -62,7 +62,7 @@ namespace CertificateRegistry3.DataSourceLayer
             {
                 case Constants.DB_TYPE_POSTGRESQL:
                 {
-                    return new PostgreSQLCertificateGateway(ConnectionHandler.DBConnection);
+                    return new PostgreSqlCertificateGateway(ConnectionHandler.DBConnection);
                 }
                 case Constants.DB_TYPE_SQLITE:
                 {

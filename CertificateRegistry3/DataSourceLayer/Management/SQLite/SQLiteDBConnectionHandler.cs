@@ -18,34 +18,39 @@ namespace CertificateRegistry3.DataSourceLayer
 
         private void InitDB()
         {
-            new SQLiteCommand(@"CREATE TABLE IF NOT EXISTS organizations 
-                                (
-                                    id   INTEGER       PRIMARY KEY AUTOINCREMENT,
-                                    name VARCHAR(255) NOT NULL
-                                )", connection).ExecuteNonQuery();
+            using (var Command = new SQLiteCommand(connection))
+            {
+                Command.CommandText = @"CREATE TABLE IF NOT EXISTS organizations 
+                                        (
+                                            id   INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                            name VARCHAR(255) NOT NULL
+                                        )";
+                Command.ExecuteNonQuery();
 
-
-            new SQLiteCommand(@"CREATE TABLE IF NOT EXISTS certificates 
-                                (
-                                    id              INTEGER       PRIMARY KEY AUTOINCREMENT,
-                                    name            VARCHAR (255) NOT NULL,
-                                    number          VARCHAR (255) NOT NULL,
-                                    date_begin      DATE          NOT NULL,
-                                    date_end        DATE          NOT NULL,
-                                    id_organization INTEGER       NOT NULL REFERENCES organizations (id)
-                                )", connection).ExecuteNonQuery();
+                Command.CommandText = @"CREATE TABLE IF NOT EXISTS certificates 
+                                        (
+                                            id              INTEGER       PRIMARY KEY AUTOINCREMENT,
+                                            name            VARCHAR (255) NOT NULL,
+                                            number          VARCHAR (255) NOT NULL,
+                                            date_begin      DATE          NOT NULL,
+                                            date_end        DATE          NOT NULL,
+                                            id_organization INTEGER       NOT NULL REFERENCES organizations (id)
+                                        )";
+                Command.ExecuteNonQuery();
+            }
         }
 
         public void Connect()
         {
             if (connection == null)
             {
-                var ConnectionStringCreator = new SQLiteConnectionStringBuilder();
-                ConnectionStringCreator.DataSource = Path.Combine(Application.StartupPath, "certificates.sqlite");
-                ConnectionStringCreator.FailIfMissing = false;
-                ConnectionStringCreator.JournalMode = SQLiteJournalModeEnum.Wal;                
-                string ConnectionString = ConnectionStringCreator.ConnectionString;
-                connection = new SQLiteConnection(ConnectionString);
+                var ConnectionStringCreator = new SQLiteConnectionStringBuilder
+                {
+                    DataSource = Path.Combine(Application.StartupPath, "certificates.sqlite"),
+                    FailIfMissing = false,
+                    JournalMode = SQLiteJournalModeEnum.Wal
+                };
+                connection = new SQLiteConnection(ConnectionStringCreator.ConnectionString);
             }
             if (connection.State != ConnectionState.Open)
             {

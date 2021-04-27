@@ -13,7 +13,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         public bool OrganizationsListChanged { get; private set; } = false;
 
-        public Organization CurrentOrganization => (Organization)grdOrganizations.CurrentRow?.DataBoundItem;
+        public Organization CurrentOrganization => grdOrganizations.CurrentRow?.DataBoundItem as Organization;
 
         private void FillOrganizationsTable()
         {
@@ -67,19 +67,25 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (new OrganizationForm().ShowDialog() == DialogResult.OK)
+            using (var form = new OrganizationForm())
             {
-                OrganizationsListChanged = true;
-                FillOrganizationsTable();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    OrganizationsListChanged = true;
+                    FillOrganizationsTable();
+                }
             }
         }
 
         private void редактироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (new OrganizationForm(CurrentOrganization).ShowDialog() == DialogResult.OK)
+            using (var form = new OrganizationForm(CurrentOrganization))
             {
-                OrganizationsListChanged = true;
-                FillOrganizationsTable();
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    OrganizationsListChanged = true;
+                    FillOrganizationsTable();
+                }
             }
         }
 

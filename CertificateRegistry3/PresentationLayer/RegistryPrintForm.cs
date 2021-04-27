@@ -5,11 +5,11 @@ namespace CertificateRegistry3.PresentationLayer
 {
     public partial class RegistryPrintForm:Form
     {
-        public RegistryPrintForm(string certificatesTable, string text = "")
+        public RegistryPrintForm(string certificatesTable, string caption = "")
         {
             InitializeComponent();
 
-            Text = string.IsNullOrEmpty(text) ? Text : text;
+            Text = string.IsNullOrEmpty(caption) ? Text : caption;
             RegistryPreview.DocumentText = certificatesTable;
             DialogResult = DialogResult.OK;
         }

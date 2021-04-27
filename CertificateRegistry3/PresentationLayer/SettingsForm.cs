@@ -10,7 +10,7 @@ namespace CertificateRegistry3.PresentationLayer
         /// <summary>
         /// Менялись ли настройки
         /// </summary>
-        private bool hasChanges => newSettings == null ? false : newSettings.SettingsHasChanges;
+        private bool hasChanges => newSettings != null && newSettings.SettingsHasChanges;
 
         private ProgramSettings newSettings = null;
 
@@ -19,7 +19,7 @@ namespace CertificateRegistry3.PresentationLayer
         /// </summary>
         private bool dbSettingsChanged = false; 
 
-        public bool DBSettingsChanged { get { return dbSettingsChanged; } }
+        public bool DBSettingsChanged => dbSettingsChanged;
 
         public SettingsForm()
         {

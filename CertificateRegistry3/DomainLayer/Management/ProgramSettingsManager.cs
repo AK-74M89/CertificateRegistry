@@ -1,5 +1,6 @@
 ﻿using CertificateRegistry3.Properties;
 using System;
+using System.Linq;
 
 namespace CertificateRegistry3.DomainLayer
 {
@@ -39,8 +40,7 @@ namespace CertificateRegistry3.DomainLayer
                 throw new ArgumentNullException(nameof(settingsToCheck));
 
             if (settingsToCheck.DBSettingsHasChanges)
-            {                                
-                string requirements;
+            {
 
                 if (!Constants.DBTypes.Contains(settingsToCheck.NewDBType))
                 {
@@ -66,7 +66,7 @@ namespace CertificateRegistry3.DomainLayer
                     return $"Некорректно введены адрес или название сервера БД: {settingsToCheck.NewHostOrAddress}!";
                 }
 
-                if (!IsCorrectUsername(settingsToCheck.NewUsername, out requirements))
+                if (!IsCorrectUsername(settingsToCheck.NewUsername, out string requirements))
                 {
                     return $"Некорректно заполнено имя пользователя: {settingsToCheck.NewUsername}! Требования: {requirements}";
                 }

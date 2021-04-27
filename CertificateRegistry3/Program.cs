@@ -14,9 +14,12 @@ namespace CertificateRegistry3
         static void Main()
         {
             DBConnectionHandler.Connect();
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CertificatesListForm());
+            using (var form = new CertificatesListForm())
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(form);
+            }
             DBConnectionHandler.Disconnect();
         }
     }

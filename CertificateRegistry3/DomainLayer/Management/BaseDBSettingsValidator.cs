@@ -8,7 +8,6 @@ namespace CertificateRegistry3.DomainLayer
     /// </summary>
     public class BaseDBSettingsValidator : IDBSettingsValidator
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1031:Не перехватывать исключения общих типов", Justification = "<Ожидание>")]
         public bool IsCorrectIPAddress(string IP)
         {
             try

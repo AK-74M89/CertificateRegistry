@@ -122,13 +122,15 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void AddOrganizationBtn_Click(object sender, EventArgs e)
         {
-            var organizationsFrom = new OrganizationsListForm(LookupMode:true);
-            if (organizationsFrom.ShowDialog() == DialogResult.OK)
+            using (var organizationsFrom = new OrganizationsListForm(LookupMode: true))
             {
-                FillOrganizationComboBox();
-                OrganizationComboBox.SelectedIndex = 
-                    OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<Organization>)
-                    .Find(o => o.OrganizationId == organizationsFrom.CurrentOrganization.OrganizationId));
+                if (organizationsFrom.ShowDialog() == DialogResult.OK)
+                {
+                    FillOrganizationComboBox();
+                    OrganizationComboBox.SelectedIndex =
+                        OrganizationComboBox.Items.IndexOf((OrganizationComboBox.DataSource as List<Organization>)
+                        .Find(o => o.OrganizationId == organizationsFrom.CurrentOrganization.OrganizationId));
+                }
             }
         }
 
