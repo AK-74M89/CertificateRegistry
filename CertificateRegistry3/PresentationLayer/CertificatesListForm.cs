@@ -130,7 +130,7 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{Application.ProductName}, версия {Application.ProductVersion}. \nCopyright © Суханов Александр, 2020", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"{Application.ProductName}, версия {Application.ProductVersion}. \nCopyright © Суханов Александр, 2021", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
