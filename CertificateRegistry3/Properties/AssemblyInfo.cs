@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Certificate Registry 3")]
-[assembly: AssemblyCopyright("Copyright © Суханов Александр,  2020")]
+[assembly: AssemblyCopyright("Copyright © Суханов Александр,  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
