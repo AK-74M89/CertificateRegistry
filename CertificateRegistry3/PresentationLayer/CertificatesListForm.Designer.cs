@@ -241,7 +241,7 @@
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
             // 
@@ -628,7 +628,7 @@
             this.lblSearch.Location = new System.Drawing.Point(11, 9);
             this.lblSearch.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(48, 17);
+            this.lblSearch.Size = new System.Drawing.Size(47, 16);
             this.lblSearch.TabIndex = 10;
             this.lblSearch.Text = "Поиск";
             // 

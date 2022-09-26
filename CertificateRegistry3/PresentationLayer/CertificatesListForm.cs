@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace CertificateRegistry3.PresentationLayer
@@ -130,7 +131,16 @@ namespace CertificateRegistry3.PresentationLayer
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{Application.ProductName}, версия {Application.ProductVersion}. \nCopyright © Суханов Александр, 2021", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var copyright = string.Empty;
+            Assembly currentAssem = typeof(CertificatesListForm).Assembly;
+            object[] attribs = currentAssem.GetCustomAttributes(typeof(AssemblyCopyrightAttribute), true);
+            if (attribs.Length > 0)
+            {
+                copyright = ((AssemblyCopyrightAttribute)attribs[0]).Copyright;
+            }
+            copyright = copyright == string.Empty ? copyright : $" \n{copyright}";
+
+            MessageBox.Show($"{Application.ProductName}, версия {Application.ProductVersion}.{copyright}", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void статистикаToolStripMenuItem_Click(object sender, EventArgs e)
